@@ -1,23 +1,48 @@
 {
   "name": "小钱包",
   "short_name": "小钱包",
-  "description": "简单好用的个人消费记录与预算管理 App",
-  "start_url": "./",
+  "id": "/xiaoqianbao-app/",
+  "start_url": "/xiaoqianbao-app/",
+  "scope": "/xiaoqianbao-app/",
   "display": "standalone",
-  "background_color": "#fff7fa",
-  "theme_color": "#ff6fa8",
-  "orientation": "portrait",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
+  "background_color": "#ffffff",
+  "theme_color": "#ff69b4",
+  "description": "简单好用的个人记账小钱包",
   "lang": "zh-CN",
+  "dir": "ltr",
+  "orientation": "portrait",
+  "categories": [
+    "finance",
+    "productivity"
+  ],
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/xiaoqianbao-app/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "/xiaoqianbao-app/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/xiaoqianbao-app/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/xiaoqianbao-app/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
