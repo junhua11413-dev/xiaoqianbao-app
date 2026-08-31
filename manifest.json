@@ -27,5 +27,19 @@
       "type": "image/png",
       "purpose": "any"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "/xiaoqianbao-app/xiaoqianbao-screenshot-1.png",
+      "sizes": "1260x2520",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/xiaoqianbao-app/xiaoqianbao-screenshot-2.png",
+      "sizes": "1260x2520",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
   ]
 }
