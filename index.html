@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小钱包</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif;
+  background:#f5f6f8;
+  color:#222;
+  max-width:600px;
+  margin:auto;
+}
+
+.header{
+  background:#111827;
+  color:white;
+  padding:28px 22px 32px;
+  border-radius:0 0 28px 28px;
+}
+
+.header h1{
+  font-size:28px;
+  margin-bottom:22px;
+}
+
+.balance-title{
+  font-size:14px;
+  opacity:.7;
+}
+
+.balance{
+  font-size:38px;
+  font-weight:700;
+  margin-top:5px;
+}
+
+.month{
+  margin-top:10px;
+  opacity:.7;
+}
+
+.stats{
+  display:flex;
+  gap:12px;
+  margin-top:22px;
+}
+
+.stat{
+  flex:1;
+  background:rgba(255,255,255,.1);
+  padding:14px;
+  border-radius:15px;
+}
+
+.stat span{
+  display:block;
+  font-size:13px;
+  opacity:.7;
+}
+
+.stat strong{
+  display:block;
+  margin-top:5px;
+  font-size:18px;
+}
+
+.container{
+  padding:20px;
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 4px 18px rgba(0,0,0,.05);
+}
+
+.card h2{
+  font-size:19px;
+  margin-bottom:15px;
+}
+
+.form-row{
+  display:flex;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+input,select{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:13px;
+  font-size:16px;
+  background:white;
+}
+
+.amount{
+  font-size:22px;
+}
+
+.type-buttons{
+  display:flex;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.type-buttons button{
+  flex:1;
+  padding:12px;
+  border:0;
+  border-radius:12px;
+  background:#eee;
+  font-size:16px;
+}
+
+.type-buttons button.active{
+  background:#111827;
+  color:white;
+}
+
+.add-btn{
+  width:100%;
+  border:0;
+  padding:14px;
+  border-radius:13px;
+  background:#2563eb;
+  color:white;
+  font-size:17px;
+  font-weight:600;
+}
+
+.record{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid #eee;
+}
+
+.record:last-child{
+  border-bottom:0;
+}
+
+.icon{
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  background:#eef2ff;
+}
+
+.record-info{
+  flex:1;
+}
+
+.record-info strong{
+  display:block;
+  font-size:16px;
+}
+
+.record-info small{
+  color:#888;
+}
+
+.income{
+  color:#16a34a;
+  font-weight:700;
+}
+
+.expense{
+  color:#dc2626;
+  font-weight:700;
+}
+
+.delete{
+  border:0;
+  background:#f3f4f6;
+  border-radius:9px;
+  padding:8px 10px;
+}
+
+.empty{
+  text-align:center;
+  color:#999;
+  padding:25px 0;
+}
+
+.footer{
+  text-align:center;
+  color:#999;
+  font-size:12px;
+  padding:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>💰 小钱包</h1>
+
+  <div class="balance-title">当前余额</div>
+  <div class="balance" id="balance">RM 0.00</div>
+  <div class="month" id="month"></div>
+
+  <div class="stats">
+    <div class="stat">
+      <span>收入</span>
+      <strong id="income">RM 0.00</strong>
+    </div>
+
+    <div class="stat">
+      <span>支出</span>
+      <strong id="expense">RM 0.00</strong>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h2>➕ 记录一笔</h2>
+
+    <div class="type-buttons">
+      <button id="expenseBtn" class="active" onclick="setType('expense')">
+        支出
+      </button>
+
+      <button id="incomeBtn" onclick="setType('income')">
+        收入
+      </button>
+    </div>
+
+    <div class="form-row">
+      <input
+        id="amount"
+        class="amount"
+        type="number"
+        step="0.01"
+        placeholder="金额 RM"
+      >
+    </div>
+
+    <div class="form-row">
+      <select id="category">
+        <option value="餐饮">🍜 餐饮</option>
+        <option value="交通">🚗 交通</option>
+        <option value="购物">🛍️ 购物</option>
+        <option value="娱乐">🎮 娱乐</option>
+        <option value="生活">🏠 生活</option>
+        <option value="账单">🧾 账单</option>
+        <option value="工资">💼 工资</option>
+        <option value="其他">📦 其他</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <input id="note" type="text" placeholder="备注（可选）">
+    </div>
+
+    <button class="add-btn" onclick="addRecord()">
+      保存记录
+    </button>
+  </div>
+
+
+  <div class="card">
+    <h2>📋 最近记录</h2>
+
+    <div id="records"></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  小钱包 · 数据保存在本机
+</div>
+
+<script>
+
+let type = "expense";
+
+let records =
+  JSON.parse(localStorage.getItem("xiaoqianbao_records")) || [];
+
+
+function setType(newType){
+
+  type = newType;
+
+  document
+    .getElementById("expenseBtn")
+    .classList.toggle("active", type === "expense");
+
+  document
+    .getElementById("incomeBtn")
+    .classList.toggle("active", type === "income");
+}
+
+
+function addRecord(){
+
+  const amountInput =
+    document.getElementById("amount");
+
+  const category =
+    document.getElementById("category").value;
+
+  const note =
+    document.getElementById("note").value.trim();
+
+  const amount =
+    parseFloat(amountInput.value);
+
+  if(!amount || amount <= 0){
+    alert("请输入正确的金额");
+    return;
+  }
+
+  const record = {
+    id: Date.now(),
+    type: type,
+    amount: amount,
+    category: category,
+    note: note,
+    date: new Date().toLocaleString("zh-CN")
+  };
+
+  records.unshift(record);
+
+  save();
+
+  amountInput.value = "";
+  document.getElementById("note").value = "";
+
+  alert("记录成功！");
+}
+
+
+function deleteRecord(id){
+
+  if(!confirm("确定删除这笔记录吗？")){
+    return;
+  }
+
+  records =
+    records.filter(record => record.id !== id);
+
+  save();
+}
+
+
+function save(){
+
+  localStorage.setItem(
+    "xiaoqianbao_records",
+    JSON.stringify(records)
+  );
+
+  render();
+}
+
+
+function render(){
+
+  let income = 0;
+  let expense = 0;
+
+  records.forEach(record => {
+
+    if(record.type === "income"){
+      income += record.amount;
+    }else{
+      expense += record.amount;
+    }
+
+  });
+
+  const balance = income - expense;
+
+  document.getElementById("income").textContent =
+    "RM " + income.toFixed(2);
+
+  document.getElementById("expense").textContent =
+    "RM " + expense.toFixed(2);
+
+  document.getElementById("balance").textContent =
+    "RM " + balance.toFixed(2);
+
+  document.getElementById("month").textContent =
+    new Date().toLocaleDateString("zh-CN",{
+      year:"numeric",
+      month:"long"
+    });
+
+
+  const container =
+    document.getElementById("records");
+
+  if(records.length === 0){
+
+    container.innerHTML =
+      '<div class="empty">还没有记录<br>添加第一笔消费吧</div>';
+
+    return;
+  }
+
+
+  container.innerHTML =
+    records.map(record => {
+
+      const icon =
+        getIcon(record.category);
+
+      const sign =
+        record.type === "income" ? "+" : "-";
+
+      const className =
+        record.type === "income"
+          ? "income"
+          : "expense";
+
+      return `
+        <div class="record">
+
+          <div class="icon">
+            ${icon}
+          </div>
+
+          <div class="record-info">
+
+            <strong>
+              ${record.category}
+              ${record.note ? " · " + escapeHtml(record.note) : ""}
+            </strong>
+
+            <small>
+              ${record.date}
+            </small>
+
+          </div>
+
+          <div class="${className}">
+            ${sign} RM ${record.amount.toFixed(2)}
+          </div>
+
+          <button
+            class="delete"
+            onclick="deleteRecord(${record.id})">
+            删除
+          </button>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+
+function getIcon(category){
+
+  const icons = {
+    "餐饮":"🍜",
+    "交通":"🚗",
+    "购物":"🛍️",
+    "娱乐":"🎮",
+    "生活":"🏠",
+    "账单":"🧾",
+    "工资":"💼",
+    "其他":"📦"
+  };
+
+  return icons[category] || "📦";
+}
+
+
+function escapeHtml(text){
+
+  const div =
+    document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+}
+
+
+render();
+
+</script>
+
+</body>
+</html>
