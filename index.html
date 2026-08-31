@@ -7,7 +7,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="小钱包">
+
 <link rel="manifest" href="./manifest.json">
+
 <title>小钱包</title>
 
 <style>
@@ -18,119 +20,164 @@
 --text:#342b30;
 --muted:#978b91;
 --green:#25a95a;
---red:#e65370
+--red:#e65370;
 }
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box;
+}
+
 body{
 margin:0;
 background:#fff7fa;
 color:var(--text);
-font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif
+font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
 }
-button,input,select{font:inherit}
+
+button,
+input,
+select{
+font:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
 .app{
 max-width:620px;
 margin:auto;
 min-height:100vh;
-padding-bottom:78px
+padding-bottom:78px;
 }
+
 header{
 background:#fff;
-padding:24px 18px 18px
+padding:24px 18px 18px;
 }
+
 .brand{
 display:flex;
 align-items:center;
 gap:10px;
 font-size:26px;
-font-weight:800
+font-weight:800;
 }
+
 .brand span{
 background:var(--pink2);
 padding:8px 10px;
-border-radius:16px
+border-radius:16px;
 }
+
 .sub{
 margin-top:5px;
 color:var(--muted);
-font-size:13px
+font-size:13px;
 }
+
 .balance{
 margin-top:18px;
 padding:22px;
 border-radius:25px;
 color:#fff;
 background:linear-gradient(135deg,#ff91ba,#ff6fa8);
-box-shadow:0 10px 25px #ff6fa833
+box-shadow:0 10px 25px #ff6fa833;
 }
-.balance small{opacity:.9}
+
+.balance small{
+opacity:.9;
+}
+
 .balance b{
 display:block;
 font-size:36px;
-margin:4px 0
+margin:4px 0;
 }
+
 .stats{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
-margin-top:12px
+margin-top:12px;
 }
+
 .stat{
 background:#fff;
 border:1px solid #f3e6ec;
 border-radius:17px;
-padding:13px
+padding:13px;
 }
-.stat small{color:var(--muted)}
+
+.stat small{
+color:var(--muted);
+}
+
 .stat b{
 display:block;
-margin-top:5px
+margin-top:5px;
 }
-main{padding:0 15px}
+
+main{
+padding:0 15px;
+}
+
 .card{
 background:#fff;
 border:1px solid #f1e5ea;
 border-radius:21px;
 padding:17px;
 margin-bottom:14px;
-box-shadow:0 5px 18px #ffb6cc14
+box-shadow:0 5px 18px #ffb6cc14;
 }
+
 h2{
 font-size:18px;
-margin:0 0 14px
+margin:0 0 14px;
 }
+
 .row{
 display:flex;
 gap:9px;
-margin-bottom:10px
+margin-bottom:10px;
 }
-input,select{
+
+input,
+select{
 width:100%;
 padding:13px;
 border:1px solid #eadde3;
 border-radius:13px;
 background:#fff;
 color:var(--text);
-outline:0
+outline:0;
 }
-input:focus,select:focus{border-color:var(--pink)}
+
+input:focus,
+select:focus{
+border-color:var(--pink);
+}
+
 .types{
 display:flex;
 gap:8px;
-margin-bottom:10px
+margin-bottom:10px;
 }
+
 .types button{
 flex:1;
 border:0;
 border-radius:13px;
 padding:12px;
 background:#f4eff1;
-color:#6e6268
+color:#6e6268;
 }
+
 .types .on{
 background:var(--pink);
-color:#fff
+color:#fff;
 }
+
 .add{
 width:100%;
 border:0;
@@ -138,67 +185,84 @@ border-radius:14px;
 padding:14px;
 background:var(--pink);
 color:#fff;
-font-weight:700
+font-weight:700;
 }
+
 .budget{
 display:flex;
 gap:10px;
-align-items:center
+align-items:center;
 }
-.budget input{max-width:190px}
+
+.budget input{
+max-width:190px;
+}
+
 .progress{
 height:9px;
 background:#f5e9ee;
 border-radius:99px;
 overflow:hidden;
-margin:12px 0
+margin:12px 0;
 }
+
 .progress i{
 display:block;
 height:100%;
 width:0;
 background:var(--pink);
-border-radius:99px
+border-radius:99px;
 }
+
 .encourage{
 padding:14px;
 border-radius:16px;
-background:var(--pink2)
+background:var(--pink2);
 }
+
 .encourage b{
 display:block;
 font-size:17px;
-margin-bottom:4px
+margin-bottom:4px;
 }
+
 .encourage span{
 font-size:13px;
-color:#796d73
+color:#796d73;
 }
+
 .tabs{
 display:flex;
 gap:8px;
-margin-bottom:12px
+margin-bottom:12px;
 }
+
 .tabs button{
 flex:1;
 border:0;
 padding:10px;
 border-radius:12px;
 background:#f5eff2;
-color:#71656b
+color:#71656b;
 }
+
 .tabs .on{
 background:var(--pink);
-color:#fff
+color:#fff;
 }
+
 .record{
 display:flex;
 align-items:center;
 gap:10px;
 padding:12px 0;
-border-bottom:1px solid #f0e8eb
+border-bottom:1px solid #f0e8eb;
 }
-.record:last-child{border-bottom:0}
+
+.record:last-child{
+border-bottom:0;
+}
+
 .ico{
 width:43px;
 height:43px;
@@ -206,80 +270,110 @@ border-radius:14px;
 background:var(--pink2);
 display:grid;
 place-items:center;
-font-size:20px
+font-size:20px;
+flex-shrink:0;
 }
+
 .info{
 flex:1;
-min-width:0
+min-width:0;
 }
+
 .info b{
 display:block;
 white-space:nowrap;
 overflow:hidden;
-text-overflow:ellipsis
+text-overflow:ellipsis;
 }
-.info small{color:var(--muted)}
+
+.info small{
+color:var(--muted);
+}
+
 .money{
 font-weight:800;
-white-space:nowrap
+white-space:nowrap;
 }
-.out{color:var(--red)}
-.in{color:var(--green)}
+
+.out{
+color:var(--red);
+}
+
+.in{
+color:var(--green);
+}
+
 .del{
 border:0;
 background:#f5f0f2;
 border-radius:9px;
 padding:7px;
-color:#756a70
+color:#756a70;
 }
+
 .empty{
 text-align:center;
 color:var(--muted);
-padding:22px
+padding:22px;
 }
+
 .summary{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:10px
+gap:10px;
 }
+
 .summary div{
 background:#fff8fb;
 border-radius:15px;
-padding:12px
+padding:12px;
 }
-.summary small{color:var(--muted)}
+
+.summary small{
+color:var(--muted);
+}
+
 .summary b{
 display:block;
-margin-top:4px
+margin-top:4px;
 }
+
 .calc{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:7px
+gap:7px;
 }
+
 .calc input{
 grid-column:1/-1;
 text-align:right;
-font-size:21px
+font-size:21px;
 }
+
 .calc button{
 border:0;
 border-radius:11px;
 padding:13px;
-background:#f7eff3
+background:#f7eff3;
 }
-.calc .op{background:var(--pink3)}
+
+.calc .op{
+background:var(--pink3);
+}
+
 .calc .eq{
 grid-column:1/-1;
 background:var(--pink);
-color:#fff
+color:#fff;
 }
+
 .footer{
 text-align:center;
 color:var(--muted);
 font-size:11px;
-margin:18px
+margin:18px;
 }
+
 .ad{
 position:fixed;
 z-index:9;
@@ -292,81 +386,151 @@ background:#fff;
 border-top:1px solid #eee;
 text-align:center;
 color:#aaa;
-font-size:10px
+font-size:10px;
 }
+
 @media(min-width:621px){
 .ad{
 bottom:10px;
-border-radius:10px
+border-radius:10px;
 }
 }
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
 <header>
-<div class="brand"><span>🐰</span>小钱包</div>
-<div class="sub">简单记录每一笔，让钱花得更明白</div>
+
+<div class="brand">
+<span>🐰</span>
+小钱包
+</div>
+
+<div class="sub">
+简单记录每一笔，让钱花得更明白
+</div>
 
 <div class="balance">
+
 <small>当前余额</small>
+
 <b id="balance">RM 0.00</b>
+
 <small id="month"></small>
+
 </div>
 
 <div class="stats">
+
 <div class="stat">
 <small>本月收入</small>
 <b id="income">RM 0.00</b>
 </div>
+
 <div class="stat">
 <small>本月支出</small>
 <b id="expense">RM 0.00</b>
 </div>
+
 </div>
+
 </header>
 
 <main>
 
 <section class="card">
+
 <h2>🌷 省钱小夸奖</h2>
+
 <div class="encourage">
-<b id="praise">🐰 记一笔，小钱包就更懂你</b>
-<span id="praise2">设定预算后，我会帮你计算每天建议花多少。</span>
+
+<b id="praise">
+🐰 记一笔，小钱包就更懂你
+</b>
+
+<span id="praise2">
+设定预算后，我会帮你计算每天建议花多少。
+</span>
+
 </div>
+
 </section>
 
+
 <section class="card">
+
 <h2>🎯 本月预算</h2>
 
 <div class="budget">
+
 <span>预算 RM</span>
-<input id="budget" type="number" min="0" step="0.01" placeholder="例如 1500">
+
+<input
+id="budget"
+type="number"
+min="0"
+step="0.01"
+placeholder="例如 1500"
+>
+
 </div>
 
-<div class="progress"><i id="bar"></i></div>
+<div class="progress">
+<i id="bar"></i>
+</div>
 
-<div id="budgetText" style="font-size:13px;color:#8e8188">
+<div
+id="budgetText"
+style="font-size:13px;color:#8e8188"
+>
 还没有设定预算
 </div>
+
 </section>
 
+
 <section class="card">
+
 <h2>➕ 记录一笔</h2>
 
 <div class="types">
-<button id="outBtn" class="on" onclick="setType('out')">支出</button>
-<button id="inBtn" onclick="setType('in')">收入</button>
+
+<button
+id="outBtn"
+class="on"
+onclick="setType('out')"
+>
+支出
+</button>
+
+<button
+id="inBtn"
+onclick="setType('in')"
+>
+收入
+</button>
+
 </div>
 
 <div class="row">
-<input id="amount" type="number" min="0" step="0.01" placeholder="金额 RM">
+
+<input
+id="amount"
+type="number"
+min="0"
+step="0.01"
+placeholder="金额 RM"
+>
+
 </div>
 
 <div class="row">
+
 <select id="cat">
+
 <option>🍜 餐饮</option>
 <option>🚗 交通</option>
 <option>🛍️ 购物</option>
@@ -376,17 +540,33 @@ border-radius:10px
 <option>💼 工资</option>
 <option>🎁 兼职</option>
 <option>📦 其他</option>
+
 </select>
+
 </div>
 
 <div class="row">
-<input id="note" maxlength="80" placeholder="备注（可选）">
+
+<input
+id="note"
+maxlength="80"
+placeholder="备注（可选）"
+>
+
 </div>
 
-<button class="add" onclick="addRecord()">保存记录</button>
+<button
+class="add"
+onclick="addRecord()"
+>
+保存记录
+</button>
+
 </section>
 
+
 <section class="card">
+
 <h2>📊 本月统计</h2>
 
 <div class="summary">
@@ -412,13 +592,21 @@ border-radius:10px
 </div>
 
 </div>
+
 </section>
 
+
 <section class="card">
+
 <h2>🧮 小型计算器</h2>
 
 <div class="calc">
-<input id="calc" readonly placeholder="0">
+
+<input
+id="calc"
+readonly
+placeholder="0"
+>
 
 <button onclick="calcKey('7')">7</button>
 <button onclick="calcKey('8')">8</button>
@@ -440,21 +628,52 @@ border-radius:10px
 <button onclick="calcKey('C')">C</button>
 <button class="op" onclick="calcKey('+')">+</button>
 
-<button class="eq" onclick="calcResult()">=</button>
+<button
+class="eq"
+onclick="calcResult()"
+>
+=
+</button>
+
 </div>
+
 </section>
 
+
 <section class="card">
+
 <h2>📋 消费记录</h2>
 
 <div class="tabs">
-<button id="allTab" class="on" onclick="setFilter('all')">全部</button>
-<button id="outTab" onclick="setFilter('out')">支出</button>
-<button id="inTab" onclick="setFilter('in')">收入</button>
+
+<button
+id="allTab"
+class="on"
+onclick="setFilter('all')"
+>
+全部
+</button>
+
+<button
+id="outTab"
+onclick="setFilter('out')"
+>
+支出
+</button>
+
+<button
+id="inTab"
+onclick="setFilter('in')"
+>
+收入
+</button>
+
 </div>
 
 <div id="records"></div>
+
 </section>
+
 
 <div class="footer">
 小钱包 · 数据保存在本机 · 版本 1.0
@@ -462,44 +681,79 @@ border-radius:10px
 
 </main>
 
-<div class="ad">📢 广告位 · 未来接入 AdMob</div>
+
+<div class="ad">
+📢 广告位 · 未来接入 AdMob
+</div>
 
 </div>
+
 
 <script>
 
 const KEY='xiaoqianbao_records_final_v1';
+
 const BKEY='xiaoqianbao_budget_final_v1';
 
 let records=[];
 
 try{
-const saved=localStorage.getItem(KEY);
-const parsed=saved?JSON.parse(saved):[];
-records=Array.isArray(parsed)?parsed:[];
+
+const saved=
+localStorage.getItem(KEY);
+
+const parsed=
+saved
+?JSON.parse(saved)
+:[];
+
+records=
+Array.isArray(parsed)
+?parsed
+:[];
+
 }catch(e){
+
 records=[];
+
 }
 
 let type='out';
+
 let filter='all';
 
 
 function money(n){
-return 'RM '+Number(n||0).toFixed(2);
+
+return 'RM '+
+Number(n||0).toFixed(2);
+
 }
 
 
 function monthKey(d=new Date()){
-return d.getFullYear()+'-'+
-String(d.getMonth()+1).padStart(2,'0');
+
+return d.getFullYear()+
+'-'+
+String(
+d.getMonth()+1
+).padStart(2,'0');
+
 }
 
 
 function todayKey(d=new Date()){
-return d.getFullYear()+'-'+
-String(d.getMonth()+1).padStart(2,'0')+'-'+
-String(d.getDate()).padStart(2,'0');
+
+return d.getFullYear()+
+'-'+
+String(
+d.getMonth()+1
+).padStart(2,'0')+
+'-'+
+String(
+d.getDate()
+).padStart(2,'0');
+
 }
 
 
@@ -507,11 +761,21 @@ function setType(t){
 
 type=t;
 
-document.getElementById('outBtn')
-.classList.toggle('on',t==='out');
+document
+.getElementById('outBtn')
+.classList
+.toggle(
+'on',
+t==='out'
+);
 
-document.getElementById('inBtn')
-.classList.toggle('on',t==='in');
+document
+.getElementById('inBtn')
+.classList
+.toggle(
+'on',
+t==='in'
+);
 
 }
 
@@ -520,14 +784,29 @@ function setFilter(f){
 
 filter=f;
 
-document.getElementById('allTab')
-.classList.toggle('on',f==='all');
+document
+.getElementById('allTab')
+.classList
+.toggle(
+'on',
+f==='all'
+);
 
-document.getElementById('outTab')
-.classList.toggle('on',f==='out');
+document
+.getElementById('outTab')
+.classList
+.toggle(
+'on',
+f==='out'
+);
 
-document.getElementById('inTab')
-.classList.toggle('on',f==='in');
+document
+.getElementById('inTab')
+.classList
+.toggle(
+'on',
+f==='in'
+);
 
 renderRecords();
 
@@ -536,14 +815,23 @@ renderRecords();
 
 function addRecord(){
 
-const amountInput=document.getElementById('amount');
+const amountInput=
+document.getElementById('amount');
 
-const a=Number(amountInput.value);
+const a=
+Number(amountInput.value);
 
-if(!Number.isFinite(a)||a<=0){
+if(
+!Number.isFinite(a)||
+a<=0
+){
+
 alert('请输入正确的金额');
+
 return;
+
 }
+
 
 const record={
 
@@ -553,24 +841,49 @@ type:type,
 
 amount:a,
 
-cat:document.getElementById('cat').value,
+cat:
+document
+.getElementById('cat')
+.value,
 
-note:document.getElementById('note').value.trim(),
+note:
+document
+.getElementById('note')
+.value
+.trim(),
 
-date:new Date().toISOString()
+date:
+new Date()
+.toISOString()
 
 };
 
+
 records.unshift(record);
+
+
+try{
 
 localStorage.setItem(
 KEY,
 JSON.stringify(records)
 );
 
+}catch(e){
+
+alert('保存失败，请检查设备存储空间');
+
+return;
+
+}
+
+
 amountInput.value='';
 
-document.getElementById('note').value='';
+document
+.getElementById('note')
+.value='';
+
 
 render();
 
@@ -579,18 +892,30 @@ render();
 
 function removeRecord(id){
 
-if(!confirm('确定删除这笔记录吗？')){
+if(
+!confirm(
+'确定删除这笔记录吗？'
+)
+){
+
 return;
+
 }
 
-records=records.filter(
-x=>Number(x.id)!==Number(id)
+
+records=
+records.filter(
+x=>
+Number(x.id)!==
+Number(id)
 );
+
 
 localStorage.setItem(
 KEY,
 JSON.stringify(records)
 );
+
 
 render();
 
@@ -601,15 +926,30 @@ function currentMonth(){
 
 return records.filter(x=>{
 
-if(!x || !x.date){
+if(
+!x||
+!x.date
+){
+
 return false;
+
 }
 
-const d=new Date(x.date);
 
-if(Number.isNaN(d.getTime())){
+const d=
+new Date(x.date);
+
+
+if(
+Number.isNaN(
+d.getTime()
+)
+){
+
 return false;
+
 }
+
 
 return monthKey(d)===monthKey();
 
@@ -620,37 +960,65 @@ return monthKey(d)===monthKey();
 
 function render(){
 
-const rs=currentMonth();
+const rs=
+currentMonth();
 
-const ins=rs.filter(
+
+const ins=
+rs.filter(
 x=>x.type==='in'
 );
 
-const outs=rs.filter(
+
+const outs=
+rs.filter(
 x=>x.type==='out'
 );
 
-const incomeSum=ins.reduce(
-(s,x)=>s+(Number(x.amount)||0),
+
+const incomeSum=
+ins.reduce(
+(s,x)=>
+s+
+(Number(x.amount)||0),
 0
 );
 
-const expenseSum=outs.reduce(
-(s,x)=>s+(Number(x.amount)||0),
+
+const expenseSum=
+outs.reduce(
+(s,x)=>
+s+
+(Number(x.amount)||0),
 0
 );
 
-document.getElementById('income').textContent=
+
+document
+.getElementById('income')
+.textContent=
 money(incomeSum);
 
-document.getElementById('expense').textContent=
+
+document
+.getElementById('expense')
+.textContent=
 money(expenseSum);
 
-document.getElementById('balance').textContent=
-money(incomeSum-expenseSum);
 
-document.getElementById('month').textContent=
-new Date().toLocaleDateString(
+document
+.getElementById('balance')
+.textContent=
+money(
+incomeSum-expenseSum
+);
+
+
+document
+.getElementById('month')
+.textContent=
+new Date()
+.toLocaleDateString(
 'zh-CN',
 {
 year:'numeric',
@@ -658,61 +1026,100 @@ month:'long'
 }
 );
 
-document.getElementById('count').textContent=
+
+document
+.getElementById('count')
+.textContent=
 rs.length;
 
-document.getElementById('avg').textContent=
+
+document
+.getElementById('avg')
+.textContent=
 money(
 outs.length
 ?expenseSum/outs.length
 :0
 );
 
-document.getElementById('max').textContent=
+
+document
+.getElementById('max')
+.textContent=
 money(
 outs.length
-?Math.max(...outs.map(x=>Number(x.amount)||0))
+?Math.max(
+...outs.map(
+x=>Number(x.amount)||0
+)
+)
 :0
 );
 
-document.getElementById('today').textContent=
+
+document
+.getElementById('today')
+.textContent=
 money(
 
 outs
 
 .filter(x=>{
 
-const d=new Date(x.date);
+const d=
+new Date(x.date);
 
-return !Number.isNaN(d.getTime()) &&
-todayKey(d)===todayKey();
+return(
+!Number.isNaN(
+d.getTime()
+)&&
+todayKey(d)===
+todayKey()
+);
 
 })
 
 .reduce(
-(s,x)=>s+(Number(x.amount)||0),
+(s,x)=>
+s+
+(Number(x.amount)||0),
 0
 )
 
 );
 
 
-const b=Number(
+const b=
+Number(
 localStorage.getItem(BKEY)||0
 );
 
-document.getElementById('budget').value=
+
+document
+.getElementById('budget')
+.value=
 b||'';
+
 
 const pct=
 b
-?Math.min(100,expenseSum/b*100)
+?Math.min(
+100,
+expenseSum/b*100
+)
 :0;
 
-document.getElementById('bar').style.width=
+
+document
+.getElementById('bar')
+.style
+.width=
 pct+'%';
 
-document.getElementById('budgetText').textContent=
+
+document
+.getElementById('budgetText')
+.textContent=
 
 b
 
@@ -720,7 +1127,12 @@ b
 
 :'还没有设定预算';
 
-updatePraise(expenseSum,b);
+
+updatePraise(
+expenseSum,
+b
+);
+
 
 renderRecords();
 
@@ -729,13 +1141,18 @@ renderRecords();
 
 function updatePraise(out,b){
 
-const prev=new Date();
+const prev=
+new Date();
+
 
 prev.setMonth(
 prev.getMonth()-1
 );
 
-const prevKey=monthKey(prev);
+
+const prevKey=
+monthKey(prev);
+
 
 const prevOut=
 
@@ -743,40 +1160,69 @@ records
 
 .filter(x=>{
 
-if(!x || !x.date){
+if(
+!x||
+!x.date
+){
+
 return false;
+
 }
 
-const d=new Date(x.date);
 
-return !Number.isNaN(d.getTime()) &&
-monthKey(d)===prevKey &&
-x.type==='out';
+const d=
+new Date(x.date);
+
+
+return(
+!Number.isNaN(
+d.getTime()
+)&&
+monthKey(d)===
+prevKey&&
+x.type==='out'
+);
 
 })
 
 .reduce(
-(s,x)=>s+(Number(x.amount)||0),
+(s,x)=>
+s+
+(Number(x.amount)||0),
 0
 );
 
 
-if(prevOut>0&&out<prevOut){
+if(
+prevOut>0&&
+out<prevOut
+){
 
-document.getElementById('praise').textContent=
+document
+.getElementById('praise')
+.textContent=
 `🎉 太棒啦！比上个月少花 ${money(prevOut-out)}`;
 
-document.getElementById('praise2').textContent=
+
+document
+.getElementById('praise2')
+.textContent=
 '继续保持，你的省钱习惯正在变好！';
+
 
 return;
 
 }
 
 
-if(b&&out<b){
+if(
+b&&
+out<b
+){
 
-const d=new Date();
+const d=
+new Date();
+
 
 const days=
 new Date(
@@ -785,11 +1231,13 @@ d.getMonth()+1,
 0
 ).getDate();
 
+
 const left=
 Math.max(
 1,
 days-d.getDate()+1
 );
+
 
 const daily=
 Math.max(
@@ -797,34 +1245,55 @@ Math.max(
 (b-out)/left
 );
 
-document.getElementById('praise').textContent=
+
+document
+.getElementById('praise')
+.textContent=
 `🌷 今天建议花不超过 ${money(daily)}`;
 
-document.getElementById('praise2').textContent=
+
+document
+.getElementById('praise2')
+.textContent=
 `预算已使用 ${Math.min(100,out/b*100).toFixed(0)}%，慢慢来就很好。`;
 
+
 return;
 
 }
 
 
-if(b&&out>=b){
+if(
+b&&
+out>=b
+){
 
-document.getElementById('praise').textContent=
+document
+.getElementById('praise')
+.textContent=
 '💗 本月预算用完啦';
 
-document.getElementById('praise2').textContent=
+
+document
+.getElementById('praise2')
+.textContent=
 '不用责怪自己，调整好下个月的预算就好。';
+
 
 return;
 
 }
 
 
-document.getElementById('praise').textContent=
+document
+.getElementById('praise')
+.textContent=
 '🐰 记一笔，小钱包就更懂你';
 
-document.getElementById('praise2').textContent=
+
+document
+.getElementById('praise2')
+.textContent=
 '设定预算后，我会帮你计算每天建议花多少。';
 
 }
@@ -833,46 +1302,75 @@ document.getElementById('praise2').textContent=
 function renderRecords(){
 
 const container=
-document.getElementById('records');
+document
+.getElementById('records');
+
 
 if(!container){
+
 return;
+
 }
 
-/*
-这里不再用 currentMonth()
-作为显示列表的限制。
 
-这样即使日期格式发生变化，
-已经保存的记录也仍然可以显示。
-*/
-
-let list=Array.isArray(records)
+let list=
+Array.isArray(records)
 ?records.slice()
 :[];
 
-if(filter==='out'){
-list=list.filter(
-x=>x && x.type==='out'
+
+if(
+filter==='out'
+){
+
+list=
+list.filter(
+x=>
+x&&
+x.type==='out'
 );
+
 }
 
-if(filter==='in'){
-list=list.filter(
-x=>x && x.type==='in'
+
+if(
+filter==='in'
+){
+
+list=
+list.filter(
+x=>
+x&&
+x.type==='in'
 );
+
 }
 
-list=list
-.filter(x=>x && typeof x==='object')
-.sort((a,b)=>{
 
-const da=new Date(a.date||0).getTime();
-const db=new Date(b.date||0).getTime();
+list=
+list
+.filter(
+x=>
+x&&
+typeof x==='object'
+)
+.sort(
+(a,b)=>{
+
+const da=
+new Date(
+a.date||0
+).getTime();
+
+const db=
+new Date(
+b.date||0
+).getTime();
 
 return db-da;
 
-});
+}
+);
 
 
 if(!list.length){
@@ -881,44 +1379,60 @@ container.innerHTML=
 '<div class="empty">这里还没有记录 🌷</div>';
 
 return;
+
 }
 
 
 container.innerHTML=
 
 list
-
 .slice(0,50)
-
 .map(x=>{
 
 const amount=
 Number(x.amount)||0;
 
 const category=
-String(x.cat||'📦 其他');
+String(
+x.cat||
+'📦 其他'
+);
 
 const note=
-String(x.note||'');
+String(
+x.note||
+''
+);
 
 const d=
-new Date(x.date);
+new Date(
+x.date
+);
 
 const dateText=
-Number.isNaN(d.getTime())
+Number.isNaN(
+d.getTime()
+)
 ?''
-:d.toLocaleString('zh-CN');
+:d.toLocaleString(
+'zh-CN'
+);
 
 const isIncome=
 x.type==='in';
 
 const typeClass=
-isIncome?'in':'out';
+isIncome
+?'in'
+:'out';
 
 const sign=
-isIncome?'+':'-';
+isIncome
+?'+'
+:'-';
 
-return `
+
+return`
 
 <div class="record">
 
@@ -930,7 +1444,10 @@ ${icon(category)}
 
 <b>
 ${esc(category)}
-${note?' · '+esc(note):''}
+${note
+?' · '+esc(note)
+:''
+}
 </b>
 
 <small>
@@ -955,7 +1472,6 @@ onclick="removeRecord(${Number(x.id)||0})"
 `;
 
 })
-
 .join('');
 
 }
@@ -964,14 +1480,16 @@ onclick="removeRecord(${Number(x.id)||0})"
 function icon(s){
 
 return String(s||'')
-.split(' ')[0]||'📦';
+.split(' ')[0]||
+'📦';
 
 }
 
 
 function esc(s){
 
-return String(s).replace(
+return String(s)
+.replace(
 /[&<>"']/g,
 m=>({
 
@@ -982,13 +1500,13 @@ m=>({
 "'":'&#39;'
 
 }[m])
-
 );
 
 }
 
 
-document.getElementById('budget')
+document
+.getElementById('budget')
 .addEventListener(
 'change',
 ()=>{
@@ -997,14 +1515,18 @@ const n=
 Math.max(
 0,
 Number(
-document.getElementById('budget').value
+document
+.getElementById('budget')
+.value
 )||0
 );
+
 
 localStorage.setItem(
 BKEY,
 n
 );
+
 
 render();
 
@@ -1015,16 +1537,27 @@ render();
 function calcKey(k){
 
 const calc=
-document.getElementById('calc');
+document
+.getElementById('calc');
+
 
 if(k==='C'){
+
 calc.value='';
+
 return;
+
 }
 
-if(calc.value==='错误'){
+
+if(
+calc.value==='错误'
+){
+
 calc.value='';
+
 }
+
 
 calc.value+=k;
 
@@ -1034,16 +1567,25 @@ calc.value+=k;
 function calcResult(){
 
 const calc=
-document.getElementById('calc');
+document
+.getElementById('calc');
+
 
 try{
 
-const s=calc.value;
+const s=
+calc.value;
 
-if(!s||
-!/^[0-9.+\-*/() ]+$/.test(s)){
+
+if(
+!s||
+!/^[0-9.+\-*/() ]+$/.test(s)
+){
+
 throw Error();
+
 }
+
 
 const result=
 Function(
@@ -1052,9 +1594,15 @@ s+
 ')'
 )();
 
-if(!Number.isFinite(result)){
+
+if(
+!Number.isFinite(result)
+){
+
 throw Error();
+
 }
+
 
 calc.value=
 String(result);
@@ -1071,29 +1619,41 @@ calc.value='错误';
 
 /* PWA Service Worker */
 
-if('serviceWorker' in navigator){
+if(
+'serviceWorker'
+in navigator
+){
 
 window.addEventListener(
 'load',
 ()=>{
 
-navigator.serviceWorker.register('./sw.js?v=2')
-.then(
-()=>console.log(
-'小钱包 Service Worker 已启用'
+navigator
+.serviceWorker
+.register(
+'./sw.js?v=3'
 )
+.then(
+()=>{
+console.log(
+'小钱包 Service Worker 已启用'
+);
+}
 )
 .catch(
-error=>console.log(
+error=>{
+console.log(
 'Service Worker:',
 error
-)
 );
-
 }
 );
 
 }
+);
+
+}
+
 
 render();
 
