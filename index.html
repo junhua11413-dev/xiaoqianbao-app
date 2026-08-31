@@ -1,501 +1,1128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff6fa8">
 <title>小钱包</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+:root{
+  --pink:#ff6fa8;
+  --pink2:#fff0f6;
+  --pink3:#ffd7e7;
+  --text:#342b30;
+  --muted:#978b91;
+  --green:#25a95a;
+  --red:#e65370;
 }
+
+*{box-sizing:border-box}
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif;
-  background:#f5f6f8;
-  color:#222;
-  max-width:600px;
+  margin:0;
+  background:#fff7fa;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",
+  "Microsoft YaHei",sans-serif;
+}
+
+button,input,select{font:inherit}
+
+.app{
+  max-width:620px;
   margin:auto;
+  min-height:100vh;
+  padding-bottom:78px;
 }
 
-.header{
-  background:#111827;
-  color:white;
-  padding:28px 22px 32px;
-  border-radius:0 0 28px 28px;
+header{
+  background:#fff;
+  padding:24px 18px 18px;
 }
 
-.header h1{
-  font-size:28px;
-  margin-bottom:22px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:26px;
+  font-weight:800;
 }
 
-.balance-title{
-  font-size:14px;
-  opacity:.7;
+.brand span{
+  background:var(--pink2);
+  padding:8px 10px;
+  border-radius:16px;
+}
+
+.sub{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:13px;
 }
 
 .balance{
-  font-size:38px;
-  font-weight:700;
-  margin-top:5px;
+  margin-top:18px;
+  padding:22px;
+  border-radius:25px;
+  color:#fff;
+  background:linear-gradient(135deg,#ff91ba,#ff6fa8);
+  box-shadow:0 10px 25px #ff6fa833;
 }
 
-.month{
-  margin-top:10px;
-  opacity:.7;
+.balance small{opacity:.9}
+
+.balance b{
+  display:block;
+  font-size:36px;
+  margin:4px 0;
 }
 
 .stats{
-  display:flex;
-  gap:12px;
-  margin-top:22px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
 }
 
 .stat{
-  flex:1;
-  background:rgba(255,255,255,.1);
-  padding:14px;
-  border-radius:15px;
+  background:#fff;
+  border:1px solid #f3e6ec;
+  border-radius:17px;
+  padding:13px;
 }
 
-.stat span{
-  display:block;
-  font-size:13px;
-  opacity:.7;
-}
+.stat small{color:var(--muted)}
 
-.stat strong{
+.stat b{
   display:block;
   margin-top:5px;
-  font-size:18px;
 }
 
-.container{
-  padding:20px;
-}
+main{padding:0 15px}
 
 .card{
-  background:white;
-  border-radius:20px;
-  padding:18px;
-  margin-bottom:18px;
-  box-shadow:0 4px 18px rgba(0,0,0,.05);
+  background:#fff;
+  border:1px solid #f1e5ea;
+  border-radius:21px;
+  padding:17px;
+  margin-bottom:14px;
+  box-shadow:0 5px 18px #ffb6cc14;
 }
 
-.card h2{
-  font-size:19px;
-  margin-bottom:15px;
+h2{
+  font-size:18px;
+  margin:0 0 14px;
 }
 
-.form-row{
+.row{
   display:flex;
-  gap:10px;
-  margin-bottom:12px;
+  gap:9px;
+  margin-bottom:10px;
 }
 
 input,select{
   width:100%;
-  border:1px solid #ddd;
-  border-radius:12px;
   padding:13px;
-  font-size:16px;
-  background:white;
+  border:1px solid #eadde3;
+  border-radius:13px;
+  background:#fff;
+  color:var(--text);
+  outline:0;
 }
 
-.amount{
-  font-size:22px;
+input:focus,select:focus{
+  border-color:var(--pink);
 }
 
-.type-buttons{
+.types{
+  display:flex;
+  gap:8px;
+  margin-bottom:10px;
+}
+
+.types button{
+  flex:1;
+  border:0;
+  border-radius:13px;
+  padding:12px;
+  background:#f4eff1;
+  color:#6e6268;
+}
+
+.types .on{
+  background:var(--pink);
+  color:#fff;
+}
+
+.add{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:14px;
+  background:var(--pink);
+  color:#fff;
+  font-weight:700;
+}
+
+.budget{
   display:flex;
   gap:10px;
+  align-items:center;
+}
+
+.budget input{max-width:190px}
+
+.progress{
+  height:9px;
+  background:#f5e9ee;
+  border-radius:99px;
+  overflow:hidden;
+  margin:12px 0;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  width:0;
+  background:var(--pink);
+  border-radius:99px;
+}
+
+.encourage{
+  padding:14px;
+  border-radius:16px;
+  background:var(--pink2);
+}
+
+.encourage b{
+  display:block;
+  font-size:17px;
+  margin-bottom:4px;
+}
+
+.encourage span{
+  font-size:13px;
+  color:#796d73;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
   margin-bottom:12px;
 }
 
-.type-buttons button{
+.tabs button{
   flex:1;
-  padding:12px;
   border:0;
+  padding:10px;
   border-radius:12px;
-  background:#eee;
-  font-size:16px;
+  background:#f5eff2;
+  color:#71656b;
 }
 
-.type-buttons button.active{
-  background:#111827;
-  color:white;
-}
-
-.add-btn{
-  width:100%;
-  border:0;
-  padding:14px;
-  border-radius:13px;
-  background:#2563eb;
-  color:white;
-  font-size:17px;
-  font-weight:600;
+.tabs .on{
+  background:var(--pink);
+  color:#fff;
 }
 
 .record{
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:14px 0;
-  border-bottom:1px solid #eee;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #f0e8eb;
 }
 
-.record:last-child{
-  border-bottom:0;
+.record:last-child{border-bottom:0}
+
+.ico{
+  width:43px;
+  height:43px;
+  border-radius:14px;
+  background:var(--pink2);
+  display:grid;
+  place-items:center;
+  font-size:20px;
 }
 
-.icon{
-  width:44px;
-  height:44px;
-  border-radius:13px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:21px;
-  background:#eef2ff;
-}
-
-.record-info{
+.info{
   flex:1;
+  min-width:0;
 }
 
-.record-info strong{
+.info b{
   display:block;
-  font-size:16px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
-.record-info small{
-  color:#888;
+.info small{color:var(--muted)}
+
+.money{
+  font-weight:800;
+  white-space:nowrap;
 }
 
-.income{
-  color:#16a34a;
-  font-weight:700;
-}
+.out{color:var(--red)}
+.in{color:var(--green)}
 
-.expense{
-  color:#dc2626;
-  font-weight:700;
-}
-
-.delete{
+.del{
   border:0;
-  background:#f3f4f6;
+  background:#f5f0f2;
   border-radius:9px;
-  padding:8px 10px;
+  padding:7px;
+  color:#756a70;
 }
 
 .empty{
   text-align:center;
-  color:#999;
-  padding:25px 0;
+  color:var(--muted);
+  padding:22px;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.summary div{
+  background:#fff8fb;
+  border-radius:15px;
+  padding:12px;
+}
+
+.summary small{color:var(--muted)}
+
+.summary b{
+  display:block;
+  margin-top:4px;
+}
+
+.calc{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+
+.calc input{
+  grid-column:1/-1;
+  text-align:right;
+  font-size:21px;
+}
+
+.calc button{
+  border:0;
+  border-radius:11px;
+  padding:13px;
+  background:#f7eff3;
+}
+
+.calc .op{background:var(--pink3)}
+
+.calc .eq{
+  grid-column:1/-1;
+  background:var(--pink);
+  color:#fff;
 }
 
 .footer{
   text-align:center;
-  color:#999;
-  font-size:12px;
-  padding:20px;
+  color:var(--muted);
+  font-size:11px;
+  margin:18px;
+}
+
+.ad{
+  position:fixed;
+  z-index:9;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(620px,100%);
+  padding:7px;
+  background:#fff;
+  border-top:1px solid #eee;
+  text-align:center;
+  color:#aaa;
+  font-size:10px;
+}
+
+@media(min-width:621px){
+  .ad{
+    bottom:10px;
+    border-radius:10px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h1>💰 小钱包</h1>
+<div class="app">
 
-  <div class="balance-title">当前余额</div>
-  <div class="balance" id="balance">RM 0.00</div>
-  <div class="month" id="month"></div>
+<header>
 
-  <div class="stats">
-    <div class="stat">
-      <span>收入</span>
-      <strong id="income">RM 0.00</strong>
-    </div>
-
-    <div class="stat">
-      <span>支出</span>
-      <strong id="expense">RM 0.00</strong>
-    </div>
-  </div>
+<div class="brand">
+<span>🐰</span>
+小钱包
 </div>
 
-<div class="container">
+<div class="sub">
+简单记录每一笔，让钱花得更明白
+</div>
 
-  <div class="card">
-    <h2>➕ 记录一笔</h2>
+<div class="balance">
+<small>当前余额</small>
+<b id="balance">RM 0.00</b>
+<small id="month"></small>
+</div>
 
-    <div class="type-buttons">
-      <button id="expenseBtn" class="active" onclick="setType('expense')">
-        支出
-      </button>
+<div class="stats">
 
-      <button id="incomeBtn" onclick="setType('income')">
-        收入
-      </button>
-    </div>
+<div class="stat">
+<small>本月收入</small>
+<b id="income">RM 0.00</b>
+</div>
 
-    <div class="form-row">
-      <input
-        id="amount"
-        class="amount"
-        type="number"
-        step="0.01"
-        placeholder="金额 RM"
-      >
-    </div>
-
-    <div class="form-row">
-      <select id="category">
-        <option value="餐饮">🍜 餐饮</option>
-        <option value="交通">🚗 交通</option>
-        <option value="购物">🛍️ 购物</option>
-        <option value="娱乐">🎮 娱乐</option>
-        <option value="生活">🏠 生活</option>
-        <option value="账单">🧾 账单</option>
-        <option value="工资">💼 工资</option>
-        <option value="其他">📦 其他</option>
-      </select>
-    </div>
-
-    <div class="form-row">
-      <input id="note" type="text" placeholder="备注（可选）">
-    </div>
-
-    <button class="add-btn" onclick="addRecord()">
-      保存记录
-    </button>
-  </div>
-
-
-  <div class="card">
-    <h2>📋 最近记录</h2>
-
-    <div id="records"></div>
-  </div>
+<div class="stat">
+<small>本月支出</small>
+<b id="expense">RM 0.00</b>
+</div>
 
 </div>
+
+</header>
+
+
+<main>
+
+<section class="card">
+
+<h2>🌷 省钱小夸奖</h2>
+
+<div class="encourage">
+
+<b id="praise">
+🐰 记一笔，小钱包就更懂你
+</b>
+
+<span id="praise2">
+设定预算后，我会帮你计算每天建议花多少。
+</span>
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h2>🎯 本月预算</h2>
+
+<div class="budget">
+
+<span>预算 RM</span>
+
+<input
+id="budget"
+type="number"
+min="0"
+step="0.01"
+placeholder="例如 1500">
+
+</div>
+
+<div class="progress">
+<i id="bar"></i>
+</div>
+
+<div id="budgetText"
+style="font-size:13px;color:#8e8188">
+还没有设定预算
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h2>➕ 记录一笔</h2>
+
+<div class="types">
+
+<button
+id="outBtn"
+class="on"
+onclick="setType('out')">
+支出
+</button>
+
+<button
+id="inBtn"
+onclick="setType('in')">
+收入
+</button>
+
+</div>
+
+
+<div class="row">
+
+<input
+id="amount"
+type="number"
+min="0"
+step="0.01"
+placeholder="金额 RM">
+
+</div>
+
+
+<div class="row">
+
+<select id="cat">
+
+<option>🍜 餐饮</option>
+<option>🚗 交通</option>
+<option>🛍️ 购物</option>
+<option>🎮 娱乐</option>
+<option>🏠 生活</option>
+<option>🧾 账单</option>
+<option>💼 工资</option>
+<option>🎁 兼职</option>
+<option>📦 其他</option>
+
+</select>
+
+</div>
+
+
+<div class="row">
+
+<input
+id="note"
+maxlength="80"
+placeholder="备注（可选）">
+
+</div>
+
+
+<button
+class="add"
+onclick="addRecord()">
+
+保存记录
+
+</button>
+
+</section>
+
+
+<section class="card">
+
+<h2>📊 本月统计</h2>
+
+<div class="summary">
+
+<div>
+<small>交易笔数</small>
+<b id="count">0</b>
+</div>
+
+<div>
+<small>平均每笔支出</small>
+<b id="avg">RM 0.00</b>
+</div>
+
+<div>
+<small>最大一笔支出</small>
+<b id="max">RM 0.00</b>
+</div>
+
+<div>
+<small>今天支出</small>
+<b id="today">RM 0.00</b>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h2>🧮 小型计算器</h2>
+
+<div class="calc">
+
+<input
+id="calc"
+readonly
+placeholder="0">
+
+<button onclick="calcKey('7')">7</button>
+<button onclick="calcKey('8')">8</button>
+<button onclick="calcKey('9')">9</button>
+<button class="op" onclick="calcKey('/')">÷</button>
+
+<button onclick="calcKey('4')">4</button>
+<button onclick="calcKey('5')">5</button>
+<button onclick="calcKey('6')">6</button>
+<button class="op" onclick="calcKey('*')">×</button>
+
+<button onclick="calcKey('1')">1</button>
+<button onclick="calcKey('2')">2</button>
+<button onclick="calcKey('3')">3</button>
+<button class="op" onclick="calcKey('-')">−</button>
+
+<button onclick="calcKey('0')">0</button>
+<button onclick="calcKey('.')">.</button>
+<button onclick="calcKey('C')">C</button>
+<button class="op" onclick="calcKey('+')">+</button>
+
+<button class="eq" onclick="calcResult()">=</button>
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h2>📋 消费记录</h2>
+
+<div class="tabs">
+
+<button
+id="allTab"
+class="on"
+onclick="setFilter('all')">
+全部
+</button>
+
+<button
+id="outTab"
+onclick="setFilter('out')">
+支出
+</button>
+
+<button
+id="inTab"
+onclick="setFilter('in')">
+收入
+</button>
+
+</div>
+
+<div id="records"></div>
+
+</section>
+
 
 <div class="footer">
-  小钱包 · 数据保存在本机
+小钱包 · 数据保存在本机 · 版本 1.0
 </div>
+
+</main>
+
+
+<div class="ad">
+📢 广告位 · 未来接入 AdMob
+</div>
+
+</div>
+
 
 <script>
 
-let type = "expense";
+const KEY='xiaoqianbao_records_final_v1';
+const BKEY='xiaoqianbao_budget_final_v1';
 
-let records =
-  JSON.parse(localStorage.getItem("xiaoqianbao_records")) || [];
+let records=
+JSON.parse(localStorage.getItem(KEY)||'[]');
+
+let type='out';
+let filter='all';
 
 
-function setType(newType){
+function money(n){
+return 'RM '+Number(n||0).toFixed(2);
+}
 
-  type = newType;
 
-  document
-    .getElementById("expenseBtn")
-    .classList.toggle("active", type === "expense");
+function monthKey(d=new Date()){
+return d.getFullYear()+
+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
 
-  document
-    .getElementById("incomeBtn")
-    .classList.toggle("active", type === "income");
+
+function todayKey(d=new Date()){
+return d.getFullYear()+
+'-'+String(d.getMonth()+1).padStart(2,'0')+
+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+
+function setType(t){
+
+type=t;
+
+outBtn.classList.toggle(
+'on',
+t==='out'
+);
+
+inBtn.classList.toggle(
+'on',
+t==='in'
+);
+
+}
+
+
+function setFilter(f){
+
+filter=f;
+
+allTab.classList.toggle(
+'on',
+f==='all'
+);
+
+outTab.classList.toggle(
+'on',
+f==='out'
+);
+
+inTab.classList.toggle(
+'on',
+f==='in'
+);
+
+renderRecords();
+
 }
 
 
 function addRecord(){
 
-  const amountInput =
-    document.getElementById("amount");
+const a=Number(amount.value);
 
-  const category =
-    document.getElementById("category").value;
+if(!a||a<=0){
 
-  const note =
-    document.getElementById("note").value.trim();
+alert('请输入正确的金额');
 
-  const amount =
-    parseFloat(amountInput.value);
+return;
 
-  if(!amount || amount <= 0){
-    alert("请输入正确的金额");
-    return;
-  }
+}
 
-  const record = {
-    id: Date.now(),
-    type: type,
-    amount: amount,
-    category: category,
-    note: note,
-    date: new Date().toLocaleString("zh-CN")
-  };
+records.unshift({
 
-  records.unshift(record);
+id:Date.now(),
 
-  save();
+type:type,
 
-  amountInput.value = "";
-  document.getElementById("note").value = "";
+amount:a,
 
-  alert("记录成功！");
+cat:cat.value,
+
+note:note.value.trim(),
+
+date:new Date().toISOString()
+
+});
+
+localStorage.setItem(
+KEY,
+JSON.stringify(records)
+);
+
+amount.value='';
+note.value='';
+
+render();
+
 }
 
 
-function deleteRecord(id){
+function removeRecord(id){
 
-  if(!confirm("确定删除这笔记录吗？")){
-    return;
-  }
+if(confirm('确定删除这笔记录吗？')){
 
-  records =
-    records.filter(record => record.id !== id);
+records=
+records.filter(x=>x.id!==id);
 
-  save();
+localStorage.setItem(
+KEY,
+JSON.stringify(records)
+);
+
+render();
+
+}
+
 }
 
 
-function save(){
+function currentMonth(){
 
-  localStorage.setItem(
-    "xiaoqianbao_records",
-    JSON.stringify(records)
-  );
+return records.filter(
+x=>x.date.slice(0,7)===monthKey()
+);
 
-  render();
 }
 
 
 function render(){
 
-  let income = 0;
-  let expense = 0;
+const rs=currentMonth();
 
-  records.forEach(record => {
+const ins=
+rs.filter(x=>x.type==='in');
 
-    if(record.type === "income"){
-      income += record.amount;
-    }else{
-      expense += record.amount;
-    }
+const outs=
+rs.filter(x=>x.type==='out');
 
-  });
+const incomeSum=
+ins.reduce(
+(s,x)=>s+x.amount,
+0
+);
 
-  const balance = income - expense;
+const expenseSum=
+outs.reduce(
+(s,x)=>s+x.amount,
+0
+);
 
-  document.getElementById("income").textContent =
-    "RM " + income.toFixed(2);
+income.textContent=
+money(incomeSum);
 
-  document.getElementById("expense").textContent =
-    "RM " + expense.toFixed(2);
+expense.textContent=
+money(expenseSum);
 
-  document.getElementById("balance").textContent =
-    "RM " + balance.toFixed(2);
+balance.textContent=
+money(incomeSum-expenseSum);
 
-  document.getElementById("month").textContent =
-    new Date().toLocaleDateString("zh-CN",{
-      year:"numeric",
-      month:"long"
-    });
-
-
-  const container =
-    document.getElementById("records");
-
-  if(records.length === 0){
-
-    container.innerHTML =
-      '<div class="empty">还没有记录<br>添加第一笔消费吧</div>';
-
-    return;
-  }
+month.textContent=
+new Date().toLocaleDateString(
+'zh-CN',
+{
+year:'numeric',
+month:'long'
+}
+);
 
 
-  container.innerHTML =
-    records.map(record => {
+count.textContent=rs.length;
 
-      const icon =
-        getIcon(record.category);
+avg.textContent=
+money(
+outs.length
+?expenseSum/outs.length
+:0
+);
 
-      const sign =
-        record.type === "income" ? "+" : "-";
+max.textContent=
+money(
+outs.length
+?Math.max(...outs.map(x=>x.amount))
+:0
+);
 
-      const className =
-        record.type === "income"
-          ? "income"
-          : "expense";
+today.textContent=
+money(
+outs
+.filter(
+x=>x.date.slice(0,10)===todayKey()
+)
+.reduce(
+(s,x)=>s+x.amount,
+0
+)
+);
 
-      return `
-        <div class="record">
 
-          <div class="icon">
-            ${icon}
-          </div>
+const b=
+Number(
+localStorage.getItem(BKEY)||0
+);
 
-          <div class="record-info">
+budget.value=b||'';
 
-            <strong>
-              ${record.category}
-              ${record.note ? " · " + escapeHtml(record.note) : ""}
-            </strong>
+const pct=
+b
+?Math.min(
+100,
+expenseSum/b*100
+)
+:0;
 
-            <small>
-              ${record.date}
-            </small>
+bar.style.width=
+pct+'%';
 
-          </div>
 
-          <div class="${className}">
-            ${sign} RM ${record.amount.toFixed(2)}
-          </div>
+budgetText.textContent=
+b
+?`已使用 ${money(expenseSum)} · 剩余 ${money(Math.max(0,b-expenseSum))} · ${pct.toFixed(0)}%`
+:'还没有设定预算';
 
-          <button
-            class="delete"
-            onclick="deleteRecord(${record.id})">
-            删除
-          </button>
 
-        </div>
-      `;
+updatePraise(
+expenseSum,
+b
+);
 
-    }).join("");
+renderRecords();
+
 }
 
 
-function getIcon(category){
+function updatePraise(out,b){
 
-  const icons = {
-    "餐饮":"🍜",
-    "交通":"🚗",
-    "购物":"🛍️",
-    "娱乐":"🎮",
-    "生活":"🏠",
-    "账单":"🧾",
-    "工资":"💼",
-    "其他":"📦"
-  };
+const prev=
+new Date();
 
-  return icons[category] || "📦";
+prev.setMonth(
+prev.getMonth()-1
+);
+
+const prevKey=
+monthKey(prev);
+
+const prevOut=
+records
+.filter(
+x=>
+x.date.slice(0,7)===prevKey &&
+x.type==='out'
+)
+.reduce(
+(s,x)=>s+x.amount,
+0
+);
+
+
+if(prevOut>0&&out<prevOut){
+
+praise.textContent=
+`🎉 太棒啦！比上个月少花 ${money(prevOut-out)}`;
+
+praise2.textContent=
+'继续保持，你的省钱习惯正在变好！';
+
+return;
+
 }
 
 
-function escapeHtml(text){
+if(b&&out<b){
 
-  const div =
-    document.createElement("div");
+const d=new Date();
 
-  div.textContent = text;
+const days=
+new Date(
+d.getFullYear(),
+d.getMonth()+1,
+0
+).getDate();
 
-  return div.innerHTML;
+const left=
+Math.max(
+1,
+days-d.getDate()+1
+);
+
+const daily=
+Math.max(
+0,
+(b-out)/left
+);
+
+praise.textContent=
+`🌷 今天建议花不超过 ${money(daily)}`;
+
+praise2.textContent=
+`预算已使用 ${Math.min(
+100,
+out/b*100
+).toFixed(0)}%，慢慢来就很好。`;
+
+return;
+
+}
+
+
+if(b&&out>=b){
+
+praise.textContent=
+'💗 本月预算用完啦';
+
+praise2.textContent=
+'不用责怪自己，调整好下个月的预算就好。';
+
+return;
+
+}
+
+
+praise.textContent=
+'🐰 记一笔，小钱包就更懂你';
+
+praise2.textContent=
+'设定预算后，我会帮你计算每天建议花多少。';
+
+}
+
+
+function renderRecords(){
+
+const rs=
+currentMonth()
+.filter(
+x=>
+filter==='all'||
+x.type===filter
+);
+
+if(!rs.length){
+
+recordsEl.innerHTML=
+'<div class="empty">这里还没有记录 🌷</div>';
+
+return;
+
+}
+
+
+recordsEl.innerHTML=
+rs
+.slice(0,50)
+.map(
+x=>
+`<div class="record">
+
+<div class="ico">
+${icon(x.cat)}
+</div>
+
+<div class="info">
+
+<b>
+${esc(x.cat)}
+${x.note?' · '+esc(x.note):''}
+</b>
+
+<small>
+${new Date(x.date).toLocaleString('zh-CN')}
+</small>
+
+</div>
+
+<div class="money ${x.type==='in'?'in':'out'}">
+${x.type==='in'?'+':'-'}${money(x.amount)}
+</div>
+
+<button
+class="del"
+onclick="removeRecord(${x.id})">
+删除
+</button>
+
+</div>`
+)
+.join('');
+
+}
+
+
+function icon(s){
+
+return String(s||'')
+.split(' ')[0]||'📦';
+
+}
+
+
+function esc(s){
+
+return String(s).replace(
+/[&<>"']/g,
+m=>
+({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#39;'
+}[m])
+);
+
+}
+
+
+budget.addEventListener(
+'change',
+()=>{
+
+const n=
+Math.max(
+0,
+Number(budget.value)||0
+);
+
+localStorage.setItem(
+BKEY,
+n
+);
+
+render();
+
+}
+);
+
+
+function calcKey(k){
+
+if(k==='C')
+calc.value='';
+else
+calc.value+=k;
+
+}
+
+
+function calcResult(){
+
+try{
+
+const s=calc.value;
+
+if(!/^[0-9.+\-*/() ]+$/.test(s))
+throw Error();
+
+const result=
+Function(
+'"use strict";return ('+
+s+
+')'
+)();
+
+if(!Number.isFinite(result))
+throw Error();
+
+calc.value=
+String(result);
+
+}catch(e){
+
+calc.value='错误';
+
+}
+
 }
 
 
