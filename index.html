@@ -13,6 +13,7 @@
 <title>小钱包</title>
 
 <style>
+
 :root{
 --pink:#ff6fa8;
 --pink2:#fff0f6;
@@ -338,6 +339,141 @@ display:block;
 margin-top:4px;
 }
 
+
+/* =========================
+   存钱统计
+========================= */
+
+.saving-card{
+background:#fff;
+border:1px solid #f1e5ea;
+border-radius:21px;
+padding:17px;
+margin-bottom:14px;
+box-shadow:0 5px 18px #ffb6cc14;
+}
+
+.saving-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:14px;
+}
+
+.saving-title h2{
+margin:0;
+}
+
+.year-select{
+width:120px;
+padding:9px 10px;
+border-radius:12px;
+font-size:14px;
+}
+
+.saving-main{
+background:linear-gradient(
+135deg,
+#fff0f6,
+#fff8fb
+);
+border:1px solid #f4dfe8;
+border-radius:18px;
+padding:16px;
+margin-bottom:10px;
+}
+
+.saving-main small{
+color:var(--muted);
+}
+
+.saving-main b{
+display:block;
+font-size:28px;
+margin-top:5px;
+color:var(--green);
+}
+
+.saving-total{
+background:#f7fff9;
+border:1px solid #dff2e5;
+border-radius:18px;
+padding:16px;
+margin-bottom:14px;
+}
+
+.saving-total small{
+color:var(--muted);
+}
+
+.saving-total b{
+display:block;
+font-size:25px;
+margin-top:5px;
+color:var(--green);
+}
+
+.saving-table-wrap{
+width:100%;
+overflow:hidden;
+}
+
+.saving-table{
+width:100%;
+border-collapse:collapse;
+font-size:14px;
+}
+
+.saving-table th{
+text-align:left;
+font-weight:600;
+color:var(--muted);
+padding:10px 8px;
+border-bottom:1px solid #f0e5e9;
+}
+
+.saving-table th:last-child,
+.saving-table td:last-child{
+text-align:right;
+}
+
+.saving-table td{
+padding:11px 8px;
+border-bottom:1px solid #f4ecef;
+}
+
+.saving-table tr:last-child td{
+border-bottom:0;
+}
+
+.saving-month{
+font-weight:600;
+}
+
+.saving-amount{
+font-weight:700;
+color:var(--green);
+}
+
+.saving-total-row td{
+font-weight:800;
+font-size:15px;
+background:#fff8fb;
+}
+
+.saving-note{
+margin-top:12px;
+font-size:12px;
+color:var(--muted);
+line-height:1.6;
+}
+
+
+/* =========================
+   计算器
+========================= */
+
 .calc{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -390,17 +526,39 @@ font-size:10px;
 }
 
 @media(min-width:621px){
+
 .ad{
 bottom:10px;
 border-radius:10px;
 }
+
 }
+
+@media(max-width:420px){
+
+.saving-table{
+font-size:13px;
+}
+
+.saving-table th,
+.saving-table td{
+padding:10px 5px;
+}
+
+.year-select{
+width:105px;
+}
+
+}
+
 </style>
 </head>
+
 
 <body>
 
 <div class="app">
+
 
 <header>
 
@@ -413,37 +571,60 @@ border-radius:10px;
 简单记录每一笔，让钱花得更明白
 </div>
 
+
 <div class="balance">
 
 <small>当前余额</small>
 
-<b id="balance">RM 0.00</b>
+<b id="balance">
+RM 0.00
+</b>
 
 <small id="month"></small>
 
 </div>
 
+
 <div class="stats">
 
 <div class="stat">
-<small>本月收入</small>
-<b id="income">RM 0.00</b>
+
+<small>
+本月收入
+</small>
+
+<b id="income">
+RM 0.00
+</b>
+
 </div>
 
+
 <div class="stat">
-<small>本月支出</small>
-<b id="expense">RM 0.00</b>
+
+<small>
+本月支出
+</small>
+
+<b id="expense">
+RM 0.00
+</b>
+
 </div>
 
 </div>
 
 </header>
 
+
 <main>
+
 
 <section class="card">
 
-<h2>🌷 省钱小夸奖</h2>
+<h2>
+🌷 省钱小夸奖
+</h2>
 
 <div class="encourage">
 
@@ -460,13 +641,18 @@ border-radius:10px;
 </section>
 
 
+
 <section class="card">
 
-<h2>🎯 本月预算</h2>
+<h2>
+🎯 本月预算
+</h2>
 
 <div class="budget">
 
-<span>预算 RM</span>
+<span>
+预算 RM
+</span>
 
 <input
 id="budget"
@@ -479,7 +665,9 @@ placeholder="例如 1500"
 </div>
 
 <div class="progress">
+
 <i id="bar"></i>
+
 </div>
 
 <div
@@ -492,9 +680,103 @@ style="font-size:13px;color:#8e8188"
 </section>
 
 
+
+<!-- =========================
+     存钱统计
+========================= -->
+
+<section class="saving-card">
+
+<div class="saving-title">
+
+<h2>
+💰 存钱统计
+</h2>
+
+<select
+id="savingYear"
+class="year-select"
+onchange="renderSavings()"
+>
+</select>
+
+</div>
+
+
+<div class="saving-total">
+
+<small>
+🏆 累计存钱总额
+</small>
+
+<b id="allTimeSaving">
+RM 0.00
+</b>
+
+</div>
+
+
+<div class="saving-main">
+
+<small id="savingTotalLabel">
+2026 年全年存下
+</small>
+
+<b id="savingTotal">
+RM 0.00
+</b>
+
+</div>
+
+
+<div class="saving-table-wrap">
+
+<table class="saving-table">
+
+<thead>
+
+<tr>
+
+<th>
+月份
+</th>
+
+<th>
+存下
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="savingTable">
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="saving-note">
+
+存下金额 = 当月收入 − 当月支出。<br>
+
+每个月独立计算，可以切换年份查看以前的存钱记录。<br>
+
+如果某个月支出高于收入，该月存下显示 RM 0.00。
+
+</div>
+
+</section>
+
+
+
 <section class="card">
 
-<h2>➕ 记录一笔</h2>
+<h2>
+➕ 记录一笔
+</h2>
+
 
 <div class="types">
 
@@ -515,6 +797,7 @@ onclick="setType('in')"
 
 </div>
 
+
 <div class="row">
 
 <input
@@ -527,23 +810,51 @@ placeholder="金额 RM"
 
 </div>
 
+
 <div class="row">
 
 <select id="cat">
 
-<option>🍜 餐饮</option>
-<option>🚗 交通</option>
-<option>🛍️ 购物</option>
-<option>🎮 娱乐</option>
-<option>🏠 生活</option>
-<option>🧾 账单</option>
-<option>💼 工资</option>
-<option>🎁 兼职</option>
-<option>📦 其他</option>
+<option>
+🍜 餐饮
+</option>
+
+<option>
+🚗 交通
+</option>
+
+<option>
+🛍️ 购物
+</option>
+
+<option>
+🎮 娱乐
+</option>
+
+<option>
+🏠 生活
+</option>
+
+<option>
+🧾 账单
+</option>
+
+<option>
+💼 工资
+</option>
+
+<option>
+🎁 兼职
+</option>
+
+<option>
+📦 其他
+</option>
 
 </select>
 
 </div>
+
 
 <div class="row">
 
@@ -555,6 +866,7 @@ placeholder="备注（可选）"
 
 </div>
 
+
 <button
 class="add"
 onclick="addRecord()"
@@ -565,30 +877,65 @@ onclick="addRecord()"
 </section>
 
 
+
 <section class="card">
 
-<h2>📊 本月统计</h2>
+<h2>
+📊 本月统计
+</h2>
+
 
 <div class="summary">
 
 <div>
-<small>交易笔数</small>
-<b id="count">0</b>
+
+<small>
+交易笔数
+</small>
+
+<b id="count">
+0
+</b>
+
 </div>
 
-<div>
-<small>平均每笔支出</small>
-<b id="avg">RM 0.00</b>
-</div>
 
 <div>
-<small>最大一笔支出</small>
-<b id="max">RM 0.00</b>
+
+<small>
+平均每笔支出
+</small>
+
+<b id="avg">
+RM 0.00
+</b>
+
 </div>
 
+
 <div>
-<small>今天支出</small>
-<b id="today">RM 0.00</b>
+
+<small>
+最大一笔支出
+</small>
+
+<b id="max">
+RM 0.00
+</b>
+
+</div>
+
+
+<div>
+
+<small>
+今天支出
+</small>
+
+<b id="today">
+RM 0.00
+</b>
+
 </div>
 
 </div>
@@ -596,9 +943,13 @@ onclick="addRecord()"
 </section>
 
 
+
 <section class="card">
 
-<h2>🧮 小型计算器</h2>
+<h2>
+🧮 小型计算器
+</h2>
+
 
 <div class="calc">
 
@@ -608,25 +959,86 @@ readonly
 placeholder="0"
 >
 
-<button onclick="calcKey('7')">7</button>
-<button onclick="calcKey('8')">8</button>
-<button onclick="calcKey('9')">9</button>
-<button class="op" onclick="calcKey('/')">÷</button>
 
-<button onclick="calcKey('4')">4</button>
-<button onclick="calcKey('5')">5</button>
-<button onclick="calcKey('6')">6</button>
-<button class="op" onclick="calcKey('*')">×</button>
+<button onclick="calcKey('7')">
+7
+</button>
 
-<button onclick="calcKey('1')">1</button>
-<button onclick="calcKey('2')">2</button>
-<button onclick="calcKey('3')">3</button>
-<button class="op" onclick="calcKey('-')">−</button>
+<button onclick="calcKey('8')">
+8
+</button>
 
-<button onclick="calcKey('0')">0</button>
-<button onclick="calcKey('.')">.</button>
-<button onclick="calcKey('C')">C</button>
-<button class="op" onclick="calcKey('+')">+</button>
+<button onclick="calcKey('9')">
+9
+</button>
+
+<button
+class="op"
+onclick="calcKey('/')"
+>
+÷
+</button>
+
+
+<button onclick="calcKey('4')">
+4
+</button>
+
+<button onclick="calcKey('5')">
+5
+</button>
+
+<button onclick="calcKey('6')">
+6
+</button>
+
+<button
+class="op"
+onclick="calcKey('*')"
+>
+×
+</button>
+
+
+<button onclick="calcKey('1')">
+1
+</button>
+
+<button onclick="calcKey('2')">
+2
+</button>
+
+<button onclick="calcKey('3')">
+3
+</button>
+
+<button
+class="op"
+onclick="calcKey('-')"
+>
+−
+</button>
+
+
+<button onclick="calcKey('0')">
+0
+</button>
+
+<button onclick="calcKey('.')">
+.
+</button>
+
+<button onclick="calcKey('C')">
+C
+</button>
+
+<button
+class="op"
+onclick="calcKey('+')"
+>
++
+</button>
+
 
 <button
 class="eq"
@@ -640,9 +1052,13 @@ onclick="calcResult()"
 </section>
 
 
+
 <section class="card">
 
-<h2>📋 消费记录</h2>
+<h2>
+📋 消费记录
+</h2>
+
 
 <div class="tabs">
 
@@ -670,32 +1086,50 @@ onclick="setFilter('in')"
 
 </div>
 
+
 <div id="records"></div>
 
 </section>
 
 
+
 <div class="footer">
+
 小钱包 · 数据保存在本机 · 版本 1.0
+
 </div>
 
 </main>
 
 
+
 <div class="ad">
+
 📢 广告位 · 未来接入 AdMob
-</div>
 
 </div>
+
+
+</div>
+
 
 
 <script>
 
-const KEY='xiaoqianbao_records_final_v1';
 
-const BKEY='xiaoqianbao_budget_final_v1';
+/* =========================
+   数据
+========================= */
+
+const KEY=
+'xiaoqianbao_records_final_v1';
+
+const BKEY=
+'xiaoqianbao_budget_final_v1';
+
 
 let records=[];
+
 
 try{
 
@@ -706,6 +1140,7 @@ const parsed=
 saved
 ?JSON.parse(saved)
 :[];
+
 
 records=
 Array.isArray(parsed)
@@ -718,10 +1153,16 @@ records=[];
 
 }
 
+
 let type='out';
 
 let filter='all';
 
+
+
+/* =========================
+   基础工具
+========================= */
 
 function money(n){
 
@@ -757,9 +1198,429 @@ d.getDate()
 }
 
 
+function validDate(x){
+
+if(
+!x||
+!x.date
+){
+
+return null;
+
+}
+
+
+const d=
+new Date(x.date);
+
+
+if(
+Number.isNaN(
+d.getTime()
+)
+){
+
+return null;
+
+}
+
+
+return d;
+
+}
+
+
+
+/* =========================
+   存钱统计
+========================= */
+
+
+function getYearSavings(year){
+
+const monthly=[];
+
+
+for(
+let month=1;
+month<=12;
+month++
+){
+
+let income=0;
+
+let expense=0;
+
+
+records.forEach(x=>{
+
+const d=
+validDate(x);
+
+
+if(!d){
+
+return;
+
+}
+
+
+if(
+d.getFullYear()!==year
+){
+
+return;
+
+}
+
+
+if(
+d.getMonth()+1!==month
+){
+
+return;
+
+}
+
+
+const amount=
+Number(x.amount)||0;
+
+
+if(
+x.type==='in'
+){
+
+income+=amount;
+
+}
+
+
+if(
+x.type==='out'
+){
+
+expense+=amount;
+
+}
+
+});
+
+
+const saved=
+Math.max(
+0,
+income-expense
+);
+
+
+monthly.push({
+
+month:month,
+
+income:income,
+
+expense:expense,
+
+saved:saved
+
+});
+
+}
+
+
+return monthly;
+
+}
+
+
+
+function getAllTimeSaving(){
+
+let total=0;
+
+
+records.forEach(x=>{
+
+const d=
+validDate(x);
+
+
+if(!d){
+
+return;
+
+}
+
+
+const amount=
+Number(x.amount)||0;
+
+
+if(
+x.type==='in'
+){
+
+total+=amount;
+
+}
+
+
+if(
+x.type==='out'
+){
+
+total-=amount;
+
+}
+
+});
+
+
+return Math.max(
+0,
+total
+);
+
+}
+
+
+
+function getAvailableYears(){
+
+const years=
+new Set();
+
+
+records.forEach(x=>{
+
+const d=
+validDate(x);
+
+
+if(d){
+
+years.add(
+d.getFullYear()
+);
+
+}
+
+});
+
+
+const currentYear=
+new Date().getFullYear();
+
+
+years.add(
+currentYear
+);
+
+
+return Array
+.from(years)
+.sort(
+(a,b)=>b-a
+);
+
+}
+
+
+
+function setupSavingYears(){
+
+const select=
+document.getElementById(
+'savingYear'
+);
+
+
+if(!select){
+
+return;
+
+}
+
+
+const oldValue=
+Number(
+select.value
+);
+
+
+const years=
+getAvailableYears();
+
+
+select.innerHTML=
+years
+.map(
+year=>
+`<option value="${year}">${year} 年</option>`
+)
+.join('');
+
+
+if(
+years.includes(oldValue)
+){
+
+select.value=
+String(oldValue);
+
+}else{
+
+select.value=
+String(
+new Date()
+.getFullYear()
+);
+
+}
+
+}
+
+
+
+function renderSavings(){
+
+const select=
+document.getElementById(
+'savingYear'
+);
+
+
+if(!select){
+
+return;
+
+}
+
+
+const year=
+Number(
+select.value
+)||
+new Date()
+.getFullYear();
+
+
+const monthly=
+getYearSavings(year);
+
+
+const total=
+monthly.reduce(
+(sum,item)=>
+sum+item.saved,
+0
+);
+
+
+const allTime=
+getAllTimeSaving();
+
+
+document
+.getElementById(
+'allTimeSaving'
+)
+.textContent=
+money(allTime);
+
+
+document
+.getElementById(
+'savingTotalLabel'
+)
+.textContent=
+`${year} 年全年存下`;
+
+
+document
+.getElementById(
+'savingTotal'
+)
+.textContent=
+money(total);
+
+
+const tbody=
+document.getElementById(
+'savingTable'
+);
+
+
+const monthNames=[
+'1月',
+'2月',
+'3月',
+'4月',
+'5月',
+'6月',
+'7月',
+'8月',
+'9月',
+'10月',
+'11月',
+'12月'
+];
+
+
+tbody.innerHTML=
+monthly
+.map(
+item=>
+`
+
+<tr>
+
+<td class="saving-month">
+${monthNames[item.month-1]}
+</td>
+
+<td class="saving-amount">
+${money(item.saved)}
+</td>
+
+</tr>
+
+`
+)
+.join('');
+
+
+tbody.innerHTML+=
+`
+
+<tr class="saving-total-row">
+
+<td>
+TOTAL
+</td>
+
+<td>
+${money(total)}
+</td>
+
+</tr>
+
+`;
+
+}
+
+
+
+/* =========================
+   类型 / 筛选
+========================= */
+
+
 function setType(t){
 
 type=t;
+
 
 document
 .getElementById('outBtn')
@@ -768,6 +1629,7 @@ document
 'on',
 t==='out'
 );
+
 
 document
 .getElementById('inBtn')
@@ -780,9 +1642,11 @@ t==='in'
 }
 
 
+
 function setFilter(f){
 
 filter=f;
+
 
 document
 .getElementById('allTab')
@@ -792,6 +1656,7 @@ document
 f==='all'
 );
 
+
 document
 .getElementById('outTab')
 .classList
@@ -799,6 +1664,7 @@ document
 'on',
 f==='out'
 );
+
 
 document
 .getElementById('inTab')
@@ -808,25 +1674,40 @@ document
 f==='in'
 );
 
+
 renderRecords();
 
 }
 
 
+
+/* =========================
+   添加记录
+========================= */
+
+
 function addRecord(){
 
 const amountInput=
-document.getElementById('amount');
+document.getElementById(
+'amount'
+);
+
 
 const a=
-Number(amountInput.value);
+Number(
+amountInput.value
+);
+
 
 if(
 !Number.isFinite(a)||
 a<=0
 ){
 
-alert('请输入正确的金额');
+alert(
+'请输入正确的金额'
+);
 
 return;
 
@@ -859,7 +1740,9 @@ new Date()
 };
 
 
-records.unshift(record);
+records.unshift(
+record
+);
 
 
 try{
@@ -871,7 +1754,9 @@ JSON.stringify(records)
 
 }catch(e){
 
-alert('保存失败，请检查设备存储空间');
+alert(
+'保存失败，请检查设备存储空间'
+);
 
 return;
 
@@ -879,6 +1764,7 @@ return;
 
 
 amountInput.value='';
+
 
 document
 .getElementById('note')
@@ -888,6 +1774,12 @@ document
 render();
 
 }
+
+
+
+/* =========================
+   删除
+========================= */
 
 
 function removeRecord(id){
@@ -922,40 +1814,41 @@ render();
 }
 
 
+
+/* =========================
+   本月
+========================= */
+
+
 function currentMonth(){
 
 return records.filter(x=>{
 
-if(
-!x||
-!x.date
-){
-
-return false;
-
-}
-
-
 const d=
-new Date(x.date);
+validDate(x);
 
 
-if(
-Number.isNaN(
-d.getTime()
-)
-){
+if(!d){
 
 return false;
 
 }
 
 
-return monthKey(d)===monthKey();
+return(
+monthKey(d)===
+monthKey()
+);
 
 });
 
 }
+
+
+
+/* =========================
+   主渲染
+========================= */
 
 
 function render(){
@@ -1010,7 +1903,8 @@ document
 .getElementById('balance')
 .textContent=
 money(
-incomeSum-expenseSum
+incomeSum-
+expenseSum
 );
 
 
@@ -1038,7 +1932,8 @@ document
 .textContent=
 money(
 outs.length
-?expenseSum/outs.length
+?expenseSum/
+outs.length
 :0
 );
 
@@ -1050,7 +1945,8 @@ money(
 outs.length
 ?Math.max(
 ...outs.map(
-x=>Number(x.amount)||0
+x=>
+Number(x.amount)||0
 )
 )
 :0
@@ -1067,12 +1963,11 @@ outs
 .filter(x=>{
 
 const d=
-new Date(x.date);
+validDate(x);
+
 
 return(
-!Number.isNaN(
-d.getTime()
-)&&
+d&&
 todayKey(d)===
 todayKey()
 );
@@ -1105,7 +2000,9 @@ const pct=
 b
 ?Math.min(
 100,
-expenseSum/b*100
+expenseSum/
+b*
+100
 )
 :0;
 
@@ -1134,9 +2031,19 @@ b
 );
 
 
+setupSavingYears();
+
+renderSavings();
+
 renderRecords();
 
 }
+
+
+
+/* =========================
+   省钱鼓励
+========================= */
 
 
 function updatePraise(out,b){
@@ -1160,24 +2067,12 @@ records
 
 .filter(x=>{
 
-if(
-!x||
-!x.date
-){
-
-return false;
-
-}
-
-
 const d=
-new Date(x.date);
+validDate(x);
 
 
 return(
-!Number.isNaN(
-d.getTime()
-)&&
+d&&
 monthKey(d)===
 prevKey&&
 x.type==='out'
@@ -1299,11 +2194,18 @@ document
 }
 
 
+
+/* =========================
+   消费记录
+========================= */
+
+
 function renderRecords(){
 
 const container=
-document
-.getElementById('records');
+document.getElementById(
+'records'
+);
 
 
 if(!container){
@@ -1349,11 +2251,13 @@ x.type==='in'
 
 list=
 list
+
 .filter(
 x=>
 x&&
 typeof x==='object'
 )
+
 .sort(
 (a,b)=>{
 
@@ -1362,10 +2266,12 @@ new Date(
 a.date||0
 ).getTime();
 
+
 const db=
 new Date(
 b.date||0
 ).getTime();
+
 
 return db-da;
 
@@ -1386,11 +2292,14 @@ return;
 container.innerHTML=
 
 list
+
 .slice(0,50)
+
 .map(x=>{
 
 const amount=
 Number(x.amount)||0;
+
 
 const category=
 String(
@@ -1398,16 +2307,19 @@ x.cat||
 '📦 其他'
 );
 
+
 const note=
 String(
 x.note||
 ''
 );
 
+
 const d=
 new Date(
 x.date
 );
+
 
 const dateText=
 Number.isNaN(
@@ -1418,13 +2330,16 @@ d.getTime()
 'zh-CN'
 );
 
+
 const isIncome=
 x.type==='in';
+
 
 const typeClass=
 isIncome
 ?'in'
 :'out';
+
 
 const sign=
 isIncome
@@ -1440,6 +2355,7 @@ return`
 ${icon(category)}
 </div>
 
+
 <div class="info">
 
 <b>
@@ -1450,15 +2366,18 @@ ${note
 }
 </b>
 
+
 <small>
 ${esc(dateText)}
 </small>
 
 </div>
 
+
 <div class="money ${typeClass}">
 ${sign}${money(amount)}
 </div>
+
 
 <button
 class="del"
@@ -1472,9 +2391,16 @@ onclick="removeRecord(${Number(x.id)||0})"
 `;
 
 })
+
 .join('');
 
 }
+
+
+
+/* =========================
+   图标
+========================= */
 
 
 function icon(s){
@@ -1484,6 +2410,12 @@ return String(s||'')
 '📦';
 
 }
+
+
+
+/* =========================
+   防止 HTML 注入
+========================= */
 
 
 function esc(s){
@@ -1503,6 +2435,12 @@ m=>({
 );
 
 }
+
+
+
+/* =========================
+   预算
+========================= */
 
 
 document
@@ -1534,6 +2472,12 @@ render();
 );
 
 
+
+/* =========================
+   计算器
+========================= */
+
+
 function calcKey(k){
 
 const calc=
@@ -1541,7 +2485,9 @@ document
 .getElementById('calc');
 
 
-if(k==='C'){
+if(
+k==='C'
+){
 
 calc.value='';
 
@@ -1562,6 +2508,7 @@ calc.value='';
 calc.value+=k;
 
 }
+
 
 
 function calcResult(){
@@ -1610,14 +2557,18 @@ String(result);
 }
 catch(e){
 
-calc.value='错误';
+calc.value=
+'错误';
 
 }
 
 }
 
 
-/* PWA Service Worker */
+
+/* =========================
+   PWA Service Worker
+========================= */
 
 if(
 'serviceWorker'
@@ -1631,7 +2582,7 @@ window.addEventListener(
 navigator
 .serviceWorker
 .register(
-'./sw.js?v=3'
+'./sw.js?v=4'
 )
 .then(
 ()=>{
@@ -1654,6 +2605,13 @@ error
 
 }
 
+
+
+/* =========================
+   启动
+========================= */
+
+setupSavingYears();
 
 render();
 
