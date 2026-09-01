@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-
 <meta name="theme-color" content="#ff6fa8">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -14,7 +13,6 @@
 <title>小钱包</title>
 
 <style>
-
 :root{
 --pink:#ff6fa8;
 --pink2:#fff0f6;
@@ -25,9 +23,7 @@
 --red:#e65370;
 }
 
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -37,14 +33,16 @@ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",san
 -webkit-tap-highlight-color:transparent;
 }
 
-button,input,select{
-font:inherit;
-}
-
+button,input,select{font:inherit}
 button{
 cursor:pointer;
--webkit-tap-highlight-color:transparent;
 touch-action:manipulation;
+-webkit-tap-highlight-color:transparent;
+transition:transform .08s ease,opacity .08s ease;
+}
+button:active{
+transform:scale(.96);
+opacity:.88;
 }
 
 .app{
@@ -88,9 +86,7 @@ background:linear-gradient(135deg,#ff91ba,#ff6fa8);
 box-shadow:0 10px 25px #ff6fa833;
 }
 
-.balance small{
-opacity:.9;
-}
+.balance small{opacity:.9}
 
 .balance b{
 display:block;
@@ -112,21 +108,15 @@ border-radius:17px;
 padding:13px;
 }
 
-.stat small{
-color:var(--muted);
-}
-
+.stat small{color:var(--muted)}
 .stat b{
 display:block;
 margin-top:5px;
 }
 
-main{
-padding:0 15px;
-}
+main{padding:0 15px}
 
-.card,
-.saving-card{
+.card,.saving-card{
 background:#fff;
 border:1px solid #f1e5ea;
 border-radius:21px;
@@ -146,8 +136,7 @@ gap:9px;
 margin-bottom:10px;
 }
 
-input,
-select{
+input,select{
 width:100%;
 padding:13px;
 border:1px solid #eadde3;
@@ -157,20 +146,17 @@ color:var(--text);
 outline:0;
 }
 
-input:focus,
-select:focus{
+input:focus,select:focus{
 border-color:var(--pink);
 }
 
-.types,
-.tabs{
+.types,.tabs{
 display:flex;
 gap:8px;
 margin-bottom:10px;
 }
 
-.types button,
-.tabs button{
+.types button,.tabs button{
 flex:1;
 border:0;
 border-radius:13px;
@@ -179,8 +165,7 @@ background:#f4eff1;
 color:#6e6268;
 }
 
-.types .on,
-.tabs .on{
+.types .on,.tabs .on{
 background:var(--pink);
 color:#fff;
 }
@@ -201,9 +186,7 @@ gap:10px;
 align-items:center;
 }
 
-.budget input{
-max-width:190px;
-}
+.budget input{max-width:190px}
 
 .progress{
 height:9px;
@@ -238,9 +221,19 @@ font-size:13px;
 color:#796d73;
 }
 
+/* 声音测试 */
+.sound-test{
+width:100%;
+margin-top:12px;
+border:0;
+border-radius:14px;
+padding:12px;
+background:#fff0f6;
+color:#d34f84;
+font-weight:700;
+}
 
-/* 存钱统计 */
-
+/* 存钱 */
 .saving-title{
 display:flex;
 align-items:center;
@@ -249,9 +242,7 @@ gap:10px;
 margin-bottom:14px;
 }
 
-.saving-title h2{
-margin:0;
-}
+.saving-title h2{margin:0}
 
 .year-select{
 width:120px;
@@ -268,7 +259,7 @@ padding:16px;
 margin-bottom:10px;
 }
 
-.saving-total small{
+.saving-total small,.saving-main small{
 color:var(--muted);
 }
 
@@ -285,10 +276,6 @@ border:1px solid #f4dfe8;
 border-radius:18px;
 padding:16px;
 margin-bottom:14px;
-}
-
-.saving-main small{
-color:var(--muted);
 }
 
 .saving-main b{
@@ -322,10 +309,7 @@ padding:11px 8px;
 border-bottom:1px solid #f4ecef;
 }
 
-.saving-month{
-font-weight:600;
-}
-
+.saving-month{font-weight:600}
 .saving-amount{
 font-weight:700;
 color:var(--green);
@@ -344,9 +328,7 @@ color:var(--muted);
 line-height:1.6;
 }
 
-
 /* 固定账单 */
-
 .bill-summary{
 background:#fff8fb;
 border-radius:16px;
@@ -354,9 +336,7 @@ padding:14px;
 margin-bottom:12px;
 }
 
-.bill-summary b{
-font-size:21px;
-}
+.bill-summary b{font-size:21px}
 
 .bill-summary small{
 display:block;
@@ -381,9 +361,7 @@ padding:12px 0;
 border-bottom:1px solid #f0e8eb;
 }
 
-.bill:last-child{
-border-bottom:0;
-}
+.bill:last-child{border-bottom:0}
 
 .bill-top{
 display:flex;
@@ -406,10 +384,7 @@ flex:1;
 min-width:0;
 }
 
-.bill-info b{
-display:block;
-}
-
+.bill-info b{display:block}
 .bill-info small{
 color:var(--muted);
 line-height:1.5;
@@ -422,9 +397,7 @@ margin-top:8px;
 justify-content:flex-end;
 }
 
-.edit-btn,
-.paid-btn,
-.del{
+.edit-btn,.paid-btn,.del{
 border:0;
 border-radius:9px;
 padding:7px;
@@ -483,9 +456,7 @@ background:#f3edef;
 color:#6e6268;
 }
 
-
 /* 记录 */
-
 .record{
 display:flex;
 align-items:center;
@@ -494,9 +465,7 @@ padding:12px 0;
 border-bottom:1px solid #f0e8eb;
 }
 
-.record:last-child{
-border-bottom:0;
-}
+.record:last-child{border-bottom:0}
 
 .ico{
 width:43px;
@@ -521,9 +490,7 @@ overflow:hidden;
 text-overflow:ellipsis;
 }
 
-.info small{
-color:var(--muted);
-}
+.info small{color:var(--muted)}
 
 .money{
 font-weight:800;
@@ -531,13 +498,8 @@ white-space:nowrap;
 font-size:13px;
 }
 
-.out{
-color:var(--red);
-}
-
-.in{
-color:var(--green);
-}
+.out{color:var(--red)}
+.in{color:var(--green)}
 
 .empty{
 text-align:center;
@@ -545,9 +507,7 @@ color:var(--muted);
 padding:22px;
 }
 
-
 /* 统计 */
-
 .summary{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -560,18 +520,13 @@ border-radius:15px;
 padding:12px;
 }
 
-.summary small{
-color:var(--muted);
-}
-
+.summary small{color:var(--muted)}
 .summary b{
 display:block;
 margin-top:4px;
 }
 
-
 /* 计算器 */
-
 .calc{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -591,9 +546,7 @@ padding:13px;
 background:#f7eff3;
 }
 
-.calc .op{
-background:var(--pink3);
-}
+.calc .op{background:var(--pink3)}
 
 .calc .eq{
 grid-column:1/-1;
@@ -601,21 +554,7 @@ background:var(--pink);
 color:#fff;
 }
 
-
-/* 按钮按下动画 */
-
-button{
-transition:
-transform .08s ease,
-opacity .08s ease;
-}
-
-button:active{
-transform:scale(.96);
-opacity:.88;
-}
-
-
+/* 底部 */
 .footer{
 text-align:center;
 color:var(--muted);
@@ -639,18 +578,14 @@ font-size:10px;
 }
 
 @media(min-width:621px){
-
 .ad{
 bottom:10px;
 border-radius:10px;
 }
-
 }
 
 @media(max-width:520px){
-
-.bill-form,
-.edit-grid{
+.bill-form,.edit-grid{
 grid-template-columns:1fr 1fr;
 }
 
@@ -658,40 +593,27 @@ grid-template-columns:1fr 1fr;
 .edit-grid input:first-child{
 grid-column:1/-1;
 }
-
 }
 
 @media(max-width:420px){
-
-.saving-table{
-font-size:13px;
-}
+.saving-table{font-size:13px}
 
 .saving-table th,
 .saving-table td{
 padding:10px 5px;
 }
 
-.year-select{
-width:105px;
-}
+.year-select{width:105px}
 
-.record{
-gap:5px;
-}
+.record{gap:5px}
 
-.del,
-.edit-btn,
-.paid-btn{
+.del,.edit-btn,.paid-btn{
 padding:6px;
 font-size:12px;
 }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
@@ -709,15 +631,9 @@ font-size:12px;
 </div>
 
 <div class="balance">
-
 <small>当前余额</small>
-
-<b id="balance">
-RM 0.00
-</b>
-
+<b id="balance">RM 0.00</b>
 <small id="month"></small>
-
 </div>
 
 <div class="stats">
@@ -734,11 +650,16 @@ RM 0.00
 
 </div>
 
+<button
+class="sound-test"
+onclick="testButtonSound()"
+>
+🔊 测试小钱包声音
+</button>
+
 </header>
 
-
 <main>
-
 
 <section class="card">
 
@@ -791,8 +712,6 @@ style="font-size:13px;color:#8e8188"
 </section>
 
 
-<!-- 存钱统计 -->
-
 <section class="saving-card">
 
 <div class="saving-title">
@@ -803,16 +722,13 @@ style="font-size:13px;color:#8e8188"
 id="savingYear"
 class="year-select"
 onchange="renderSavings()"
->
-</select>
+></select>
 
 </div>
 
 <div class="saving-total">
 
-<small>
-🏆 累计存钱总额
-</small>
+<small>🏆 累计存钱总额</small>
 
 <b id="allTimeSaving">
 RM 0.00
@@ -835,12 +751,10 @@ RM 0.00
 <table class="saving-table">
 
 <thead>
-
 <tr>
 <th>月份</th>
 <th>存下</th>
 </tr>
-
 </thead>
 
 <tbody id="savingTable"></tbody>
@@ -848,17 +762,13 @@ RM 0.00
 </table>
 
 <div class="saving-note">
-
 存下金额 = 当月收入 − 当月支出。<br>
 每个月独立计算，可以切换年份查看以前的存钱记录。<br>
 如果某个月支出高于收入，该月存下显示 RM 0.00。
-
 </div>
 
 </section>
 
-
-<!-- 固定账单 -->
 
 <section class="card">
 
@@ -866,13 +776,9 @@ RM 0.00
 
 <div class="bill-summary">
 
-<b id="billTotal">
-RM 0.00
-</b>
+<b id="billTotal">RM 0.00</b>
 
-<small>
-本月固定账单总额
-</small>
+<small>本月固定账单总额</small>
 
 </div>
 
@@ -931,8 +837,6 @@ style="margin-top:8px"
 
 </section>
 
-
-<!-- 记录 -->
 
 <section class="card">
 
@@ -1007,8 +911,6 @@ onclick="addRecord()"
 </section>
 
 
-<!-- 本月统计 -->
-
 <section class="card">
 
 <h2>📊 本月统计</h2>
@@ -1039,8 +941,6 @@ onclick="addRecord()"
 
 </section>
 
-
-<!-- 计算器 -->
 
 <section class="card">
 
@@ -1086,8 +986,6 @@ onclick="calcResult()"
 </section>
 
 
-<!-- 消费记录 -->
-
 <section class="card">
 
 <h2>📋 消费记录</h2>
@@ -1124,18 +1022,13 @@ onclick="setFilter('in')"
 
 
 <div class="footer">
-
-小钱包 · 数据保存在本机 · 版本 1.2
-
+小钱包 · 数据保存在本机 · 版本 1.3
 </div>
 
 </main>
 
-
 <div class="ad">
-
 📢 广告位 · 未来接入 AdMob
-
 </div>
 
 </div>
@@ -1143,140 +1036,89 @@ onclick="setFilter('in')"
 
 <script>
 
-/* =========================
+/* =====================================================
    数据
-========================= */
+===================================================== */
 
-const KEY =
-'xiaoqianbao_records_final_v1';
+const KEY='xiaoqianbao_records_final_v1';
+const BKEY='xiaoqianbao_budget_final_v1';
+const BILLKEY='xiaoqianbao_bills_v1';
 
-const BKEY =
-'xiaoqianbao_budget_final_v1';
-
-const BILLKEY =
-'xiaoqianbao_bills_v1';
-
-
-let records = [];
-
-let bills = [];
-
-let type = 'out';
-
-let filter = 'all';
-
-let editingRecordId = null;
-
-let editingBillId = null;
+let records=[];
+let bills=[];
+let type='out';
+let filter='all';
+let editingRecordId=null;
+let editingBillId=null;
 
 
-/* =========================
-   读取数据
-========================= */
+/* =====================================================
+   读取记录
+===================================================== */
 
 try{
 
-const saved =
-localStorage.getItem(KEY);
+const saved=localStorage.getItem(KEY);
+const parsed=saved?JSON.parse(saved):[];
 
-const parsed =
-saved ? JSON.parse(saved) : [];
-
-records =
-Array.isArray(parsed)
-? parsed
-: [];
+records=Array.isArray(parsed)?parsed:[];
 
 }catch(e){
 
-records = [];
+records=[];
 
 }
 
 
 try{
 
-const saved =
-localStorage.getItem(BILLKEY);
+const saved=localStorage.getItem(BILLKEY);
+const parsed=saved?JSON.parse(saved):[];
 
-const parsed =
-saved ? JSON.parse(saved) : [];
-
-bills =
-Array.isArray(parsed)
-? parsed
-: [];
+bills=Array.isArray(parsed)?parsed:[];
 
 }catch(e){
 
-bills = [];
+bills=[];
 
 }
 
 
-/* =========================
-   🔊 即时按钮声音
-========================= */
+/* =====================================================
+   🔊 音频系统
+===================================================== */
 
-let audioCtx = null;
+let audioCtx=null;
 
 
 /*
-第一次按按钮时建立声音环境。
-iPhone Safari 必须由用户触摸页面后
-才能播放声音，所以这里直接绑定
-pointerdown。
+   获取 AudioContext
 */
+function getAudioContext(){
 
-function initAudio(){
-
-try{
-
-if(!audioCtx){
-
-const AudioContext =
-window.AudioContext ||
+const AudioContext=
+window.AudioContext||
 window.webkitAudioContext;
 
 if(!AudioContext){
 return null;
 }
 
-audioCtx =
-new AudioContext();
-
-}
-
-if(
-audioCtx.state === 'suspended'
-){
-
-audioCtx.resume();
-
+if(!audioCtx){
+audioCtx=new AudioContext();
 }
 
 return audioCtx;
-
-}catch(e){
-
-return null;
-
-}
 
 }
 
 
 /*
-非常短的柔和声音。
-
-不是刺耳的 beep，
-而是轻轻的“叮”。
+   解锁 iPhone Safari 音频
 */
+function unlockAudio(){
 
-function buttonSound(){
-
-const ctx =
-initAudio();
+const ctx=getAudioContext();
 
 if(!ctx){
 return;
@@ -1284,29 +1126,199 @@ return;
 
 try{
 
-const now =
-ctx.currentTime;
+if(ctx.state==='suspended'){
+ctx.resume();
+}
 
 
-/* 第一层：主音 */
+/*
+   在用户真正触摸的时候
+   播放极轻的初始化声音
+*/
+const osc=ctx.createOscillator();
+const gain=ctx.createGain();
 
-const osc =
-ctx.createOscillator();
+osc.type='sine';
+osc.frequency.value=440;
 
-const gain =
-ctx.createGain();
+gain.gain.value=0.00001;
 
-osc.type =
-'sine';
+osc.connect(gain);
+gain.connect(ctx.destination);
+
+osc.start();
+osc.stop(ctx.currentTime+0.01);
+
+}catch(e){
+
+console.log('Audio unlock:',e);
+
+}
+
+}
+
+
+/*
+   页面第一次触摸
+*/
+document.addEventListener(
+'touchstart',
+unlockAudio,
+{
+once:true,
+passive:true
+}
+);
+
+document.addEventListener(
+'pointerdown',
+unlockAudio,
+{
+once:true,
+passive:true
+}
+);
+
+
+/*
+   普通按钮：
+   柔和、短、不会刺耳
+*/
+function buttonSound(){
+
+const ctx=getAudioContext();
+
+if(!ctx){
+return;
+}
+
+try{
+
+if(ctx.state==='suspended'){
+ctx.resume();
+}
+
+const now=ctx.currentTime;
+
+
+/* 主音 */
+
+const osc=ctx.createOscillator();
+const gain=ctx.createGain();
+
+osc.type='sine';
 
 osc.frequency.setValueAtTime(
-680,
+520,
 now
 );
 
 osc.frequency.exponentialRampToValueAtTime(
-820,
-now + 0.055
+680,
+now+0.07
+);
+
+gain.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.075,
+now+0.012
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.20
+);
+
+osc.connect(gain);
+gain.connect(ctx.destination);
+
+osc.start(now);
+osc.stop(now+0.21);
+
+
+/* 第二颗小音 */
+
+const osc2=ctx.createOscillator();
+const gain2=ctx.createGain();
+
+osc2.type='sine';
+
+osc2.frequency.setValueAtTime(
+760,
+now+0.025
+);
+
+osc2.frequency.exponentialRampToValueAtTime(
+880,
+now+0.085
+);
+
+gain2.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain2.gain.exponentialRampToValueAtTime(
+0.022,
+now+0.035
+);
+
+gain2.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.16
+);
+
+osc2.connect(gain2);
+gain2.connect(ctx.destination);
+
+osc2.start(now);
+osc2.stop(now+0.17);
+
+}catch(e){
+
+console.log('Button sound:',e);
+
+}
+
+}
+
+
+/*
+   计算器声音
+*/
+function calculatorSound(){
+
+const ctx=getAudioContext();
+
+if(!ctx){
+return;
+}
+
+try{
+
+if(ctx.state==='suspended'){
+ctx.resume();
+}
+
+const now=ctx.currentTime;
+
+const osc=ctx.createOscillator();
+const gain=ctx.createGain();
+
+osc.type='sine';
+
+osc.frequency.setValueAtTime(
+430,
+now
+);
+
+osc.frequency.exponentialRampToValueAtTime(
+560,
+now+0.045
 );
 
 gain.gain.setValueAtTime(
@@ -1316,76 +1328,23 @@ now
 
 gain.gain.exponentialRampToValueAtTime(
 0.045,
-now + 0.008
+now+0.008
 );
 
 gain.gain.exponentialRampToValueAtTime(
 0.0001,
-now + 0.12
+now+0.10
 );
 
 osc.connect(gain);
-
-gain.connect(
-ctx.destination
-);
+gain.connect(ctx.destination);
 
 osc.start(now);
-
-osc.stop(
-now + 0.125
-);
-
-
-/* 第二层非常轻的高音 */
-
-const osc2 =
-ctx.createOscillator();
-
-const gain2 =
-ctx.createGain();
-
-osc2.type =
-'sine';
-
-osc2.frequency.setValueAtTime(
-980,
-now + 0.015
-);
-
-gain2.gain.setValueAtTime(
-0.0001,
-now
-);
-
-gain2.gain.exponentialRampToValueAtTime(
-0.012,
-now + 0.025
-);
-
-gain2.gain.exponentialRampToValueAtTime(
-0.0001,
-now + 0.095
-);
-
-osc2.connect(gain2);
-
-gain2.connect(
-ctx.destination
-);
-
-osc2.start(now);
-
-osc2.stop(
-now + 0.1
-);
+osc.stop(now+0.11);
 
 }catch(e){
 
-console.log(
-'Button sound:',
-e
-);
+console.log('Calculator sound:',e);
 
 }
 
@@ -1393,27 +1352,54 @@ e
 
 
 /*
-重点：
-
-pointerdown = 手指刚按下去
-
-不是 click。
-
-所以声音会在按下的瞬间出现。
+   测试声音按钮
 */
+function testButtonSound(){
 
+unlockAudio();
+
+setTimeout(
+()=>{
+buttonSound();
+},
+80
+);
+
+}
+
+
+/*
+   所有按钮按下瞬间发声
+*/
 document.addEventListener(
 'pointerdown',
 function(e){
 
-const button =
-e.target.closest('button');
+const button=e.target.closest('button');
 
 if(!button){
 return;
 }
 
+const ctx=getAudioContext();
+
+if(ctx&&ctx.state==='suspended'){
+ctx.resume();
+}
+
+
+/*
+   计算器使用不同声音
+*/
+if(button.closest('.calc')){
+
+calculatorSound();
+
+}else{
+
 buttonSound();
+
+}
 
 },
 {
@@ -1422,77 +1408,57 @@ passive:true
 );
 
 
-/* =========================
+/* =====================================================
    工具
-========================= */
+===================================================== */
 
 function money(n){
 
-return 'RM ' +
-Number(n || 0).toFixed(2);
+return 'RM '+Number(n||0).toFixed(2);
 
 }
 
 
-function monthKey(
-d = new Date()
-){
+function monthKey(d=new Date()){
 
-return d.getFullYear() +
-'-' +
-String(
-d.getMonth()+1
-).padStart(2,'0');
+return d.getFullYear()+
+'-'+
+String(d.getMonth()+1).padStart(2,'0');
 
 }
 
 
-function todayKey(
-d = new Date()
-){
+function todayKey(d=new Date()){
 
-return d.getFullYear() +
-'-' +
-String(
-d.getMonth()+1
-).padStart(2,'0') +
-'-' +
-String(
-d.getDate()
-).padStart(2,'0');
+return d.getFullYear()+
+'-'+
+String(d.getMonth()+1).padStart(2,'0')+
+'-'+
+String(d.getDate()).padStart(2,'0');
 
 }
 
 
 function validDate(x){
 
-if(
-!x ||
-!x.date
-){
-
+if(!x||!x.date){
 return null;
-
 }
 
-const d =
-new Date(x.date);
+const d=new Date(x.date);
 
-return Number.isNaN(
-d.getTime()
-)
-? null
-: d;
+return Number.isNaN(d.getTime())
+?null
+:d;
 
 }
 
 
 function esc(s){
 
-return String(s)
-.replace(
+return String(s).replace(
 /[&<>"']/g,
-m => ({
+m=>({
 
 '&':'&amp;',
 '<':'&lt;',
@@ -1508,63 +1474,48 @@ m => ({
 
 function icon(s){
 
-return String(s || '')
-.split(' ')[0] ||
-'📦';
+return String(s||'📦').split(' ')[0]||'📦';
 
 }
 
 
-/* =========================
+/* =====================================================
    存钱统计
-========================= */
+===================================================== */
 
 function getYearSavings(year){
 
-const monthly = [];
+const monthly=[];
 
 for(
-let month = 1;
-month <= 12;
+let month=1;
+month<=12;
 month++
 ){
 
-let income = 0;
+let income=0;
+let expense=0;
 
-let expense = 0;
+records.forEach(x=>{
 
-records.forEach(x => {
-
-const d =
-validDate(x);
+const d=validDate(x);
 
 if(
-!d ||
-d.getFullYear() !== year ||
-d.getMonth()+1 !== month
+!d||
+d.getFullYear()!==year||
+d.getMonth()+1!==month
 ){
-
 return;
-
 }
 
-const amount =
-Number(x.amount) || 0;
+const amount=Number(x.amount)||0;
 
-if(
-x.type === 'in'
-){
-
-income += amount;
-
+if(x.type==='in'){
+income+=amount;
 }
 
-if(
-x.type === 'out'
-){
-
-expense += amount;
-
+if(x.type==='out'){
+expense+=amount;
 }
 
 });
@@ -1574,11 +1525,7 @@ monthly.push({
 month,
 income,
 expense,
-saved:
-Math.max(
-0,
-income-expense
-)
+saved:Math.max(0,income-expense)
 
 });
 
@@ -1591,75 +1538,49 @@ return monthly;
 
 function getAllTimeSaving(){
 
-let total = 0;
+let total=0;
 
-records.forEach(x => {
+records.forEach(x=>{
 
-if(
-!validDate(x)
-){
-
+if(!validDate(x)){
 return;
-
 }
 
-const amount =
-Number(x.amount) || 0;
+const amount=Number(x.amount)||0;
 
-if(
-x.type === 'in'
-){
-
-total += amount;
-
+if(x.type==='in'){
+total+=amount;
 }
 
-if(
-x.type === 'out'
-){
-
-total -= amount;
-
+if(x.type==='out'){
+total-=amount;
 }
 
 });
 
-return Math.max(
-0,
-total
-);
+return Math.max(0,total);
 
 }
 
 
 function getAvailableYears(){
 
-const years =
-new Set();
+const years=new Set();
 
-records.forEach(x => {
+records.forEach(x=>{
 
-const d =
-validDate(x);
+const d=validDate(x);
 
 if(d){
-
-years.add(
-d.getFullYear()
-);
-
+years.add(d.getFullYear());
 }
 
 });
 
-years.add(
-new Date().getFullYear()
-);
+years.add(new Date().getFullYear());
 
-return Array
-.from(years)
-.sort(
-(a,b) => b-a
+return Array.from(years).sort(
+(a,b)=>b-a
 );
 
 }
@@ -1667,38 +1588,27 @@ return Array
 
 function setupSavingYears(){
 
-const select =
-document.getElementById(
-'savingYear'
-);
+const select=document.getElementById('savingYear');
 
-const oldValue =
-Number(select.value);
+if(!select){
+return;
+}
 
-const years =
-getAvailableYears();
+const oldValue=Number(select.value);
 
-select.innerHTML =
-years
-.map(
-y =>
-`<option value="${y}">
-${y} 年
-</option>`
-)
-.join('');
+const years=getAvailableYears();
 
-if(
-years.includes(oldValue)
-){
+select.innerHTML=years.map(
+y=>`<option value="${y}">${y} 年</option>`
+).join('');
 
-select.value =
-String(oldValue);
+if(years.includes(oldValue)){
+
+select.value=String(oldValue);
 
 }else{
 
-select.value =
-String(
+select.value=String(
 new Date().getFullYear()
 );
 
@@ -1709,63 +1619,46 @@ new Date().getFullYear()
 
 function renderSavings(){
 
-const year =
-Number(
-document
-.getElementById(
-'savingYear'
-)
-.value
-) ||
+const select=document.getElementById('savingYear');
+
+const year=
+Number(select.value)||
 new Date().getFullYear();
 
-const monthly =
-getYearSavings(year);
+const monthly=getYearSavings(year);
 
-const total =
-monthly.reduce(
-(s,x) => s+x.saved,
+const total=monthly.reduce(
+(s,x)=>s+x.saved,
 0
 );
 
-document
-.getElementById(
+document.getElementById(
 'allTimeSaving'
-)
-.textContent =
-money(
+).textContent=money(
 getAllTimeSaving()
 );
 
-document
-.getElementById(
+document.getElementById(
 'savingTotalLabel'
-)
-.textContent =
+).textContent=
 `${year} 年全年存下`;
 
-document
-.getElementById(
+document.getElementById(
 'savingTotal'
-)
-.textContent =
-money(total);
+).textContent=money(total);
 
-const names = [
+const names=[
 '1月','2月','3月','4月',
 '5月','6月','7月','8月',
 '9月','10月','11月','12月'
 ];
 
-document
-.getElementById(
+document.getElementById(
 'savingTable'
-)
-.innerHTML =
+).innerHTML=
 
-monthly
-.map(
-x => `
+monthly.map(
+x=>`
 
 <tr>
 
@@ -1780,8 +1673,7 @@ ${money(x.saved)}
 </tr>
 
 `
-)
-.join('')
+).join('')
 
 +
 
@@ -1789,13 +1681,9 @@ ${money(x.saved)}
 
 <tr class="saving-total-row">
 
-<td>
-TOTAL
-</td>
+<td>TOTAL</td>
 
-<td>
-${money(total)}
-</td>
+<td>${money(total)}</td>
 
 </tr>
 
@@ -1804,9 +1692,9 @@ ${money(total)}
 }
 
 
-/* =========================
+/* =====================================================
    固定账单
-========================= */
+===================================================== */
 
 function saveBills(){
 
@@ -1820,9 +1708,7 @@ JSON.stringify(bills)
 
 function billMonthId(){
 
-return monthKey(
-new Date()
-);
+return monthKey(new Date());
 
 }
 
@@ -1830,9 +1716,7 @@ new Date()
 function isBillPaid(b){
 
 return(
-Array.isArray(
-b.paidMonths
-) &&
+Array.isArray(b.paidMonths)&&
 b.paidMonths.includes(
 billMonthId()
 )
@@ -1843,83 +1727,60 @@ billMonthId()
 
 function billIcon(cat){
 
-return String(cat || '📦')
-.split(' ')[0] ||
-'📦';
+return String(cat||'📦')
+.split(' ')[0]||'📦';
 
 }
 
 
 function addBill(){
 
-const name =
-document
-.getElementById(
+const name=document.getElementById(
 'billName'
-)
-.value
-.trim();
+).value.trim();
 
-const amount =
-Number(
-document
-.getElementById(
+const amount=Number(
+document.getElementById(
 'billAmount'
-)
-.value
+).value
 );
 
-const day =
-Math.floor(
+const day=Math.floor(
 Number(
-document
-.getElementById(
+document.getElementById(
 'billDay'
-)
-.value
+).value
 )
 );
 
-const cat =
-document
-.getElementById(
+const cat=document.getElementById(
 'billCat'
-)
-.value;
+).value;
 
 if(!name){
 
-alert(
-'请输入账单名称'
-);
-
+alert('请输入账单名称');
 return;
 
 }
 
 if(
-!Number.isFinite(amount) ||
-amount <= 0
+!Number.isFinite(amount)||
+amount<=0
 ){
 
-alert(
-'请输入正确的金额'
-);
-
+alert('请输入正确的金额');
 return;
 
 }
 
 if(
-!Number.isInteger(day) ||
-day < 1 ||
-day > 31
+!Number.isInteger(day)||
+day<1||
+day>31
 ){
 
-alert(
-'请输入 1 到 31 的付款日'
-);
-
+alert('请输入 1 到 31 的付款日');
 return;
 
 }
@@ -1927,38 +1788,19 @@ return;
 bills.push({
 
 id:Date.now(),
-
 name,
-
 amount,
-
 day,
-
 cat,
-
 paidMonths:[]
 
 });
 
 saveBills();
 
-document
-.getElementById(
-'billName'
-)
-.value = '';
-
-document
-.getElementById(
-'billAmount'
-)
-.value = '';
-
-document
-.getElementById(
-'billDay'
-)
-.value = '';
+document.getElementById('billName').value='';
+document.getElementById('billAmount').value='';
+document.getElementById('billDay').value='';
 
 renderBills();
 
@@ -1967,61 +1809,42 @@ renderBills();
 
 function renderBills(){
 
-const total =
-bills.reduce(
-(s,b) =>
-s +
-(Number(b.amount)||0),
+const total=bills.reduce(
+(s,b)=>s+(Number(b.amount)||0),
 0
 );
 
-document
-.getElementById(
-'billTotal'
-)
-.textContent =
-money(total);
-
-const container =
 document.getElementById(
+'billTotal'
+).textContent=money(total);
+
+const container=document.getElementById(
 'bills'
 );
 
-if(
-!bills.length
-){
+if(!bills.length){
 
-container.innerHTML =
+container.innerHTML=
 '<div class="empty">还没有固定账单 🌷</div>';
 
 return;
 
 }
 
-const currentDay =
-new Date().getDate();
+const currentDay=new Date().getDate();
 
-const sorted =
-bills
-.slice()
-.sort(
-(a,b) =>
-Number(a.day) -
-Number(b.day)
+const sorted=bills.slice().sort(
+(a,b)=>Number(a.day)-Number(b.day)
 );
 
-container.innerHTML =
-
-sorted
-.map(
-b => {
+container.innerHTML=sorted.map(
+b=>{
 
 if(
-editingBillId ===
-Number(b.id)
+editingBillId===Number(b.id)
 ){
 
-return `
+return`
 
 <div class="bill">
 
@@ -2055,14 +1878,10 @@ placeholder="付款日"
 
 </div>
 
-<div
-class="row"
-style="margin-top:7px;margin-bottom:0"
->
+<div class="row"
+style="margin-top:7px;margin-bottom:0">
 
-<select
-id="ebc_${b.id}"
->
+<select id="ebc_${b.id}">
 
 ${[
 '🧾 账单',
@@ -2071,16 +1890,15 @@ ${[
 '🌐 网络',
 '🚗 交通',
 '📦 其他'
-]
-.map(
-x =>
-`<option
+].map(
+x=>`
+<option
 ${x===b.cat?'selected':''}
 >
 ${x}
-</option>`
-)
-.join('')}
+</option>
+`
+).join('')}
 
 </select>
 
@@ -2112,31 +1930,25 @@ onclick="cancelBillEdit()"
 
 }
 
-const paid =
-isBillPaid(b);
+const paid=isBillPaid(b);
 
-let due = '';
+let due='';
 
 if(paid){
 
-due =
-'本月已付款 ✓';
+due='本月已付款 ✓';
 
-}else if(
-Number(b.day) >= currentDay
-){
+}else if(Number(b.day)>=currentDay){
 
-due =
-`还有 ${Number(b.day)-currentDay} 天`;
+due=`还有 ${Number(b.day)-currentDay} 天`;
 
 }else{
 
-due =
-'本月已过期';
+due='本月已过期';
 
 }
 
-return `
+return`
 
 <div class="bill">
 
@@ -2148,9 +1960,7 @@ ${billIcon(b.cat)}
 
 <div class="bill-info">
 
-<b>
-${esc(b.name)}
-</b>
+<b>${esc(b.name)}</b>
 
 <small>
 ${money(b.amount)}
@@ -2181,10 +1991,8 @@ onclick="removeBill(${b.id})"
 
 ${
 paid
-?
-''
-:
-`
+?''
+:`
 <button
 class="paid-btn"
 onclick="payBill(${b.id})"
@@ -2200,16 +2008,14 @@ onclick="payBill(${b.id})"
 
 `;
 
-})
-.join('');
+}).join('');
 
 }
 
 
 function editBill(id){
 
-editingBillId =
-Number(id);
+editingBillId=Number(id);
 
 renderBills();
 
@@ -2218,7 +2024,7 @@ renderBills();
 
 function cancelBillEdit(){
 
-editingBillId = null;
+editingBillId=null;
 
 renderBills();
 
@@ -2227,100 +2033,72 @@ renderBills();
 
 function saveBillEdit(id){
 
-const b =
-bills.find(
-x =>
-Number(x.id) ===
-Number(id)
+const b=bills.find(
+x=>Number(x.id)===Number(id)
 );
 
 if(!b){
 return;
 }
 
-const name =
-document
-.getElementById(
+const name=document.getElementById(
 'ebn_'+id
-)
-.value
-.trim();
+).value.trim();
 
-const amount =
-Number(
-document
-.getElementById(
+const amount=Number(
+document.getElementById(
 'eba_'+id
-)
-.value
+).value
 );
 
-const day =
-Math.floor(
+const day=Math.floor(
 Number(
-document
-.getElementById(
+document.getElementById(
 'ebd_'+id
-)
-.value
+).value
 )
 );
 
-const cat =
-document
-.getElementById(
+const cat=document.getElementById(
 'ebc_'+id
-)
-.value;
+).value;
 
 if(!name){
 
-alert(
-'请输入账单名称'
-);
-
+alert('请输入账单名称');
 return;
 
 }
 
 if(
-!Number.isFinite(amount) ||
-amount <= 0
+!Number.isFinite(amount)||
+amount<=0
 ){
 
-alert(
-'请输入正确的金额'
-);
-
+alert('请输入正确的金额');
 return;
 
 }
 
 if(
-!Number.isInteger(day) ||
-day < 1 ||
-day > 31
+!Number.isInteger(day)||
+day<1||
+day>31
 ){
 
-alert(
-'请输入 1 到 31 的付款日'
-);
-
+alert('请输入 1 到 31 的付款日');
 return;
 
 }
 
-b.name = name;
-
-b.amount = amount;
-
-b.day = day;
-
-b.cat = cat;
+b.name=name;
+b.amount=amount;
+b.day=day;
+b.cat=cat;
 
 saveBills();
 
-editingBillId = null;
+editingBillId=null;
 
 renderBills();
 
@@ -2329,21 +2107,16 @@ renderBills();
 
 function removeBill(id){
 
-if(
-!confirm(
+if(!confirm(
 '确定删除这个固定账单吗？'
-)
-){
+)){
 
 return;
 
 }
 
-bills =
-bills.filter(
-x =>
-Number(x.id) !==
-Number(id)
+bills=bills.filter(
+x=>Number(x.id)!==Number(id)
 );
 
 saveBills();
@@ -2355,43 +2128,28 @@ renderBills();
 
 function payBill(id){
 
-const b =
-bills.find(
-x =>
-Number(x.id) ===
-Number(id)
+const b=bills.find(
+x=>Number(x.id)===Number(id)
 );
 
 if(!b){
 return;
 }
 
-if(
-isBillPaid(b)
-){
-
+if(isBillPaid(b)){
 return;
-
 }
 
-if(
-!confirm(
+if(!confirm(
 `确认已支付「${b.name}」${money(b.amount)}？\n确认后会自动加入本月支出。`
-)
-){
+)){
 
 return;
 
 }
 
-if(
-!Array.isArray(
-b.paidMonths
-)
-){
-
-b.paidMonths = [];
-
+if(!Array.isArray(b.paidMonths)){
+b.paidMonths=[];
 }
 
 b.paidMonths.push(
@@ -2404,19 +2162,13 @@ id:Date.now(),
 
 type:'out',
 
-amount:
-Number(b.amount)||0,
+amount:Number(b.amount)||0,
 
-cat:
-b.cat ||
-'🧾 账单',
+cat:b.cat||'🧾 账单',
 
-note:
-'固定账单 · ' +
-b.name,
+note:'固定账单 · '+b.name,
 
-date:
-new Date().toISOString()
+date:new Date().toISOString()
 
 });
 
@@ -2432,73 +2184,58 @@ render();
 }
 
 
-/* =========================
+/* =====================================================
    类型
-========================= */
+===================================================== */
 
 function setType(t){
 
-type = t;
+type=t;
 
-document
-.getElementById(
+document.getElementById(
 'outBtn'
-)
-.classList
-.toggle(
+).classList.toggle(
 'on',
-t === 'out'
+t==='out'
 );
 
-document
-.getElementById(
+document.getElementById(
 'inBtn'
-)
-.classList
-.toggle(
+).classList.toggle(
 'on',
-t === 'in'
+t==='in'
 );
 
 }
 
 
-/* =========================
+/* =====================================================
    筛选
-========================= */
+===================================================== */
 
 function setFilter(f){
 
-filter = f;
+filter=f;
 
-document
-.getElementById(
+document.getElementById(
 'allTab'
-)
-.classList
-.toggle(
+).classList.toggle(
 'on',
-f === 'all'
+f==='all'
 );
 
-document
-.getElementById(
+document.getElementById(
 'outTab'
-)
-.classList
-.toggle(
+).classList.toggle(
 'on',
-f === 'out'
+f==='out'
 );
 
-document
-.getElementById(
+document.getElementById(
 'inTab'
-)
-.classList
-.toggle(
+).classList.toggle(
 'on',
-f === 'in'
+f==='in'
 );
 
 renderRecords();
@@ -2506,29 +2243,24 @@ renderRecords();
 }
 
 
-/* =========================
+/* =====================================================
    添加记录
-========================= */
+===================================================== */
 
 function addRecord(){
 
-const input =
-document.getElementById(
+const input=document.getElementById(
 'amount'
 );
 
-const amount =
-Number(input.value);
+const amount=Number(input.value);
 
 if(
-!Number.isFinite(amount) ||
-amount <= 0
+!Number.isFinite(amount)||
+amount<=0
 ){
 
-alert(
-'请输入正确的金额'
-);
-
+alert('请输入正确的金额');
 return;
 
 }
@@ -2541,23 +2273,15 @@ type,
 
 amount,
 
-cat:
-document
-.getElementById(
+cat:document.getElementById(
 'cat'
-)
-.value,
+).value,
 
-note:
-document
-.getElementById(
+note:document.getElementById(
 'note'
-)
-.value
-.trim(),
+).value.trim(),
 
-date:
-new Date().toISOString()
+date:new Date().toISOString()
 
 });
 
@@ -2570,48 +2294,38 @@ JSON.stringify(records)
 
 }catch(e){
 
-alert(
-'保存失败，请检查设备存储空间'
-);
-
+alert('保存失败，请检查设备存储空间');
 return;
 
 }
 
-input.value = '';
+input.value='';
 
-document
-.getElementById(
+document.getElementById(
 'note'
-)
-.value = '';
+).value='';
 
 render();
 
 }
 
 
-/* =========================
+/* =====================================================
    删除记录
-========================= */
+===================================================== */
 
 function removeRecord(id){
 
-if(
-!confirm(
+if(!confirm(
 '确定删除这笔记录吗？'
-)
-){
+)){
 
 return;
 
 }
 
-records =
-records.filter(
-x =>
-Number(x.id) !==
-Number(id)
+records=records.filter(
+x=>Number(x.id)!==Number(id)
 );
 
 localStorage.setItem(
@@ -2624,14 +2338,13 @@ render();
 }
 
 
-/* =========================
+/* =====================================================
    编辑记录
-========================= */
+===================================================== */
 
 function editRecord(id){
 
-editingRecordId =
-Number(id);
+editingRecordId=Number(id);
 
 renderRecords();
 
@@ -2640,7 +2353,7 @@ renderRecords();
 
 function cancelRecordEdit(){
 
-editingRecordId = null;
+editingRecordId=null;
 
 renderRecords();
 
@@ -2649,97 +2362,73 @@ renderRecords();
 
 function saveRecordEdit(id){
 
-const r =
-records.find(
-x =>
-Number(x.id) ===
-Number(id)
+const r=records.find(
+x=>Number(x.id)===Number(id)
 );
 
 if(!r){
 return;
 }
 
-const amount =
-Number(
-document
-.getElementById(
+const amount=Number(
+document.getElementById(
 'era_'+id
-)
-.value
+).value
 );
 
-const newType =
-document
-.getElementById(
+const newType=document.getElementById(
 'ert_'+id
-)
-.value;
+).value;
 
-const cat =
-document
-.getElementById(
+const cat=document.getElementById(
 'erc_'+id
-)
-.value;
+).value;
 
-const note =
-document
-.getElementById(
+const note=document.getElementById(
 'ern_'+id
-)
-.value
-.trim();
+).value.trim();
 
 if(
-!Number.isFinite(amount) ||
-amount <= 0
+!Number.isFinite(amount)||
+amount<=0
 ){
 
-alert(
-'请输入正确的金额'
-);
-
+alert('请输入正确的金额');
 return;
 
 }
 
-r.amount = amount;
-
-r.type = newType;
-
-r.cat = cat;
-
-r.note = note;
+r.amount=amount;
+r.type=newType;
+r.cat=cat;
+r.note=note;
 
 localStorage.setItem(
 KEY,
 JSON.stringify(records)
 );
 
-editingRecordId = null;
+editingRecordId=null;
 
 render();
 
 }
 
 
-/* =========================
+/* =====================================================
    本月
-========================= */
+===================================================== */
 
 function currentMonth(){
 
 return records.filter(
-x => {
+x=>{
 
-const d =
-validDate(x);
+const d=validDate(x);
 
 return(
-d &&
-monthKey(d) ===
-monthKey()
+d&&
+monthKey(d)===monthKey()
 );
 
 }
@@ -2748,74 +2437,50 @@ monthKey()
 }
 
 
-/* =========================
+/* =====================================================
    主渲染
-========================= */
+===================================================== */
 
 function render(){
 
-const rs =
-currentMonth();
+const rs=currentMonth();
 
-const ins =
-rs.filter(
-x =>
-x.type === 'in'
+const ins=rs.filter(
+x=>x.type==='in'
 );
 
-const outs =
-rs.filter(
-x =>
-x.type === 'out'
+const outs=rs.filter(
+x=>x.type==='out'
 );
 
-const incomeSum =
-ins.reduce(
-(s,x) =>
-s +
-(Number(x.amount)||0),
+const incomeSum=ins.reduce(
+(s,x)=>s+(Number(x.amount)||0),
 0
 );
 
-const expenseSum =
-outs.reduce(
-(s,x) =>
-s +
-(Number(x.amount)||0),
+const expenseSum=outs.reduce(
+(s,x)=>s+(Number(x.amount)||0),
 0
 );
 
-document
-.getElementById(
+document.getElementById(
 'income'
-)
-.textContent =
-money(incomeSum);
+).textContent=money(incomeSum);
 
-document
-.getElementById(
+document.getElementById(
 'expense'
-)
-.textContent =
-money(expenseSum);
+).textContent=money(expenseSum);
 
-document
-.getElementById(
+document.getElementById(
 'balance'
-)
-.textContent =
-money(
-incomeSum -
-expenseSum
+).textContent=money(
+incomeSum-expenseSum
 );
 
-document
-.getElementById(
+document.getElementById(
 'month'
-)
-.textContent =
-new Date()
-.toLocaleDateString(
+).textContent=
+new Date().toLocaleDateString(
 'zh-CN',
 {
 year:'numeric',
@@ -2823,128 +2488,80 @@ month:'long'
 }
 );
 
-document
-.getElementById(
+document.getElementById(
 'count'
-)
-.textContent =
-rs.length;
+).textContent=rs.length;
 
-document
-.getElementById(
+document.getElementById(
 'avg'
-)
-.textContent =
-money(
+).textContent=money(
 outs.length
-?
-expenseSum /
-outs.length
-:
-0
+?expenseSum/outs.length
+:0
 );
 
-document
-.getElementById(
+document.getElementById(
 'max'
-)
-.textContent =
-money(
+).textContent=money(
 outs.length
-?
-Math.max(
+?Math.max(
 ...outs.map(
-x =>
-Number(x.amount)||0
+x=>Number(x.amount)||0
 )
 )
-:
-0
+:0
 );
 
-document
-.getElementById(
+document.getElementById(
 'today'
-)
-.textContent =
-money(
+).textContent=money(
 
-outs
+outs.filter(
+x=>{
 
-.filter(
-x => {
-
-const d =
-validDate(x);
+const d=validDate(x);
 
 return(
-d &&
-todayKey(d) ===
-todayKey()
+d&&
+todayKey(d)===todayKey()
 );
 
 }
-)
-
-.reduce(
-(s,x) =>
-s +
-(Number(x.amount)||0),
+).reduce(
+(s,x)=>s+(Number(x.amount)||0),
 0
 )
 
 );
 
-
-const b =
-Number(
-localStorage.getItem(
-BKEY
-) || 0
+const b=Number(
+localStorage.getItem(BKEY)||0
 );
 
-document
-.getElementById(
+document.getElementById(
 'budget'
-)
-.value =
-b || '';
+).value=b||'';
 
-const pct =
-b
-?
-Math.min(
+const pct=b
+?Math.min(
 100,
-expenseSum /
-b *
-100
+expenseSum/b*100
 )
-:
-0;
+:0;
 
-document
-.getElementById(
+document.getElementById(
 'bar'
-)
-.style
-.width =
-pct + '%';
+).style.width=pct+'%';
 
-document
-.getElementById(
+document.getElementById(
 'budgetText'
-)
-.textContent =
+).textContent=
 
 b
 
-?
+?`已使用 ${money(expenseSum)} · 剩余 ${money(Math.max(0,b-expenseSum))} · ${pct.toFixed(0)}%`
 
-`已使用 ${money(expenseSum)} · 剩余 ${money(Math.max(0,b-expenseSum))} · ${pct.toFixed(0)}%`
-
-:
-
-'还没有设定预算';
+:'还没有设定预算';
 
 updatePraise(
 expenseSum,
@@ -2962,239 +2579,163 @@ renderRecords();
 }
 
 
-/* =========================
+/* =====================================================
    省钱鼓励
-========================= */
+===================================================== */
 
-function updatePraise(
-out,
-b
-){
+function updatePraise(out,b){
 
-const prev =
-new Date();
+const prev=new Date();
 
 prev.setMonth(
 prev.getMonth()-1
 );
 
-const prevOut =
+const prevOut=records.filter(
+x=>{
 
-records
-
-.filter(
-x => {
-
-const d =
-validDate(x);
+const d=validDate(x);
 
 return(
-d &&
-monthKey(d) ===
-monthKey(prev) &&
-x.type === 'out'
+d&&
+monthKey(d)===monthKey(prev)&&
+x.type==='out'
 );
 
 }
-)
-
-.reduce(
-(s,x) =>
-s +
-(Number(x.amount)||0),
+).reduce(
+(s,x)=>s+(Number(x.amount)||0),
 0
 );
 
-
 if(
-prevOut > 0 &&
-out < prevOut
+prevOut>0&&
+out<prevOut
 ){
 
-document
-.getElementById(
+document.getElementById(
 'praise'
-)
-.textContent =
+).textContent=
 `🎉 太棒啦！比上个月少花 ${money(prevOut-out)}`;
 
-document
-.getElementById(
+document.getElementById(
 'praise2'
-)
-.textContent =
+).textContent=
 '继续保持，你的省钱习惯正在变好！';
 
 return;
 
 }
 
+if(b&&out<b){
 
-if(
-b &&
-out < b
-){
+const d=new Date();
 
-const d =
-new Date();
-
-const days =
-new Date(
+const days=new Date(
 d.getFullYear(),
 d.getMonth()+1,
 0
-)
-.getDate();
+).getDate();
 
-const left =
-Math.max(
+const left=Math.max(
 1,
-days -
-d.getDate() +
-1
+days-d.getDate()+1
 );
 
-const daily =
-Math.max(
+const daily=Math.max(
 0,
-(b-out) /
-left
+(b-out)/left
 );
 
-document
-.getElementById(
+document.getElementById(
 'praise'
-)
-.textContent =
+).textContent=
 `🌷 今天建议花不超过 ${money(daily)}`;
 
-document
-.getElementById(
+document.getElementById(
 'praise2'
-)
-.textContent =
+).textContent=
 `预算已使用 ${Math.min(100,out/b*100).toFixed(0)}%，慢慢来就很好。`;
 
 return;
 
 }
 
+if(b&&out>=b){
 
-if(
-b &&
-out >= b
-){
-
-document
-.getElementById(
+document.getElementById(
 'praise'
-)
-.textContent =
+).textContent=
 '💗 本月预算用完啦';
 
-document
-.getElementById(
+document.getElementById(
 'praise2'
-)
-.textContent =
+).textContent=
 '不用责怪自己，调整好下个月的预算就好。';
 
 return;
 
 }
 
-
-document
-.getElementById(
+document.getElementById(
 'praise'
-)
-.textContent =
+).textContent=
 '🐰 记一笔，小钱包就更懂你';
 
-document
-.getElementById(
+document.getElementById(
 'praise2'
-)
-.textContent =
+).textContent=
 '设定预算后，我会帮你计算每天建议花多少。';
 
 }
 
 
-/* =========================
+/* =====================================================
    消费记录
-========================= */
+===================================================== */
 
 function renderRecords(){
 
-const container =
-document.getElementById(
+const container=document.getElementById(
 'records'
 );
 
-let list =
-records.slice();
+let list=records.slice();
 
-if(
-filter === 'out'
-){
+if(filter==='out'){
 
-list =
-list.filter(
-x =>
-x &&
-x.type === 'out'
+list=list.filter(
+x=>x&&x.type==='out'
 );
 
 }
 
-if(
-filter === 'in'
-){
+if(filter==='in'){
 
-list =
-list.filter(
-x =>
-x &&
-x.type === 'in'
+list=list.filter(
+x=>x&&x.type==='in'
 );
 
 }
 
-list =
-list
-
-.filter(
-x =>
-x &&
-typeof x === 'object'
-)
-
-.sort(
-(a,b) =>
-new Date(
-b.date || 0
-) -
-new Date(
-a.date || 0
-)
+list=list.filter(
+x=>x&&typeof x==='object'
+).sort(
+(a,b)=>
+new Date(b.date||0)-
+new Date(a.date||0)
 );
 
+if(!list.length){
 
-if(
-!list.length
-){
-
-container.innerHTML =
+container.innerHTML=
 '<div class="empty">这里还没有记录 🌷</div>';
 
 return;
 
 }
 
-
-const cats = [
-
+const cats=[
 '🍜 餐饮',
 '🚗 交通',
 '🛍️ 购物',
@@ -3204,70 +2745,48 @@ const cats = [
 '💼 工资',
 '🎁 兼职',
 '📦 其他'
-
 ];
 
+container.innerHTML=list.slice(
+0,
+50
+).map(
+x=>{
 
-container.innerHTML =
+const amount=Number(x.amount)||0;
 
-list
-.slice(0,50)
-.map(
-x => {
-
-const amount =
-Number(x.amount)||0;
-
-const category =
-String(
-x.cat ||
-'📦 其他'
+const category=String(
+x.cat||'📦 其他'
 );
 
-const note =
-String(
-x.note ||
-''
+const note=String(
+x.note||''
 );
 
-const d =
-new Date(x.date);
+const d=new Date(x.date);
 
-const dateText =
-Number.isNaN(
+const dateText=Number.isNaN(
 d.getTime()
 )
-?
-''
-:
-d.toLocaleString(
-'zh-CN'
-);
+?''
+:d.toLocaleString('zh-CN');
 
-const isIncome =
-x.type === 'in';
+const isIncome=x.type==='in';
 
-const typeClass =
-isIncome
-?
-'in'
-:
-'out';
+const typeClass=isIncome
+?'in'
+:'out';
 
-const sign =
-isIncome
-?
-'+'
-:
-'-';
-
+const sign=isIncome
+?'+'
+:'-';
 
 if(
-editingRecordId ===
+editingRecordId===
 Number(x.id)
 ){
 
-return `
+return`
 
 <div class="record">
 
@@ -3289,9 +2808,7 @@ step="0.01"
 value="${amount}"
 >
 
-<select
-id="ert_${x.id}"
->
+<select id="ert_${x.id}">
 
 <option
 value="out"
@@ -3309,22 +2826,17 @@ ${x.type==='in'?'selected':''}
 
 </select>
 
-<select
-id="erc_${x.id}"
->
+<select id="erc_${x.id}">
 
-${
-cats
-.map(
-c =>
-`<option
+${cats.map(
+c=>`
+<option
 ${c===category?'selected':''}
 >
 ${c}
-</option>`
-)
-.join('')
-}
+</option>
+`
+).join('')}
 
 </select>
 
@@ -3365,8 +2877,7 @@ onclick="cancelRecordEdit()"
 
 }
 
-
-return `
+return`
 
 <div class="record">
 
@@ -3377,18 +2888,8 @@ ${icon(category)}
 <div class="info">
 
 <b>
-
 ${esc(category)}
-
-${
-note
-?
-' · ' +
-esc(note)
-:
-''
-}
-
+${note?' · '+esc(note):''}
 </b>
 
 <small>
@@ -3419,60 +2920,51 @@ onclick="removeRecord(${Number(x.id)||0})"
 
 `;
 
-})
-.join('');
+}).join('');
 
 }
 
 
-/* =========================
+/* =====================================================
    计算器
-========================= */
+===================================================== */
 
 function calcKey(k){
 
-const calc =
-document.getElementById(
+const calc=document.getElementById(
 'calc'
 );
 
-if(
-k === 'C'
-){
+if(k==='C'){
 
-calc.value = '';
-
+calc.value='';
 return;
 
 }
 
-if(
-calc.value === '错误'
-){
+if(calc.value==='错误'){
 
-calc.value = '';
+calc.value='';
 
 }
 
-calc.value += k;
+calc.value+=k;
 
 }
 
 
 function calcResult(){
 
-const calc =
-document.getElementById(
+const calc=document.getElementById(
 'calc'
 );
 
 try{
 
-const s =
-calc.value;
+const s=calc.value;
 
 if(
-!s ||
+!s||
 !/^[0-9.+\-*/() ]+$/.test(s)
 ){
 
@@ -3480,56 +2972,46 @@ throw Error();
 
 }
 
-const result =
-Function(
-'"use strict";return (' +
-s +
+const result=Function(
+'"use strict";return ('+
+s+
 ')'
 )();
 
-if(
-!Number.isFinite(result)
-){
+if(!Number.isFinite(result)){
 
 throw Error();
 
 }
 
-calc.value =
-String(result);
+calc.value=String(result);
 
 }catch(e){
 
-calc.value =
-'错误';
+calc.value='错误';
 
 }
 
 }
 
 
-/* =========================
+/* =====================================================
    预算
-========================= */
+===================================================== */
 
-document
-.getElementById(
+document.getElementById(
 'budget'
-)
-.addEventListener(
+).addEventListener(
 'change',
-() => {
+()=>{
 
-const n =
-Math.max(
+const n=Math.max(
 0,
 Number(
-document
-.getElementById(
+document.getElementById(
 'budget'
-)
-.value
-) || 0
+).value
+)||0
 );
 
 localStorage.setItem(
@@ -3543,41 +3025,30 @@ render();
 );
 
 
-/* =========================
-   Service Worker
-========================= */
+/* =====================================================
+   PWA
+===================================================== */
 
-if(
-'serviceWorker'
-in navigator
-){
+if('serviceWorker' in navigator){
 
 window.addEventListener(
 'load',
-() => {
+()=>{
 
-navigator
-.serviceWorker
-.register(
-'./sw.js?v=6'
-)
-.then(
-() => {
-
+navigator.serviceWorker.register(
+'./sw.js?v=7'
+).then(
+()=>{
 console.log(
 '小钱包 Service Worker 已启用'
 );
-
 }
-)
-.catch(
-error => {
-
+).catch(
+error=>{
 console.log(
 'Service Worker:',
 error
 );
-
 }
 );
 
@@ -3587,12 +3058,11 @@ error
 }
 
 
-/* =========================
+/* =====================================================
    启动
-========================= */
+===================================================== */
 
 setupSavingYears();
-
 render();
 
 </script>
