@@ -23,9 +23,7 @@
 --red:#e65370;
 }
 
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -714,7 +712,7 @@ font-size:12px;
 
 <!-- ==========================================
      背景音乐
-     文件必须和 index.html 在同一个位置
+     音乐文件必须和 index.html 在同一个位置
 ========================================== -->
 
 <audio
@@ -1253,7 +1251,7 @@ onclick="setFilter('in')"
 
 <div class="footer">
 
-小钱包 · 数据保存在本机 · 版本 1.4
+小钱包 · 数据保存在本机 · 版本 1.5
 
 </div>
 
@@ -1275,14 +1273,11 @@ onclick="setFilter('in')"
    数据
 ========================================== */
 
-const KEY =
-'xiaoqianbao_records_final_v1';
+const KEY='xiaoqianbao_records_final_v1';
 
-const BKEY =
-'xiaoqianbao_budget_final_v1';
+const BKEY='xiaoqianbao_budget_final_v1';
 
-const BILLKEY =
-'xiaoqianbao_bills_v1';
+const BILLKEY='xiaoqianbao_bills_v1';
 
 
 let records=[];
@@ -1351,15 +1346,17 @@ bills=[];
 
 
 /* ==========================================
-   🔊 按钮声音
+   🔊 按钮声音系统 v2
 ========================================== */
 
 let audioContext=null;
 
+let audioUnlocked=false;
 
-function initSound(){
 
-try{
+/* 获取 AudioContext */
+
+function getAudioContext(){
 
 const AudioCtx=
 window.AudioContext||
@@ -1367,7 +1364,7 @@ window.webkitAudioContext;
 
 if(!AudioCtx){
 
-return;
+return null;
 
 }
 
@@ -1378,61 +1375,131 @@ new AudioCtx();
 
 }
 
-if(
-audioContext.state==='suspended'
-){
-
-audioContext.resume();
-
-}
-
-}catch(e){
-
-console.log(
-'声音初始化失败',
-e
-);
-
-}
+return audioContext;
 
 }
 
 
-function buttonSound(){
+/* 解锁声音 */
 
-initSound();
+async function unlockSound(){
 
-if(!audioContext){
+const ctx=
+getAudioContext();
 
-return;
+if(!ctx){
+
+return false;
 
 }
 
 try{
 
+if(
+ctx.state==='suspended'
+){
+
+await ctx.resume();
+
+}
+
+audioUnlocked=
+ctx.state==='running';
+
+return audioUnlocked;
+
+}catch(e){
+
+console.log(
+'Audio unlock error:',
+e
+);
+
+return false;
+
+}
+
+}
+
+
+/* 真正的按钮声音 */
+
+async function buttonSound(){
+
+const ctx=
+getAudioContext();
+
+if(!ctx){
+
+return;
+
+}
+
+
+/* 确保 iPhone 音频已经启动 */
+
+if(
+ctx.state==='suspended'
+){
+
+try{
+
+await ctx.resume();
+
+}catch(e){
+
+console.log(
+'Audio resume error:',
+e
+);
+
+return;
+
+}
+
+}
+
+
+if(
+ctx.state!=='running'
+){
+
+return;
+
+}
+
+
+try{
+
 const now=
-audioContext.currentTime;
+ctx.currentTime;
 
 
-/* 主音 */
+/* ==========================================
+   第一颗声音
+========================================== */
 
 const osc=
-audioContext.createOscillator();
+ctx.createOscillator();
 
 const gain=
-audioContext.createGain();
+ctx.createGain();
 
-osc.type='sine';
+
+osc.type=
+'sine';
+
 
 osc.frequency.setValueAtTime(
-720,
+620,
 now
 );
 
 osc.frequency.exponentialRampToValueAtTime(
-860,
-now+0.07
+820,
+now+0.055
 );
+
 
 gain.gain.setValueAtTime(
 0.0001,
@@ -1440,42 +1507,55 @@ now
 );
 
 gain.gain.exponentialRampToValueAtTime(
-0.035,
-now+0.012
+0.045,
+now+0.008
 );
 
 gain.gain.exponentialRampToValueAtTime(
 0.0001,
-now+0.16
+now+0.13
 );
+
 
 osc.connect(gain);
 
 gain.connect(
-audioContext.destination
+ctx.destination
 );
+
 
 osc.start(now);
 
 osc.stop(
-now+0.17
+now+0.14
 );
 
 
-/* 尾音 */
+/* ==========================================
+   第二颗小尾音
+========================================== */
 
 const osc2=
-audioContext.createOscillator();
+ctx.createOscillator();
 
 const gain2=
-audioContext.createGain();
+ctx.createGain();
 
-osc2.type='sine';
+
+osc2.type=
+'sine';
+
 
 osc2.frequency.setValueAtTime(
-1080,
+900,
 now+0.025
 );
+
+osc2.frequency.exponentialRampToValueAtTime(
+1050,
+now+0.075
+);
+
 
 gain2.gain.setValueAtTime(
 0.0001,
@@ -1483,33 +1563,36 @@ now
 );
 
 gain2.gain.exponentialRampToValueAtTime(
-0.009,
-now+0.035
+0.012,
+now+0.03
 );
 
 gain2.gain.exponentialRampToValueAtTime(
 0.0001,
-now+0.13
+now+0.12
 );
+
 
 osc2.connect(gain2);
 
 gain2.connect(
-audioContext.destination
+ctx.destination
 );
+
 
 osc2.start(
 now+0.02
 );
 
 osc2.stop(
-now+0.14
+now+0.13
 );
+
 
 }catch(e){
 
 console.log(
-'按钮声音失败',
+'Button sound error:',
 e
 );
 
@@ -1518,7 +1601,27 @@ e
 }
 
 
-/* 所有按钮按下时声音 */
+/* ==========================================
+   第一次触摸准备声音
+========================================== */
+
+document.addEventListener(
+'touchstart',
+function(){
+
+unlockSound();
+
+},
+{
+once:true,
+passive:true
+}
+);
+
+
+/* ==========================================
+   所有按钮按下时播放声音
+========================================== */
 
 document.addEventListener(
 'pointerdown',
@@ -1533,7 +1636,17 @@ return;
 
 }
 
+
+/*
+   先解锁。
+   解锁成功后播放。
+*/
+
+unlockSound().then(
+()=>{
 buttonSound();
+}
+);
 
 },
 {
@@ -1542,7 +1655,24 @@ passive:true
 );
 
 
-function testButtonSound(){
+/* ==========================================
+   测试声音
+========================================== */
+
+async function testButtonSound(){
+
+const ok=
+await unlockSound();
+
+if(!ok){
+
+alert(
+'声音没有成功启动，请再按一次测试声音。'
+);
+
+return;
+
+}
 
 buttonSound();
 
@@ -1558,9 +1688,10 @@ document.getElementById(
 'bgMusic'
 );
 
-
 let musicPlaying=false;
 
+
+/* 更新音乐按钮 */
 
 function updateMusicUI(){
 
@@ -1579,6 +1710,7 @@ if(!btn||!status){
 return;
 
 }
+
 
 if(musicPlaying){
 
@@ -1601,11 +1733,18 @@ status.textContent=
 }
 
 
+/* 开始音乐 */
+
 async function startMusic(){
 
 try{
 
 bgMusic.volume=0.35;
+
+
+/*
+   play() 必须来自用户操作。
+*/
 
 await bgMusic.play();
 
@@ -1633,6 +1772,8 @@ alert(
 }
 
 
+/* 停止音乐 */
+
 function stopMusic(){
 
 try{
@@ -1641,12 +1782,15 @@ bgMusic.pause();
 
 }catch(e){}
 
+
 musicPlaying=false;
 
 updateMusicUI();
 
 }
 
+
+/* 开关音乐 */
 
 function toggleMusic(){
 
@@ -1663,35 +1807,9 @@ startMusic();
 }
 
 
-/*
-   iPhone Safari 不允许网页
-   在没有用户操作时自动播放声音。
-
-   所以第一次打开 App 时，
-   用户按一下「开启背景音乐」即可播放。
-
-   同时尝试在用户第一次触摸页面时准备音频。
-*/
-
-document.addEventListener(
-'touchstart',
-function(){
-
-initSound();
-
-},
-{
-once:true,
-passive:true
-}
-);
-
-
-/*
-   如果页面从后台回到前台，
-   如果之前已经开启音乐，
-   尝试继续播放。
-*/
+/* ==========================================
+   页面切后台 / 回前台
+========================================== */
 
 document.addEventListener(
 'visibilitychange',
@@ -1843,6 +1961,7 @@ return;
 
 }
 
+
 const amount=
 Number(x.amount)||0;
 
@@ -1870,8 +1989,11 @@ expense+=amount;
 monthly.push({
 
 month,
+
 income,
+
 expense,
+
 saved:
 Math.max(
 0,
@@ -1888,6 +2010,10 @@ return monthly;
 }
 
 
+/* ==========================================
+   累计存钱
+========================================== */
+
 function getAllTimeSaving(){
 
 let total=0;
@@ -1903,6 +2029,7 @@ if(
 return;
 
 }
+
 
 const amount=
 Number(x.amount)||0;
@@ -1932,6 +2059,10 @@ total
 
 }
 
+
+/* ==========================================
+   可用年份
+========================================== */
 
 function getAvailableYears(){
 
@@ -1971,6 +2102,10 @@ return Array
 }
 
 
+/* ==========================================
+   年份选择
+========================================== */
+
 function setupSavingYears(){
 
 const select=
@@ -1984,8 +2119,12 @@ return;
 
 }
 
+
 const old=
-Number(select.value);
+Number(
+select.value
+);
+
 
 const years=
 getAvailableYears();
@@ -2022,6 +2161,10 @@ new Date()
 }
 
 
+/* ==========================================
+   渲染存钱
+========================================== */
+
 function renderSavings(){
 
 const select=
@@ -2043,7 +2186,8 @@ getYearSavings(year);
 
 const total=
 monthly.reduce(
-(s,x)=>s+x.saved,
+(s,x)=>
+s+x.saved,
 0
 );
 
@@ -2069,6 +2213,7 @@ money(total);
 
 
 const names=[
+
 '1月',
 '2月',
 '3月',
@@ -2081,6 +2226,7 @@ const names=[
 '10月',
 '11月',
 '12月'
+
 ];
 
 
@@ -2088,7 +2234,8 @@ document.getElementById(
 'savingTable'
 ).innerHTML=
 
-monthly.map(
+monthly
+.map(
 x=>`
 
 <tr>
@@ -2437,10 +2584,12 @@ let due='';
 
 if(paid){
 
-due='本月已付款 ✓';
+due=
+'本月已付款 ✓';
 
 }else if(
-Number(b.day)>=currentDay
+Number(b.day)>=
+currentDay
 ){
 
 due=
@@ -2448,7 +2597,8 @@ due=
 
 }else{
 
-due='本月已过期';
+due=
+'本月已过期';
 
 }
 
@@ -2893,7 +3043,8 @@ document.getElementById(
 note:
 document.getElementById(
 'note'
-).value.trim(),
+).value
+.trim(),
 
 date:
 new Date()
@@ -3363,7 +3514,8 @@ new Date(
 d.getFullYear(),
 d.getMonth()+1,
 0
-).getDate();
+)
+.getDate();
 
 
 const left=
@@ -3569,16 +3721,14 @@ const typeClass=
 isIncome
 ?
 'in'
-:
-'out';
+:'out';
 
 
 const sign=
 isIncome
 ?
 '+'
-:
-'-';
+:'-';
 
 
 if(
@@ -3766,7 +3916,9 @@ document.getElementById(
 );
 
 
-if(k==='C'){
+if(
+k==='C'
+){
 
 calc.value='';
 
@@ -3862,7 +4014,9 @@ Number(
 document.getElementById(
 'budget'
 ).value
-)||0
+)
+||
+0
 );
 
 
@@ -3876,6 +4030,45 @@ render();
 
 }
 );
+
+
+/* ==========================================
+   PWA
+========================================== */
+
+if(
+'serviceWorker'
+in navigator
+){
+
+window.addEventListener(
+'load',
+()=>{
+
+navigator.serviceWorker
+.register(
+'./sw.js?v=9'
+)
+.then(
+()=>{
+console.log(
+'小钱包 Service Worker 已启用'
+);
+}
+)
+.catch(
+error=>{
+console.log(
+'Service Worker:',
+error
+);
+}
+);
+
+}
+);
+
+}
 
 
 /* ==========================================
