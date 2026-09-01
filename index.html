@@ -13,7 +13,6 @@
 <title>小钱包</title>
 
 <style>
-
 :root{
 --pink:#ff6fa8;
 --pink2:#fff0f6;
@@ -35,9 +34,7 @@ color:var(--text);
 font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
 }
 
-button,
-input,
-select{
+button,input,select{
 font:inherit;
 }
 
@@ -159,13 +156,15 @@ select:focus{
 border-color:var(--pink);
 }
 
-.types{
+.types,
+.tabs{
 display:flex;
 gap:8px;
 margin-bottom:10px;
 }
 
-.types button{
+.types button,
+.tabs button{
 flex:1;
 border:0;
 border-radius:13px;
@@ -174,7 +173,8 @@ background:#f4eff1;
 color:#6e6268;
 }
 
-.types .on{
+.types .on,
+.tabs .on{
 background:var(--pink);
 color:#fff;
 }
@@ -230,113 +230,6 @@ margin-bottom:4px;
 .encourage span{
 font-size:13px;
 color:#796d73;
-}
-
-.tabs{
-display:flex;
-gap:8px;
-margin-bottom:12px;
-}
-
-.tabs button{
-flex:1;
-border:0;
-padding:10px;
-border-radius:12px;
-background:#f5eff2;
-color:#71656b;
-}
-
-.tabs .on{
-background:var(--pink);
-color:#fff;
-}
-
-.record{
-display:flex;
-align-items:center;
-gap:10px;
-padding:12px 0;
-border-bottom:1px solid #f0e8eb;
-}
-
-.record:last-child{
-border-bottom:0;
-}
-
-.ico{
-width:43px;
-height:43px;
-border-radius:14px;
-background:var(--pink2);
-display:grid;
-place-items:center;
-font-size:20px;
-flex-shrink:0;
-}
-
-.info{
-flex:1;
-min-width:0;
-}
-
-.info b{
-display:block;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
-}
-
-.info small{
-color:var(--muted);
-}
-
-.money{
-font-weight:800;
-white-space:nowrap;
-}
-
-.out{
-color:var(--red);
-}
-
-.in{
-color:var(--green);
-}
-
-.del{
-border:0;
-background:#f5f0f2;
-border-radius:9px;
-padding:7px;
-color:#756a70;
-}
-
-.empty{
-text-align:center;
-color:var(--muted);
-padding:22px;
-}
-
-.summary{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.summary div{
-background:#fff8fb;
-border-radius:15px;
-padding:12px;
-}
-
-.summary small{
-color:var(--muted);
-}
-
-.summary b{
-display:block;
-margin-top:4px;
 }
 
 
@@ -414,11 +307,6 @@ margin-top:5px;
 color:var(--green);
 }
 
-.saving-table-wrap{
-width:100%;
-overflow:hidden;
-}
-
 .saving-table{
 width:100%;
 border-collapse:collapse;
@@ -443,10 +331,6 @@ padding:11px 8px;
 border-bottom:1px solid #f4ecef;
 }
 
-.saving-table tr:last-child td{
-border-bottom:0;
-}
-
 .saving-month{
 font-weight:600;
 }
@@ -467,6 +351,237 @@ margin-top:12px;
 font-size:12px;
 color:var(--muted);
 line-height:1.6;
+}
+
+
+/* =========================
+   固定账单
+========================= */
+
+.bill-summary{
+background:#fff8fb;
+border-radius:16px;
+padding:14px;
+margin-bottom:12px;
+}
+
+.bill-summary b{
+font-size:21px;
+}
+
+.bill-summary small{
+display:block;
+color:var(--muted);
+margin-top:3px;
+}
+
+.bill-form{
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr;
+gap:8px;
+margin-bottom:10px;
+}
+
+.bill-list{
+display:flex;
+flex-direction:column;
+}
+
+.bill{
+padding:12px 0;
+border-bottom:1px solid #f0e8eb;
+}
+
+.bill:last-child{
+border-bottom:0;
+}
+
+.bill-top{
+display:flex;
+align-items:center;
+gap:9px;
+}
+
+.bill-icon{
+width:40px;
+height:40px;
+border-radius:13px;
+background:var(--pink2);
+display:grid;
+place-items:center;
+flex-shrink:0;
+}
+
+.bill-info{
+flex:1;
+min-width:0;
+}
+
+.bill-info b{
+display:block;
+}
+
+.bill-info small{
+color:var(--muted);
+line-height:1.5;
+}
+
+.bill-actions{
+display:flex;
+gap:5px;
+margin-top:8px;
+justify-content:flex-end;
+}
+
+.edit-btn,
+.paid-btn,
+.del{
+border:0;
+border-radius:9px;
+padding:7px;
+white-space:nowrap;
+}
+
+.edit-btn{
+background:var(--pink2);
+color:#d34f84;
+}
+
+.paid-btn{
+background:#eaf8ef;
+color:#22864a;
+}
+
+.del{
+background:#f5f0f2;
+color:#756a70;
+}
+
+.edit-box{
+background:#fff8fb;
+border:1px solid #f2dce6;
+border-radius:15px;
+padding:12px;
+margin-top:8px;
+}
+
+.edit-grid{
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr;
+gap:7px;
+}
+
+.edit-actions{
+display:flex;
+gap:7px;
+margin-top:8px;
+}
+
+.edit-actions button{
+flex:1;
+border:0;
+border-radius:10px;
+padding:10px;
+}
+
+.save-edit{
+background:var(--pink);
+color:#fff;
+}
+
+.cancel-edit{
+background:#f3edef;
+color:#6e6268;
+}
+
+
+/* =========================
+   消费记录
+========================= */
+
+.record{
+display:flex;
+align-items:center;
+gap:8px;
+padding:12px 0;
+border-bottom:1px solid #f0e8eb;
+}
+
+.record:last-child{
+border-bottom:0;
+}
+
+.ico{
+width:43px;
+height:43px;
+border-radius:14px;
+background:var(--pink2);
+display:grid;
+place-items:center;
+font-size:20px;
+flex-shrink:0;
+}
+
+.info{
+flex:1;
+min-width:0;
+}
+
+.info b{
+display:block;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.info small{
+color:var(--muted);
+}
+
+.money{
+font-weight:800;
+white-space:nowrap;
+font-size:13px;
+}
+
+.out{
+color:var(--red);
+}
+
+.in{
+color:var(--green);
+}
+
+.empty{
+text-align:center;
+color:var(--muted);
+padding:22px;
+}
+
+
+/* =========================
+   本月统计
+========================= */
+
+.summary{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.summary div{
+background:#fff8fb;
+border-radius:15px;
+padding:12px;
+}
+
+.summary small{
+color:var(--muted);
+}
+
+.summary b{
+display:block;
+margin-top:4px;
 }
 
 
@@ -503,6 +618,11 @@ background:var(--pink);
 color:#fff;
 }
 
+
+/* =========================
+   其他
+========================= */
+
 .footer{
 text-align:center;
 color:var(--muted);
@@ -534,6 +654,20 @@ border-radius:10px;
 
 }
 
+@media(max-width:520px){
+
+.bill-form,
+.edit-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.bill-form input:first-child,
+.edit-grid input:first-child{
+grid-column:1/-1;
+}
+
+}
+
 @media(max-width:420px){
 
 .saving-table{
@@ -549,16 +683,25 @@ padding:10px 5px;
 width:105px;
 }
 
+.record{
+gap:5px;
+}
+
+.del,
+.edit-btn,
+.paid-btn{
+padding:6px;
+font-size:12px;
+}
+
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="app">
-
 
 <header>
 
@@ -571,7 +714,6 @@ width:105px;
 简单记录每一笔，让钱花得更明白
 </div>
 
-
 <div class="balance">
 
 <small>当前余额</small>
@@ -583,7 +725,6 @@ RM 0.00
 <small id="month"></small>
 
 </div>
-
 
 <div class="stats">
 
@@ -598,7 +739,6 @@ RM 0.00
 </b>
 
 </div>
-
 
 <div class="stat">
 
@@ -641,7 +781,6 @@ RM 0.00
 </section>
 
 
-
 <section class="card">
 
 <h2>
@@ -665,9 +804,7 @@ placeholder="例如 1500"
 </div>
 
 <div class="progress">
-
 <i id="bar"></i>
-
 </div>
 
 <div
@@ -678,7 +815,6 @@ style="font-size:13px;color:#8e8188"
 </div>
 
 </section>
-
 
 
 <!-- =========================
@@ -729,8 +865,6 @@ RM 0.00
 </div>
 
 
-<div class="saving-table-wrap">
-
 <table class="saving-table">
 
 <thead>
@@ -749,20 +883,15 @@ RM 0.00
 
 </thead>
 
-<tbody id="savingTable">
-</tbody>
+<tbody id="savingTable"></tbody>
 
 </table>
-
-</div>
 
 
 <div class="saving-note">
 
 存下金额 = 当月收入 − 当月支出。<br>
-
 每个月独立计算，可以切换年份查看以前的存钱记录。<br>
-
 如果某个月支出高于收入，该月存下显示 RM 0.00。
 
 </div>
@@ -770,6 +899,109 @@ RM 0.00
 </section>
 
 
+<!-- =========================
+     固定账单
+========================= -->
+
+<section class="card">
+
+<h2>
+🔔 固定账单
+</h2>
+
+
+<div class="bill-summary">
+
+<b id="billTotal">
+RM 0.00
+</b>
+
+<small>
+本月固定账单总额
+</small>
+
+</div>
+
+
+<div class="bill-form">
+
+<input
+id="billName"
+placeholder="账单名称，例如手机费"
+>
+
+<input
+id="billAmount"
+type="number"
+min="0"
+step="0.01"
+placeholder="金额 RM"
+>
+
+<input
+id="billDay"
+type="number"
+min="1"
+max="31"
+placeholder="付款日"
+>
+
+</div>
+
+
+<div class="row">
+
+<select id="billCat">
+
+<option>
+🧾 账单
+</option>
+
+<option>
+🏠 生活
+</option>
+
+<option>
+📱 手机
+</option>
+
+<option>
+🌐 网络
+</option>
+
+<option>
+🚗 交通
+</option>
+
+<option>
+📦 其他
+</option>
+
+</select>
+
+</div>
+
+
+<button
+class="add"
+onclick="addBill()"
+>
+＋ 添加固定账单
+</button>
+
+
+<div
+id="bills"
+class="bill-list"
+style="margin-top:8px"
+></div>
+
+</section>
+
+
+<!-- =========================
+     记录
+========================= -->
 
 <section class="card">
 
@@ -815,41 +1047,15 @@ placeholder="金额 RM"
 
 <select id="cat">
 
-<option>
-🍜 餐饮
-</option>
-
-<option>
-🚗 交通
-</option>
-
-<option>
-🛍️ 购物
-</option>
-
-<option>
-🎮 娱乐
-</option>
-
-<option>
-🏠 生活
-</option>
-
-<option>
-🧾 账单
-</option>
-
-<option>
-💼 工资
-</option>
-
-<option>
-🎁 兼职
-</option>
-
-<option>
-📦 其他
-</option>
+<option>🍜 餐饮</option>
+<option>🚗 交通</option>
+<option>🛍️ 购物</option>
+<option>🎮 娱乐</option>
+<option>🏠 生活</option>
+<option>🧾 账单</option>
+<option>💼 工资</option>
+<option>🎁 兼职</option>
+<option>📦 其他</option>
 
 </select>
 
@@ -877,7 +1083,6 @@ onclick="addRecord()"
 </section>
 
 
-
 <section class="card">
 
 <h2>
@@ -899,7 +1104,6 @@ onclick="addRecord()"
 
 </div>
 
-
 <div>
 
 <small>
@@ -912,7 +1116,6 @@ RM 0.00
 
 </div>
 
-
 <div>
 
 <small>
@@ -924,7 +1127,6 @@ RM 0.00
 </b>
 
 </div>
-
 
 <div>
 
@@ -943,7 +1145,6 @@ RM 0.00
 </section>
 
 
-
 <section class="card">
 
 <h2>
@@ -959,86 +1160,25 @@ readonly
 placeholder="0"
 >
 
+<button onclick="calcKey('7')">7</button>
+<button onclick="calcKey('8')">8</button>
+<button onclick="calcKey('9')">9</button>
+<button class="op" onclick="calcKey('/')">÷</button>
 
-<button onclick="calcKey('7')">
-7
-</button>
+<button onclick="calcKey('4')">4</button>
+<button onclick="calcKey('5')">5</button>
+<button onclick="calcKey('6')">6</button>
+<button class="op" onclick="calcKey('*')">×</button>
 
-<button onclick="calcKey('8')">
-8
-</button>
+<button onclick="calcKey('1')">1</button>
+<button onclick="calcKey('2')">2</button>
+<button onclick="calcKey('3')">3</button>
+<button class="op" onclick="calcKey('-')">−</button>
 
-<button onclick="calcKey('9')">
-9
-</button>
-
-<button
-class="op"
-onclick="calcKey('/')"
->
-÷
-</button>
-
-
-<button onclick="calcKey('4')">
-4
-</button>
-
-<button onclick="calcKey('5')">
-5
-</button>
-
-<button onclick="calcKey('6')">
-6
-</button>
-
-<button
-class="op"
-onclick="calcKey('*')"
->
-×
-</button>
-
-
-<button onclick="calcKey('1')">
-1
-</button>
-
-<button onclick="calcKey('2')">
-2
-</button>
-
-<button onclick="calcKey('3')">
-3
-</button>
-
-<button
-class="op"
-onclick="calcKey('-')"
->
-−
-</button>
-
-
-<button onclick="calcKey('0')">
-0
-</button>
-
-<button onclick="calcKey('.')">
-.
-</button>
-
-<button onclick="calcKey('C')">
-C
-</button>
-
-<button
-class="op"
-onclick="calcKey('+')"
->
-+
-</button>
-
+<button onclick="calcKey('0')">0</button>
+<button onclick="calcKey('.')">.</button>
+<button onclick="calcKey('C')">C</button>
+<button class="op" onclick="calcKey('+')">+</button>
 
 <button
 class="eq"
@@ -1050,7 +1190,6 @@ onclick="calcResult()"
 </div>
 
 </section>
-
 
 
 <section class="card">
@@ -1092,15 +1231,13 @@ onclick="setFilter('in')"
 </section>
 
 
-
 <div class="footer">
 
-小钱包 · 数据保存在本机 · 版本 1.0
+小钱包 · 数据保存在本机 · 版本 1.1
 
 </div>
 
 </main>
-
 
 
 <div class="ad">
@@ -1109,27 +1246,34 @@ onclick="setFilter('in')"
 
 </div>
 
-
 </div>
-
 
 
 <script>
 
+const KEY='xiaoqianbao_records_final_v1';
 
-/* =========================
-   数据
-========================= */
+const BKEY='xiaoqianbao_budget_final_v1';
 
-const KEY=
-'xiaoqianbao_records_final_v1';
-
-const BKEY=
-'xiaoqianbao_budget_final_v1';
+const BILLKEY='xiaoqianbao_bills_v1';
 
 
 let records=[];
 
+let bills=[];
+
+let type='out';
+
+let filter='all';
+
+let editingRecordId=null;
+
+let editingBillId=null;
+
+
+/* =========================
+   读取数据
+========================= */
 
 try{
 
@@ -1140,7 +1284,6 @@ const parsed=
 saved
 ?JSON.parse(saved)
 :[];
-
 
 records=
 Array.isArray(parsed)
@@ -1154,14 +1297,30 @@ records=[];
 }
 
 
-let type='out';
+try{
 
-let filter='all';
+const saved=
+localStorage.getItem(BILLKEY);
 
+const parsed=
+saved
+?JSON.parse(saved)
+:[];
+
+bills=
+Array.isArray(parsed)
+?parsed
+:[];
+
+}catch(e){
+
+bills=[];
+
+}
 
 
 /* =========================
-   基础工具
+   工具
 ========================= */
 
 function money(n){
@@ -1209,32 +1368,49 @@ return null;
 
 }
 
-
 const d=
 new Date(x.date);
 
-
-if(
-Number.isNaN(
+return Number.isNaN(
 d.getTime()
 )
-){
+?null
+:d;
 
-return null;
+}
+
+
+function esc(s){
+
+return String(s)
+.replace(
+/[&<>"']/g,
+m=>({
+
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#39;'
+
+}[m])
+);
 
 }
 
 
-return d;
+function icon(s){
+
+return String(s||'')
+.split(' ')[0]||
+'📦';
 
 }
-
 
 
 /* =========================
    存钱统计
 ========================= */
-
 
 function getYearSavings(year){
 
@@ -1258,23 +1434,9 @@ const d=
 validDate(x);
 
 
-if(!d){
-
-return;
-
-}
-
-
 if(
-d.getFullYear()!==year
-){
-
-return;
-
-}
-
-
-if(
+!d||
+d.getFullYear()!==year||
 d.getMonth()+1!==month
 ){
 
@@ -1307,13 +1469,6 @@ expense+=amount;
 });
 
 
-const saved=
-Math.max(
-0,
-income-expense
-);
-
-
 monthly.push({
 
 month:month,
@@ -1322,7 +1477,10 @@ income:income,
 
 expense:expense,
 
-saved:saved
+saved:Math.max(
+0,
+income-expense
+)
 
 });
 
@@ -1334,7 +1492,6 @@ return monthly;
 }
 
 
-
 function getAllTimeSaving(){
 
 let total=0;
@@ -1342,11 +1499,9 @@ let total=0;
 
 records.forEach(x=>{
 
-const d=
-validDate(x);
-
-
-if(!d){
+if(
+!validDate(x)
+){
 
 return;
 
@@ -1385,7 +1540,6 @@ total
 }
 
 
-
 function getAvailableYears(){
 
 const years=
@@ -1409,12 +1563,9 @@ d.getFullYear()
 });
 
 
-const currentYear=
-new Date().getFullYear();
-
-
 years.add(
-currentYear
+new Date()
+.getFullYear()
 );
 
 
@@ -1427,7 +1578,6 @@ return Array
 }
 
 
-
 function setupSavingYears(){
 
 const select=
@@ -1436,17 +1586,8 @@ document.getElementById(
 );
 
 
-if(!select){
-
-return;
-
-}
-
-
 const oldValue=
-Number(
-select.value
-);
+Number(select.value);
 
 
 const years=
@@ -1456,8 +1597,8 @@ getAvailableYears();
 select.innerHTML=
 years
 .map(
-year=>
-`<option value="${year}">${year} 年</option>`
+y=>
+`<option value="${y}">${y} 年</option>`
 )
 .join('');
 
@@ -1482,25 +1623,13 @@ new Date()
 }
 
 
-
 function renderSavings(){
-
-const select=
-document.getElementById(
-'savingYear'
-);
-
-
-if(!select){
-
-return;
-
-}
-
 
 const year=
 Number(
-select.value
+document.getElementById(
+'savingYear'
+).value
 )||
 new Date()
 .getFullYear();
@@ -1512,14 +1641,10 @@ getYearSavings(year);
 
 const total=
 monthly.reduce(
-(sum,item)=>
-sum+item.saved,
+(s,x)=>
+s+x.saved,
 0
 );
-
-
-const allTime=
-getAllTimeSaving();
 
 
 document
@@ -1527,7 +1652,9 @@ document
 'allTimeSaving'
 )
 .textContent=
-money(allTime);
+money(
+getAllTimeSaving()
+);
 
 
 document
@@ -1546,52 +1673,42 @@ document
 money(total);
 
 
-const tbody=
-document.getElementById(
-'savingTable'
-);
-
-
-const monthNames=[
-'1月',
-'2月',
-'3月',
-'4月',
-'5月',
-'6月',
-'7月',
-'8月',
-'9月',
-'10月',
-'11月',
-'12月'
+const names=[
+'1月','2月','3月','4月',
+'5月','6月','7月','8月',
+'9月','10月','11月','12月'
 ];
 
 
-tbody.innerHTML=
+document
+.getElementById(
+'savingTable'
+)
+.innerHTML=
+
 monthly
 .map(
-item=>
+x=>
 `
 
 <tr>
 
 <td class="saving-month">
-${monthNames[item.month-1]}
+${names[x.month-1]}
 </td>
 
 <td class="saving-amount">
-${money(item.saved)}
+${money(x.saved)}
 </td>
 
 </tr>
 
 `
 )
-.join('');
+.join('')
 
++
 
-tbody.innerHTML+=
 `
 
 <tr class="saving-total-row">
@@ -1611,11 +1728,664 @@ ${money(total)}
 }
 
 
-
 /* =========================
-   类型 / 筛选
+   固定账单
 ========================= */
 
+function saveBills(){
+
+localStorage.setItem(
+BILLKEY,
+JSON.stringify(bills)
+);
+
+}
+
+
+function billMonthId(){
+
+return monthKey(
+new Date()
+);
+
+}
+
+
+function isBillPaid(b){
+
+return(
+Array.isArray(b.paidMonths)&&
+b.paidMonths.includes(
+billMonthId()
+)
+);
+
+}
+
+
+function billIcon(cat){
+
+return String(cat||'📦')
+.split(' ')[0]||
+'📦';
+
+}
+
+
+function addBill(){
+
+const name=
+document
+.getElementById('billName')
+.value
+.trim();
+
+
+const amount=
+Number(
+document
+.getElementById('billAmount')
+.value
+);
+
+
+const day=
+Math.floor(
+Number(
+document
+.getElementById('billDay')
+.value
+)
+);
+
+
+const cat=
+document
+.getElementById('billCat')
+.value;
+
+
+if(!name){
+
+alert(
+'请输入账单名称'
+);
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(amount)||
+amount<=0
+){
+
+alert(
+'请输入正确的金额'
+);
+
+return;
+
+}
+
+
+if(
+!Number.isInteger(day)||
+day<1||
+day>31
+){
+
+alert(
+'请输入 1 到 31 的付款日'
+);
+
+return;
+
+}
+
+
+bills.push({
+
+id:Date.now(),
+
+name:name,
+
+amount:amount,
+
+day:day,
+
+cat:cat,
+
+paidMonths:[]
+
+});
+
+
+saveBills();
+
+
+document
+.getElementById('billName')
+.value='';
+
+
+document
+.getElementById('billAmount')
+.value='';
+
+
+document
+.getElementById('billDay')
+.value='';
+
+
+renderBills();
+
+}
+
+
+function renderBills(){
+
+const total=
+bills.reduce(
+(s,b)=>
+s+
+(Number(b.amount)||0),
+0
+);
+
+
+document
+.getElementById('billTotal')
+.textContent=
+money(total);
+
+
+const container=
+document.getElementById('bills');
+
+
+if(!bills.length){
+
+container.innerHTML=
+'<div class="empty">还没有固定账单 🌷</div>';
+
+return;
+
+}
+
+
+const now=
+new Date();
+
+
+const currentDay=
+now.getDate();
+
+
+const sorted=
+bills
+.slice()
+.sort(
+(a,b)=>
+Number(a.day)-
+Number(b.day)
+);
+
+
+container.innerHTML=
+
+sorted
+.map(
+b=>{
+
+if(
+editingBillId===
+Number(b.id)
+){
+
+return`
+
+<div class="bill">
+
+<div class="edit-box">
+
+<div class="edit-grid">
+
+<input
+id="ebn_${b.id}"
+value="${esc(b.name)}"
+placeholder="账单名称"
+>
+
+<input
+id="eba_${b.id}"
+type="number"
+min="0"
+step="0.01"
+value="${Number(b.amount)||0}"
+placeholder="金额"
+>
+
+<input
+id="ebd_${b.id}"
+type="number"
+min="1"
+max="31"
+value="${Number(b.day)||1}"
+placeholder="付款日"
+>
+
+</div>
+
+
+<div class="row"
+style="margin-top:7px;margin-bottom:0">
+
+<select id="ebc_${b.id}">
+
+${[
+'🧾 账单',
+'🏠 生活',
+'📱 手机',
+'🌐 网络',
+'🚗 交通',
+'📦 其他'
+]
+.map(
+x=>
+`<option ${x===b.cat?'selected':''}>${x}</option>`
+)
+.join('')}
+
+</select>
+
+</div>
+
+
+<div class="edit-actions">
+
+<button
+class="save-edit"
+onclick="saveBillEdit(${b.id})"
+>
+保存修改
+</button>
+
+<button
+class="cancel-edit"
+onclick="cancelBillEdit()"
+>
+取消
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+const paid=
+isBillPaid(b);
+
+
+let due='';
+
+
+if(paid){
+
+due='本月已付款 ✓';
+
+}else if(
+Number(b.day)>=currentDay
+){
+
+due=
+`还有 ${Number(b.day)-currentDay} 天`;
+
+}else{
+
+due='本月已过期';
+
+}
+
+
+return`
+
+<div class="bill">
+
+<div class="bill-top">
+
+<div class="bill-icon">
+${billIcon(b.cat)}
+</div>
+
+
+<div class="bill-info">
+
+<b>
+${esc(b.name)}
+</b>
+
+<small>
+${money(b.amount)}
+ · 每月 ${Number(b.day)} 日
+ · ${esc(b.cat)}
+ · ${due}
+</small>
+
+</div>
+
+</div>
+
+
+<div class="bill-actions">
+
+<button
+class="edit-btn"
+onclick="editBill(${b.id})"
+>
+编辑
+</button>
+
+<button
+class="del"
+onclick="removeBill(${b.id})"
+>
+删除
+</button>
+
+${
+paid
+?''
+:`
+<button
+class="paid-btn"
+onclick="payBill(${b.id})"
+>
+已付款
+</button>
+`
+}
+
+</div>
+
+</div>
+
+`;
+
+})
+.join('');
+
+}
+
+
+function editBill(id){
+
+editingBillId=
+Number(id);
+
+renderBills();
+
+}
+
+
+function cancelBillEdit(){
+
+editingBillId=null;
+
+renderBills();
+
+}
+
+
+function saveBillEdit(id){
+
+const b=
+bills.find(
+x=>
+Number(x.id)===
+Number(id)
+);
+
+
+if(!b){
+
+return;
+
+}
+
+
+const name=
+document
+.getElementById(
+'ebn_'+id
+)
+.value
+.trim();
+
+
+const amount=
+Number(
+document
+.getElementById(
+'eba_'+id
+)
+.value
+);
+
+
+const day=
+Math.floor(
+Number(
+document
+.getElementById(
+'ebd_'+id
+)
+.value
+)
+);
+
+
+const cat=
+document
+.getElementById(
+'ebc_'+id
+)
+.value;
+
+
+if(!name){
+
+alert(
+'请输入账单名称'
+);
+
+return;
+
+}
+
+
+if(
+!Number.isFinite(amount)||
+amount<=0
+){
+
+alert(
+'请输入正确的金额'
+);
+
+return;
+
+}
+
+
+if(
+!Number.isInteger(day)||
+day<1||
+day>31
+){
+
+alert(
+'请输入 1 到 31 的付款日'
+);
+
+return;
+
+}
+
+
+b.name=name;
+
+b.amount=amount;
+
+b.day=day;
+
+b.cat=cat;
+
+
+saveBills();
+
+
+editingBillId=null;
+
+renderBills();
+
+}
+
+
+function removeBill(id){
+
+if(
+!confirm(
+'确定删除这个固定账单吗？'
+)
+){
+
+return;
+
+}
+
+
+bills=
+bills.filter(
+x=>
+Number(x.id)!==
+Number(id)
+);
+
+
+saveBills();
+
+renderBills();
+
+}
+
+
+function payBill(id){
+
+const b=
+bills.find(
+x=>
+Number(x.id)===
+Number(id)
+);
+
+
+if(!b){
+
+return;
+
+}
+
+
+if(
+isBillPaid(b)
+){
+
+return;
+
+}
+
+
+if(
+!confirm(
+`确认已支付「${b.name}」${money(b.amount)}？\n确认后会自动加入本月支出。`
+)
+){
+
+return;
+
+}
+
+
+if(
+!Array.isArray(
+b.paidMonths
+)
+){
+
+b.paidMonths=[];
+
+}
+
+
+b.paidMonths.push(
+billMonthId()
+);
+
+
+records.unshift({
+
+id:Date.now(),
+
+type:'out',
+
+amount:Number(b.amount)||0,
+
+cat:b.cat||'🧾 账单',
+
+note:'固定账单 · '+b.name,
+
+date:new Date().toISOString()
+
+});
+
+
+try{
+
+localStorage.setItem(
+KEY,
+JSON.stringify(records)
+);
+
+}catch(e){
+
+alert(
+'保存失败'
+);
+
+return;
+
+}
+
+
+saveBills();
+
+render();
+
+}
+
+
+/* =========================
+   类型
+========================= */
 
 function setType(t){
 
@@ -1642,6 +2412,9 @@ t==='in'
 }
 
 
+/* =========================
+   筛选
+========================= */
 
 function setFilter(f){
 
@@ -1680,24 +2453,19 @@ renderRecords();
 }
 
 
-
 /* =========================
    添加记录
 ========================= */
 
-
 function addRecord(){
 
-const amountInput=
-document.getElementById(
-'amount'
-);
+const input=
+document
+.getElementById('amount');
 
 
 const a=
-Number(
-amountInput.value
-);
+Number(input.value);
 
 
 if(
@@ -1714,7 +2482,7 @@ return;
 }
 
 
-const record={
+records.unshift({
 
 id:Date.now(),
 
@@ -1734,15 +2502,9 @@ document
 .trim(),
 
 date:
-new Date()
-.toISOString()
+new Date().toISOString()
 
-};
-
-
-records.unshift(
-record
-);
+});
 
 
 try{
@@ -1763,7 +2525,7 @@ return;
 }
 
 
-amountInput.value='';
+input.value='';
 
 
 document
@@ -1776,11 +2538,9 @@ render();
 }
 
 
-
 /* =========================
-   删除
+   删除记录
 ========================= */
-
 
 function removeRecord(id){
 
@@ -1814,42 +2574,144 @@ render();
 }
 
 
+/* =========================
+   编辑记录
+========================= */
+
+function editRecord(id){
+
+editingRecordId=
+Number(id);
+
+renderRecords();
+
+}
+
+
+function cancelRecordEdit(){
+
+editingRecordId=null;
+
+renderRecords();
+
+}
+
+
+function saveRecordEdit(id){
+
+const r=
+records.find(
+x=>
+Number(x.id)===
+Number(id)
+);
+
+
+if(!r){
+
+return;
+
+}
+
+
+const amount=
+Number(
+document
+.getElementById(
+'era_'+id
+)
+.value
+);
+
+
+const newType=
+document
+.getElementById(
+'ert_'+id
+)
+.value;
+
+
+const cat=
+document
+.getElementById(
+'erc_'+id
+)
+.value;
+
+
+const note=
+document
+.getElementById(
+'ern_'+id
+)
+.value
+.trim();
+
+
+if(
+!Number.isFinite(amount)||
+amount<=0
+){
+
+alert(
+'请输入正确的金额'
+);
+
+return;
+
+}
+
+
+r.amount=amount;
+
+r.type=newType;
+
+r.cat=cat;
+
+r.note=note;
+
+
+localStorage.setItem(
+KEY,
+JSON.stringify(records)
+);
+
+
+editingRecordId=null;
+
+render();
+
+}
+
 
 /* =========================
    本月
 ========================= */
 
-
 function currentMonth(){
 
-return records.filter(x=>{
+return records.filter(
+x=>{
 
 const d=
 validDate(x);
 
-
-if(!d){
-
-return false;
-
-}
-
-
 return(
+d&&
 monthKey(d)===
 monthKey()
 );
 
-});
+}
+);
 
 }
-
 
 
 /* =========================
    主渲染
 ========================= */
-
 
 function render(){
 
@@ -1932,8 +2794,7 @@ document
 .textContent=
 money(
 outs.length
-?expenseSum/
-outs.length
+?expenseSum/outs.length
 :0
 );
 
@@ -1960,11 +2821,11 @@ money(
 
 outs
 
-.filter(x=>{
+.filter(
+x=>{
 
 const d=
 validDate(x);
-
 
 return(
 d&&
@@ -1972,7 +2833,8 @@ todayKey(d)===
 todayKey()
 );
 
-})
+}
+)
 
 .reduce(
 (s,x)=>
@@ -2000,9 +2862,7 @@ const pct=
 b
 ?Math.min(
 100,
-expenseSum/
-b*
-100
+expenseSum/b*100
 )
 :0;
 
@@ -2035,16 +2895,16 @@ setupSavingYears();
 
 renderSavings();
 
+renderBills();
+
 renderRecords();
 
 }
 
 
-
 /* =========================
    省钱鼓励
 ========================= */
-
 
 function updatePraise(out,b){
 
@@ -2057,28 +2917,25 @@ prev.getMonth()-1
 );
 
 
-const prevKey=
-monthKey(prev);
-
-
 const prevOut=
 
 records
 
-.filter(x=>{
+.filter(
+x=>{
 
 const d=
 validDate(x);
 
-
 return(
 d&&
 monthKey(d)===
-prevKey&&
+monthKey(prev)&&
 x.type==='out'
 );
 
-})
+}
+)
 
 .reduce(
 (s,x)=>
@@ -2194,11 +3051,9 @@ document
 }
 
 
-
 /* =========================
-   消费记录
+   消费记录显示
 ========================= */
-
 
 function renderRecords(){
 
@@ -2208,17 +3063,8 @@ document.getElementById(
 );
 
 
-if(!container){
-
-return;
-
-}
-
-
 let list=
-Array.isArray(records)
-?records.slice()
-:[];
+records.slice();
 
 
 if(
@@ -2259,23 +3105,13 @@ typeof x==='object'
 )
 
 .sort(
-(a,b)=>{
-
-const da=
-new Date(
-a.date||0
-).getTime();
-
-
-const db=
+(a,b)=>
 new Date(
 b.date||0
-).getTime();
-
-
-return db-da;
-
-}
+)-
+new Date(
+a.date||0
+)
 );
 
 
@@ -2289,13 +3125,30 @@ return;
 }
 
 
+const cats=[
+'🍜 餐饮',
+'🚗 交通',
+'🛍️ 购物',
+'🎮 娱乐',
+'🏠 生活',
+'🧾 账单',
+'💼 工资',
+'🎁 兼职',
+'📦 其他'
+];
+
+
 container.innerHTML=
 
 list
 
-.slice(0,50)
+.slice(
+0,
+50
+)
 
-.map(x=>{
+.map(
+x=>{
 
 const amount=
 Number(x.amount)||0;
@@ -2347,6 +3200,111 @@ isIncome
 :'-';
 
 
+if(
+editingRecordId===
+Number(x.id)
+){
+
+return`
+
+<div class="record">
+
+<div class="ico">
+${icon(category)}
+</div>
+
+
+<div class="info">
+
+<div class="edit-box">
+
+<div class="edit-grid">
+
+<input
+id="era_${x.id}"
+type="number"
+min="0"
+step="0.01"
+value="${amount}"
+>
+
+
+<select
+id="ert_${x.id}"
+>
+
+<option
+value="out"
+${x.type==='out'?'selected':''}
+>
+支出
+</option>
+
+<option
+value="in"
+${x.type==='in'?'selected':''}
+>
+收入
+</option>
+
+</select>
+
+
+<select
+id="erc_${x.id}"
+>
+
+${
+cats
+.map(
+c=>
+`<option ${c===category?'selected':''}>${c}</option>`
+)
+.join('')
+}
+
+</select>
+
+
+<input
+id="ern_${x.id}"
+maxlength="80"
+value="${esc(note)}"
+placeholder="备注"
+>
+
+</div>
+
+
+<div class="edit-actions">
+
+<button
+class="save-edit"
+onclick="saveRecordEdit(${x.id})"
+>
+保存修改
+</button>
+
+<button
+class="cancel-edit"
+onclick="cancelRecordEdit()"
+>
+取消
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
 return`
 
 <div class="record">
@@ -2366,7 +3324,6 @@ ${note
 }
 </b>
 
-
 <small>
 ${esc(dateText)}
 </small>
@@ -2377,6 +3334,14 @@ ${esc(dateText)}
 <div class="money ${typeClass}">
 ${sign}${money(amount)}
 </div>
+
+
+<button
+class="edit-btn"
+onclick="editRecord(${Number(x.id)||0})"
+>
+编辑
+</button>
 
 
 <button
@@ -2397,86 +3362,9 @@ onclick="removeRecord(${Number(x.id)||0})"
 }
 
 
-
-/* =========================
-   图标
-========================= */
-
-
-function icon(s){
-
-return String(s||'')
-.split(' ')[0]||
-'📦';
-
-}
-
-
-
-/* =========================
-   防止 HTML 注入
-========================= */
-
-
-function esc(s){
-
-return String(s)
-.replace(
-/[&<>"']/g,
-m=>({
-
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#39;'
-
-}[m])
-);
-
-}
-
-
-
-/* =========================
-   预算
-========================= */
-
-
-document
-.getElementById('budget')
-.addEventListener(
-'change',
-()=>{
-
-const n=
-Math.max(
-0,
-Number(
-document
-.getElementById('budget')
-.value
-)||0
-);
-
-
-localStorage.setItem(
-BKEY,
-n
-);
-
-
-render();
-
-}
-);
-
-
-
 /* =========================
    计算器
 ========================= */
-
 
 function calcKey(k){
 
@@ -2508,7 +3396,6 @@ calc.value='';
 calc.value+=k;
 
 }
-
 
 
 function calcResult(){
@@ -2565,9 +3452,41 @@ calc.value=
 }
 
 
+/* =========================
+   预算
+========================= */
+
+document
+.getElementById('budget')
+.addEventListener(
+'change',
+()=>{
+
+const n=
+Math.max(
+0,
+Number(
+document
+.getElementById('budget')
+.value
+)||0
+);
+
+
+localStorage.setItem(
+BKEY,
+n
+);
+
+
+render();
+
+}
+);
+
 
 /* =========================
-   PWA Service Worker
+   Service Worker
 ========================= */
 
 if(
@@ -2582,7 +3501,7 @@ window.addEventListener(
 navigator
 .serviceWorker
 .register(
-'./sw.js?v=4'
+'./sw.js?v=5'
 )
 .then(
 ()=>{
@@ -2604,7 +3523,6 @@ error
 );
 
 }
-
 
 
 /* =========================
