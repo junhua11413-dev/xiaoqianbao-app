@@ -13,6 +13,7 @@
 <title>小钱包</title>
 
 <style>
+
 :root{
 --pink:#ff6fa8;
 --pink2:#fff0f6;
@@ -40,6 +41,7 @@ font:inherit;
 
 button{
 cursor:pointer;
+-webkit-tap-highlight-color:transparent;
 }
 
 .app{
@@ -66,6 +68,16 @@ font-weight:800;
 background:var(--pink2);
 padding:8px 10px;
 border-radius:16px;
+}
+
+.sound-toggle{
+margin-left:auto;
+border:0;
+background:var(--pink2);
+border-radius:12px;
+padding:8px 10px;
+font-size:18px;
+line-height:1;
 }
 
 .sub{
@@ -708,6 +720,15 @@ font-size:12px;
 <div class="brand">
 <span>🐰</span>
 小钱包
+
+<button
+id="soundToggle"
+class="sound-toggle"
+onclick="toggleSound(event)"
+>
+🔊
+</button>
+
 </div>
 
 <div class="sub">
@@ -1233,7 +1254,7 @@ onclick="setFilter('in')"
 
 <div class="footer">
 
-小钱包 · 数据保存在本机 · 版本 1.1
+小钱包 · 数据保存在本机 · 版本 1.2
 
 </div>
 
@@ -1251,11 +1272,17 @@ onclick="setFilter('in')"
 
 <script>
 
+/* =========================
+   数据
+========================= */
+
 const KEY='xiaoqianbao_records_final_v1';
 
 const BKEY='xiaoqianbao_budget_final_v1';
 
 const BILLKEY='xiaoqianbao_bills_v1';
+
+const SOUNDKEY='xiaoqianbao_sound_v1';
 
 
 let records=[];
@@ -1272,6 +1299,351 @@ let editingBillId=null;
 
 
 /* =========================
+   声音
+========================= */
+
+let soundEnabled=
+localStorage.getItem(SOUNDKEY)!=='off';
+
+let audioContext=null;
+
+
+function getAudioContext(){
+
+if(!audioContext){
+
+const AudioContext=
+window.AudioContext||
+window.webkitAudioContext;
+
+if(!AudioContext){
+
+return null;
+
+}
+
+audioContext=
+new AudioContext();
+
+}
+
+return audioContext;
+
+}
+
+
+function playButtonSound(kind='click'){
+
+if(!soundEnabled){
+
+return;
+
+}
+
+try{
+
+const ctx=
+getAudioContext();
+
+if(!ctx){
+
+return;
+
+}
+
+if(
+ctx.state==='suspended'
+){
+
+ctx.resume();
+
+}
+
+
+const now=
+ctx.currentTime;
+
+
+const osc=
+ctx.createOscillator();
+
+const gain=
+ctx.createGain();
+
+
+osc.connect(gain);
+
+gain.connect(
+ctx.destination
+);
+
+
+if(
+kind==='success'
+){
+
+osc.type='sine';
+
+osc.frequency.setValueAtTime(
+620,
+now
+);
+
+osc.frequency.setValueAtTime(
+820,
+now+0.07
+);
+
+gain.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.045,
+now+0.012
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.16
+);
+
+osc.start(now);
+
+osc.stop(
+now+0.18
+);
+
+return;
+
+}
+
+
+if(
+kind==='bill'
+){
+
+osc.type='sine';
+
+osc.frequency.setValueAtTime(
+560,
+now
+);
+
+osc.frequency.setValueAtTime(
+700,
+now+0.08
+);
+
+osc.frequency.setValueAtTime(
+850,
+now+0.16
+);
+
+gain.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.04,
+now+0.012
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.24
+);
+
+osc.start(now);
+
+osc.stop(
+now+0.26
+);
+
+return;
+
+}
+
+
+osc.type='sine';
+
+osc.frequency.setValueAtTime(
+480,
+now
+);
+
+gain.gain.setValueAtTime(
+0.0001,
+now
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.022,
+now+0.008
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+now+0.045
+);
+
+osc.start(now);
+
+osc.stop(
+now+0.06
+);
+
+}
+
+
+catch(e){
+
+console.log(
+'Sound:',
+e
+);
+
+}
+
+}
+
+
+function updateSoundButton(){
+
+const btn=
+document.getElementById(
+'soundToggle'
+);
+
+if(!btn){
+
+return;
+
+}
+
+btn.textContent=
+soundEnabled
+?'🔊'
+:'🔇';
+
+btn.title=
+soundEnabled
+?'关闭按钮音效'
+:'开启按钮音效';
+
+}
+
+
+function toggleSound(event){
+
+if(event){
+
+event.stopPropagation();
+
+}
+
+soundEnabled=
+!soundEnabled;
+
+localStorage.setItem(
+SOUNDKEY,
+soundEnabled
+?'on'
+:'off'
+);
+
+updateSoundButton();
+
+if(soundEnabled){
+
+playButtonSound(
+'success'
+);
+
+}
+
+}
+
+
+/* =========================
+   全局按钮声音
+========================= */
+
+document.addEventListener(
+'click',
+function(event){
+
+const button=
+event.target.closest(
+'button'
+);
+
+if(!button){
+
+return;
+
+}
+
+
+/* 声音开关自己处理 */
+
+if(
+button.id==='soundToggle'
+){
+
+return;
+
+}
+
+
+/* 删除、取消不发声音 */
+
+if(
+button.classList.contains('del')||
+button.classList.contains('cancel-edit')
+){
+
+return;
+
+}
+
+
+let kind='click';
+
+
+if(
+button.classList.contains('add')||
+button.classList.contains('save-edit')||
+button.textContent.includes('保存记录')||
+button.textContent.includes('保存修改')
+){
+
+kind='success';
+
+}
+
+
+if(
+button.classList.contains('paid-btn')||
+button.textContent.includes('已付款')
+){
+
+kind='bill';
+
+}
+
+
+playButtonSound(
+kind
+);
+
+}
+);
+
+
+/* =========================
    读取数据
 ========================= */
 
@@ -1284,6 +1656,7 @@ const parsed=
 saved
 ?JSON.parse(saved)
 :[];
+
 
 records=
 Array.isArray(parsed)
@@ -1306,6 +1679,7 @@ const parsed=
 saved
 ?JSON.parse(saved)
 :[];
+
 
 bills=
 Array.isArray(parsed)
@@ -1586,6 +1960,13 @@ document.getElementById(
 );
 
 
+if(!select){
+
+return;
+
+}
+
+
 const oldValue=
 Number(select.value);
 
@@ -1625,14 +2006,22 @@ new Date()
 
 function renderSavings(){
 
-const year=
-Number(
+const select=
 document.getElementById(
 'savingYear'
-).value
-)||
-new Date()
-.getFullYear();
+);
+
+
+if(!select){
+
+return;
+
+}
+
+
+const year=
+Number(select.value)||
+new Date().getFullYear();
 
 
 const monthly=
@@ -1903,7 +2292,9 @@ money(total);
 
 
 const container=
-document.getElementById('bills');
+document.getElementById(
+'bills'
+);
 
 
 if(!bills.length){
@@ -1916,12 +2307,8 @@ return;
 }
 
 
-const now=
-new Date();
-
-
 const currentDay=
-now.getDate();
+new Date().getDate();
 
 
 const sorted=
@@ -2794,7 +3181,8 @@ document
 .textContent=
 money(
 outs.length
-?expenseSum/outs.length
+?expenseSum/
+outs.length
 :0
 );
 
@@ -2862,7 +3250,9 @@ const pct=
 b
 ?Math.min(
 100,
-expenseSum/b*100
+expenseSum/
+b*
+100
 )
 :0;
 
@@ -3052,7 +3442,7 @@ document
 
 
 /* =========================
-   消费记录显示
+   消费记录
 ========================= */
 
 function renderRecords(){
@@ -3097,13 +3487,11 @@ x.type==='in'
 
 list=
 list
-
 .filter(
 x=>
 x&&
 typeof x==='object'
 )
-
 .sort(
 (a,b)=>
 new Date(
@@ -3141,12 +3529,7 @@ const cats=[
 container.innerHTML=
 
 list
-
-.slice(
-0,
-50
-)
-
+.slice(0,50)
 .map(
 x=>{
 
@@ -3356,7 +3739,6 @@ onclick="removeRecord(${Number(x.id)||0})"
 `;
 
 })
-
 .join('');
 
 }
@@ -3501,7 +3883,7 @@ window.addEventListener(
 navigator
 .serviceWorker
 .register(
-'./sw.js?v=5'
+'./sw.js?v=6'
 )
 .then(
 ()=>{
@@ -3517,6 +3899,7 @@ console.log(
 error
 );
 }
+
 );
 
 }
@@ -3528,6 +3911,8 @@ error
 /* =========================
    启动
 ========================= */
+
+updateSoundButton();
 
 setupSavingYears();
 
